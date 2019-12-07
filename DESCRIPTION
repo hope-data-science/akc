@@ -1,0 +1,34 @@
+Package: akc
+Title: Automatic Knowledge Classification
+Version: 0.8.5
+Authors@R: 
+    person(given = "Tian-Yuan",
+           family = "Huang",
+           role = c("aut", "cre"),
+           email = "huang.tian-yuan@qq.com",
+           comment = c(ORCID = "0000-0002-3591-4203"))
+Description: A tidy framework for automatic knowledge classification and visualization based on keyword co-occurrence network.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Depends: R (>= 3.0.0)
+Imports: 
+    igraph,
+    dplyr,
+    ggplot2,
+    stringr,
+    ggraph (>= 1.0.2),
+    tidygraph (>= 1.1.2),
+    ggforce,
+    textstem,
+    tibble,
+    tidytext,
+    widyr,
+    rlang,
+    magrittr,
+    data.table (>= 1.12.6)
+RoxygenNote: 7.0.1
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

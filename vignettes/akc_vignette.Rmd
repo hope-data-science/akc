@@ -1,0 +1,107 @@
+---
+title: "Automatic knowledge classification based on keyword co-occurrrence network"
+output: rmarkdown::html_vignette
+author: Hope (Huang Tian-Yuan)
+vignette: >
+  %\VignetteIndexEntry{akc_vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+ 
+## Introduction 
+  Short for automatic knowledge classification, **akc** is an R package used to carry out keyword classification based on netword science (mainly community detection techniques), using bibliometric data. However, these provided functions are general, and could be extended to solve other tasks in text mining as well. Main functions are listed as below:
+  
+- `keyword_clean` - Automatic keyword cleaning and transfer to tidy format 
+- `keyword_extract` - Extract keywords from raw text 
+- `keyword_merge` - Merge keywords that supposed to have same meanings 
+- `keyword_group` - Construct network from a tidy table and divide them into groups
+- `keyword_table` - Display the table with different groups of keywords
+- `keyword_vis` - Visualization of grouped keyword co-occurrence network 
+  
+## Features    
+  Generally provides a ***tidy***  framework of data manipulation supported by `dplyr`, **akc** was written in `data.table` when necessary to guarantee the performance for big data analysis. Meanwhile, **akc** also utilizes the state-of-the-art text mining functions provided by `stringr`,`tidytext`,`textstem` and network analysis functions provided by `igraph`,`tidygraph` and `ggraph`. Pipe `%>%` has been exported from `magrittr` and could be used directly in **akc**.
+```{=html}
+<style type="text/css">
+  .figure {
+    float: center;
+    text-align: center;
+  }
+</style>
+```
+
+``` {r fig.cap = "Logo of akc package.", echo=FALSE}
+knitr::include_graphics("logo.png")
+```
+                                      
+  
+## Example
+### Load package and inspect data
+```{r setup}
+# load pakcage
+library(akc)
+library(dplyr)
+
+# inspect the built-in data
+bibli_data_table
+```
+  The data set contains bibliometric data on topic of "academic library",it is a data.frame of 4 columns(with docuent ID,article title,keyword and abstract), more information could be found via `?bibli_data_data`.If the user want to carry out tasks by simply copying the example codes,make sure to arrange the data in the same format as `biblio_data_table` and set the same names for the corresponding columns.  
+  
+### Keyword cleaning
+  The entire cleaning processes include: 1.Split the text with separators; 2.Reomve the contents in the parentheses (including the parentheses); 3.Remove whitespaces from start and end of string and reduces repeated whitespaces inside a string; 4.Remove all the null character string and pure number sequences; 5.Convert all letters to lower case; 6.Lemmatization (not in default setting because it is not recommended unless you need a relatively rough result. For better merging, use `keyword_merge` displayed below).
+```{r}
+bibli_data_table %>% 
+  keyword_clean() -> clean_data
+
+clean_data
+```
+### Keyword merging
+  Merge keywords that have common stem or lemma, and return the majority form of the word.
+```{r}
+clean_data %>% 
+  keyword_merge() -> merged_data
+
+merged_data
+```
+### Keyword grouping
+  Create a tbl_graph(a class provided by `tidygraph` package) from the tidy table with document ID and keyword. Each entry(row) should contain only one keyword in the tidy format.
+```{r}
+merged_data %>% 
+  keyword_group() -> grouped_data
+
+grouped_data
+```
+### Output the table of results
+  The output table would show the top 10 keywords (by occurrence) and their frequency. Keywords are separated by ";".
+```{r}
+grouped_data %>% 
+  keyword_table(top = 10)
+```
+
+### Visualize the results
+  Keyword co-occurrence network in different groups. Colors are used to specify the groups, the size of nodes is proportional to the keyword frequency, while the alpha of edges is proportional to the co-occurrence relationship between keywords.
+```{r, fig.width=10, fig.height=8}
+grouped_data %>% 
+  keyword_vis()
+```
+
+### Keyword extraction from abstract
+   To extract keywords from the abstract using the keywords as a dictionary. More pre-processing filter should be implemented afterward, such as cleaning, keyword merging and filtering by term frequency or tf-idf. It is suggested to keep the size down before using `keyword_group`.
+```{r}
+bibli_data_table %>%
+  keyword_clean(id = "id",keyword = "keyword") %>%
+  pull(keyword) %>%
+  make_dict -> my_dict
+
+bibli_data_table %>%
+  keyword_extract(id = "id",text = "abstract",dict = my_dict) %>%
+  keyword_merge(keyword = "keyword")
+```
+ 
+## END
