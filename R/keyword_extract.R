@@ -5,12 +5,12 @@
 #' keywords first. The least prerequisite data to be provided are a data.frame with document id and raw text,
 #' and a user defined dictionary should be provided. One could use \code{\link[akc]{make_dict}} function to construct his(her)
 #' own dictionary with a character vector containing the vocabularies.
-#' @param df A data.frame containing at least two columns with document ID and text strings for extraction.
+#' @param dt A data.frame containing at least two columns with document ID and text strings for extraction.
 #' @param id Quoted characters specifying the column name of document ID.Default uses "id".
 #' @param text Quoted characters specifying the column name of raw text for extraction.
 #' @param dict A data.table with two columns,namely "id" and "keyword"(set as key).
 #' This should be exported by \code{\link[akc]{make_dict}} function.
-#' @param stopword_word A character vector containing the stop words.
+#' @param stopword_vector A character vector containing the stop words.
 #' Default uses \code{tidytext::stop_words$word}.
 #' @param n_max The number of words in the n-gram. This must be an integer greater than or equal to 1.
 #' Default uses 4.

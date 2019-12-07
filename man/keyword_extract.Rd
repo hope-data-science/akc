@@ -15,6 +15,8 @@ keyword_extract(
 )
 }
 \arguments{
+\item{dt}{A data.frame containing at least two columns with document ID and text strings for extraction.}
+
 \item{id}{Quoted characters specifying the column name of document ID.Default uses "id".}
 
 \item{text}{Quoted characters specifying the column name of raw text for extraction.}
@@ -22,16 +24,14 @@ keyword_extract(
 \item{dict}{A data.table with two columns,namely "id" and "keyword"(set as key).
 This should be exported by \code{\link[akc]{make_dict}} function.}
 
+\item{stopword_vector}{A character vector containing the stop words.
+Default uses \code{tidytext::stop_words$word}.}
+
 \item{n_max}{The number of words in the n-gram. This must be an integer greater than or equal to 1.
 Default uses 4.}
 
 \item{n_min}{This must be an integer greater than or equal to 1, and less than or equal to n_max.
 Default uses 1.}
-
-\item{df}{A data.frame containing at least two columns with document ID and text strings for extraction.}
-
-\item{stopword_word}{A character vector containing the stop words.
-Default uses \code{tidytext::stop_words$word}.}
 }
 \value{
 A data.frame(tibble) with two columns, namely document ID and extracted keyword.
