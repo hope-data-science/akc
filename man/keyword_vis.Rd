@@ -26,24 +26,26 @@ network.Colors are used to specify the groups, the size of nodes is proportional
 while the alpha of edges is proportional to the co-occurrence relationship between keywords.
 }
 \examples{
-library(akc)
+## not run
+# library(akc)
+#
+# bibli_data_table \%>\%
+#   keyword_clean(id = "id",keyword = "keyword") \%>\%
+#   keyword_group(id = "id",keyword = "keyword") \%>\%
+#   keyword_vis()
+#
+# # without facet
+# bibli_data_table \%>\%
+#   keyword_clean(id = "id",keyword = "keyword") \%>\%
+#   keyword_group(id = "id",keyword = "keyword") \%>\%
+#   keyword_vis(facet = FALSE)
+#
+# # remove legends
+# bibli_data_table \%>\%
+#   keyword_clean(id = "id",keyword = "keyword") \%>\%
+#   keyword_group(id = "id",keyword = "keyword") \%>\%
+#   keyword_vis() + ggplot2::guides(fill = FALSE)
 
-bibli_data_table \%>\%
-  keyword_clean(id = "id",keyword = "keyword") \%>\%
-  keyword_group(id = "id",keyword = "keyword") \%>\%
-  keyword_vis()
-
-# without facet
-bibli_data_table \%>\%
-  keyword_clean(id = "id",keyword = "keyword") \%>\%
-  keyword_group(id = "id",keyword = "keyword") \%>\%
-  keyword_vis(facet = FALSE)
-
-# remove legends
-bibli_data_table \%>\%
-  keyword_clean(id = "id",keyword = "keyword") \%>\%
-  keyword_group(id = "id",keyword = "keyword") \%>\%
-  keyword_vis() + ggplot2::guides(fill = FALSE)
 }
 \seealso{
 \code{\link[ggraph]{ggraph}}
