@@ -17,4 +17,4 @@ devtools::install_github("hope-data-science/akc")
 
 ## Further information
 
-See <https://hope-data-science.github.io/akc/>.
+See [vignette](<https://hope-data-science.github.io/akc/articles/akc_vignette.html>).
