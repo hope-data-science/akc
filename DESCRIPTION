@@ -1,12 +1,13 @@
 Package: akc
 Title: Automatic Knowledge Classification
-Version: 0.8.5
+Version: 0.8.6
 Authors@R: 
     person(given = "Tian-Yuan",
            family = "Huang",
            role = c("aut", "cre"),
            email = "huang.tian-yuan@qq.com",
            comment = c(ORCID = "0000-0002-3591-4203"))
+Maintainer: Huang Tian-Yuan <huang.tian-yuan@qq.com>
 Description: A tidy framework for automatic knowledge classification and visualization based on keyword co-occurrence network.
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -27,6 +28,7 @@ Imports:
     rlang,
     magrittr,
     data.table (>= 1.12.6)
+URL: https://github.com/hope-data-science/akc
 RoxygenNote: 7.0.1
 Suggests: 
     knitr,

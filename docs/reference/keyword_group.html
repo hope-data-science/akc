@@ -77,7 +77,7 @@ the frequency and classification group number of nodes representing keywords." /
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">akc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.6</span>
       </span>
     </div>
 
@@ -107,7 +107,12 @@ the frequency and classification group number of nodes representing keywords." /
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/hope-data-science/akc">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -122,7 +127,7 @@ the frequency and classification group number of nodes representing keywords." /
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Construct network from a tidy table and divide them into groups</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/hope-data-science/akc/blob/master/R/keyword_group.R'><code>R/keyword_group.R</code></a></small>
     <div class="hidden name"><code>keyword_group.Rd</code></div>
     </div>
 
@@ -140,7 +145,7 @@ the frequency and classification group number of nodes representing keywords.</p
   <span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>,
   <span class='kw'>top</span> <span class='kw'>=</span> <span class='fl'>200</span>,
   <span class='kw'>min_freq</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>com_dect_fun</span> <span class='kw'>=</span> <span class='no'>group_fast_greedy</span>
+  <span class='kw'>com_detect_fun</span> <span class='kw'>=</span> <span class='no'>group_fast_greedy</span>
 )</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -168,7 +173,7 @@ If there is a tie,more than <em>top</em> entries would be selected.</p></td>
       <td><p>Minimum occurrence of selected keywords.Default uses 1.</p></td>
     </tr>
     <tr>
-      <th>com_dect_fun</th>
+      <th>com_detect_fun</th>
       <td><p>Community detection function,provided by <span class="pkg">tidygraph</span>(wrappers around clustering
 functions provided by <span class="pkg">igraph</span>), see <code><a href='https://rdrr.io/pkg/tidygraph/man/group_graph.html'>group_graph</a></code> to find other optional algorithms.
 Default uses <code><a href='https://rdrr.io/pkg/tidygraph/man/group_graph.html'>group_fast_greedy</a></code>.</p></td>
@@ -222,7 +227,37 @@ For suggestions of community detection algorithm, see the references provided be
 #&gt; </span><span style='color: #555555;'>1</span><span>     1     2     1
 #&gt; </span><span style='color: #555555;'>2</span><span>     1     7     1
 #&gt; </span><span style='color: #555555;'>3</span><span>     2     7     1
-#&gt; </span><span style='color: #555555;'># ... with 1,220 more rows</span><span></div></span></pre>
+#&gt; </span><span style='color: #555555;'># ... with 1,220 more rows</span><span></div><div class='input'>
+<span class='co'># use 'louvain' algorithm for community detection</span>
+
+<span class='no'>bibli_data_table</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='keyword_clean.html'>keyword_clean</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>keyword_group</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>,
+  <span class='kw'>com_detect_fun</span> <span class='kw'>=</span> <span class='no'>group_louvain</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tbl_graph: 203 nodes and 1223 edges
+#&gt; #
+#&gt; # An undirected simple graph with 1 component
+#&gt; #
+#&gt; # Node Data: 203 x 3 (active)</span><span>
+#&gt;   name                    freq group
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                  </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> curriculum                 5     4
+#&gt; </span><span style='color: #555555;'>2</span><span> education and training     6     4
+#&gt; </span><span style='color: #555555;'>3</span><span> public libraries          52     7
+#&gt; </span><span style='color: #555555;'>4</span><span> collection development    23     2
+#&gt; </span><span style='color: #555555;'>5</span><span> democracy                  4     7
+#&gt; </span><span style='color: #555555;'>6</span><span> information literacy      58     4
+#&gt; </span><span style='color: #555555;'># ... with 197 more rows</span><span>
+#&gt; </span><span style='color: #555555;'>#
+#&gt; # Edge Data: 1,223 x 3</span><span>
+#&gt;    from    to     n
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     2     1
+#&gt; </span><span style='color: #555555;'>2</span><span>     1     7     1
+#&gt; </span><span style='color: #555555;'>3</span><span>     2     7     1
+#&gt; </span><span style='color: #555555;'># ... with 1,220 more rows</span><span></div><div class='input'>
+# get more alternatives by searching '?tidygraph::group_graph'
+
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

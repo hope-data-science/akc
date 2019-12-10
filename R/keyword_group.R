@@ -10,7 +10,7 @@
 #' @param top The number of keywords selected with the largest frequency.
 #' If there is a tie,more than \emph{top} entries would be selected.
 #' @param min_freq Minimum occurrence of selected keywords.Default uses 1.
-#' @param com_dect_fun Community detection function,provided by \pkg{tidygraph}(wrappers around clustering
+#' @param com_detect_fun Community detection function,provided by \pkg{tidygraph}(wrappers around clustering
 #' functions provided by \pkg{igraph}), see \code{\link[tidygraph]{group_graph}} to find other optional algorithms.
 #' Default uses \code{\link[tidygraph]{group_fast_greedy}}.
 #' @return A tbl_graph, representing the keyword co-occurence network with frequency and group
@@ -34,10 +34,20 @@
 #' bibli_data_table %>%
 #'   keyword_clean(id = "id",keyword = "keyword") %>%
 #'   keyword_group(id = "id",keyword = "keyword")
+#'
+#' # use 'louvain' algorithm for community detection
+#'
+#' bibli_data_table %>%
+#'   keyword_clean(id = "id",keyword = "keyword") %>%
+#'   keyword_group(id = "id",keyword = "keyword",
+#'   com_detect_fun = group_louvain)
+#'
+#' # get more alternatives by searching '?tidygraph::group_graph'
+#'
 
 keyword_group = function(dt,id = "id",keyword = "keyword",
                         top = 200,min_freq = 1,
-                        com_dect_fun = group_fast_greedy){
+                        com_detect_fun = group_fast_greedy){
 
   dt %>%
     as_tibble() %>%
@@ -55,7 +65,7 @@ keyword_group = function(dt,id = "id",keyword = "keyword",
     as_tbl_graph() %>%
     inner_join(freq_table,by = c("name"="keyword")) %>%
     rename(freq = n) %>%
-    mutate(group = com_dect_fun())  # community detection,this algorithm could be changed
+    mutate(group = com_detect_fun())  # community detection,this algorithm could be changed
   # other options could be found in tidygraph::group_graph
 
 }

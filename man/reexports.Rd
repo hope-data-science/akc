@@ -4,6 +4,17 @@
 \name{reexports}
 \alias{reexports}
 \alias{\%>\%}
+\alias{group_components}
+\alias{group_edge_betweenness}
+\alias{group_fast_greedy}
+\alias{group_infomap}
+\alias{group_label_prop}
+\alias{group_leading_eigen}
+\alias{group_louvain}
+\alias{group_optimal}
+\alias{group_spinglass}
+\alias{group_walktrap}
+\alias{group_biconnected_component}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -12,5 +23,7 @@ below to see their documentation.
 
 \describe{
   \item{magrittr}{\code{\link[magrittr]{\%>\%}}}
+
+  \item{tidygraph}{\code{\link[tidygraph]{group_biconnected_component}}, \code{\link[tidygraph]{group_components}}, \code{\link[tidygraph]{group_edge_betweenness}}, \code{\link[tidygraph]{group_fast_greedy}}, \code{\link[tidygraph]{group_infomap}}, \code{\link[tidygraph]{group_label_prop}}, \code{\link[tidygraph]{group_leading_eigen}}, \code{\link[tidygraph]{group_louvain}}, \code{\link[tidygraph]{group_optimal}}, \code{\link[tidygraph]{group_spinglass}}, \code{\link[tidygraph]{group_walktrap}}}
 }}
 

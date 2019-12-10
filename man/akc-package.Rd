@@ -10,6 +10,13 @@
 
 A tidy framework for automatic knowledge classification and visualization based on keyword co-occurrence network.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/hope-data-science/akc}
+}
+
+}
 \author{
 \strong{Maintainer}: Tian-Yuan Huang \email{huang.tian-yuan@qq.com} (\href{https://orcid.org/0000-0002-3591-4203}{ORCID})
 
