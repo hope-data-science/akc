@@ -5,6 +5,15 @@
 #' @details Build a user defined vocabulary for keyword extraction (\code{\link[akc]{keyword_extract}}).
 #' @return  A data.table with document id and keyword,using keyword as the key.
 #' @seealso \code{\link[akc]{keyword_extract}}
+#' @examples
+#' library(akc)
+#' library(dplyr)
+#'
+#' bibli_data_table %>%
+#'   keyword_clean() %>%
+#'   pull(keyword) %>%
+#'   make_dict() -> dict
+#'
 #' @export
 #'
 make_dict = function(dict_vacabulary_vector){

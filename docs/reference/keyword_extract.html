@@ -78,7 +78,7 @@ own dictionary with a character vector containing the vocabularies." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">akc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.8</span>
       </span>
     </div>
 
@@ -141,15 +141,7 @@ own dictionary with a character vector containing the vocabularies.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>keyword_extract</span>(
-  <span class='no'>dt</span>,
-  <span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,
-  <span class='no'>text</span>,
-  <span class='no'>dict</span>,
-  <span class='kw'>stopword_vector</span> <span class='kw'>=</span> <span class='no'>stop_words</span>$<span class='no'>word</span>,
-  <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>4</span>,
-  <span class='kw'>n_min</span> <span class='kw'>=</span> <span class='fl'>1</span>
-)</pre>
+    <pre class="usage"><span class='fu'>keyword_extract</span>(<span class='no'>dt</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>, <span class='no'>text</span>, <span class='no'>dict</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>n_min</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -172,11 +164,6 @@ own dictionary with a character vector containing the vocabularies.</p>
 This should be exported by <code><a href='make_dict.html'>make_dict</a></code> function.</p></td>
     </tr>
     <tr>
-      <th>stopword_vector</th>
-      <td><p>A character vector containing the stop words.
-Default uses <code>tidytext::stop_words$word</code>.</p></td>
-    </tr>
-    <tr>
       <th>n_max</th>
       <td><p>The number of words in the n-gram. This must be an integer greater than or equal to 1.
 Default uses 4.</p></td>
@@ -197,8 +184,9 @@ Default uses 1.</p></td>
     <p>In the procedure of keyword extraction from <span class="pkg">akc</span>,first the raw text would be split
 into independent clause (namely split by puctuations of <code>[,;!?.]</code>). Then the ngrams of the
 clauses would be extracted. Finally, the phrases represented by ngrams should be in the dictionary
-created by the user (using <code>make_dict</code>).The user could also specify the <em>n</em> of ngrams,
-and the stop words could be changed to another character vector.</p>
+created by the user (using <code>make_dict</code>).The user could also specify the <em>n</em> of ngrams.</p>
+<p>This function could take some time if the sample size is large, it is suggested to use system.time to do
+some test first. Nonetheless, it has been optimized by data.table codes already and has good performance for big data.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -206,34 +194,34 @@ and the stop words could be changed to another character vector.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>akc</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+    <pre class="examples"><div class='input'> <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>akc</span>)
+ <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: 'dplyr'</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:stats':</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:base':</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'>
-<span class='no'>bibli_data_table</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='keyword_clean.html'>keyword_clean</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/dplyr/man/pull.html'>pull</a></span>(<span class='no'>keyword</span>) <span class='kw'>%&gt;%</span>
-  <span class='no'>make_dict</span> <span class='kw'>-&gt;</span> <span class='no'>my_dict</span>
+ <span class='no'>bibli_data_table</span> <span class='kw'>%&gt;%</span>
+   <span class='fu'><a href='keyword_clean.html'>keyword_clean</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>) <span class='kw'>%&gt;%</span>
+   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/pull.html'>pull</a></span>(<span class='no'>keyword</span>) <span class='kw'>%&gt;%</span>
+   <span class='no'>make_dict</span> <span class='kw'>-&gt;</span> <span class='no'>my_dict</span>
 
-<span class='no'>bibli_data_table</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>keyword_extract</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>text</span> <span class='kw'>=</span> <span class='st'>"abstract"</span>,<span class='kw'>dict</span> <span class='kw'>=</span> <span class='no'>my_dict</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='keyword_merge.html'>keyword_merge</a></span>(<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 24,475 x 2</span><span>
-#&gt;       id keyword               
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                 
-#&gt; </span><span style='color: #555555;'> 1</span><span>   619 18th century          
-#&gt; </span><span style='color: #555555;'> 2</span><span>  </span><span style='text-decoration: underline;'>1</span><span>223 18th century          
-#&gt; </span><span style='color: #555555;'> 3</span><span>  </span><span style='text-decoration: underline;'>1</span><span>154 1password             
-#&gt; </span><span style='color: #555555;'> 4</span><span>    81 1science              
-#&gt; </span><span style='color: #555555;'> 5</span><span>   983 1science              
-#&gt; </span><span style='color: #555555;'> 6</span><span>   662 3d environment        
-#&gt; </span><span style='color: #555555;'> 7</span><span>   910 fourth museum assembly
-#&gt; </span><span style='color: #555555;'> 8</span><span>   624 55th library week     
-#&gt; </span><span style='color: #555555;'> 9</span><span>   747 aasl standards        
-#&gt; </span><span style='color: #555555;'>10</span><span>   284 aboriginal            
-#&gt; </span><span style='color: #555555;'># ... with 24,465 more rows</span><span></div></span></pre>
+ <span class='no'>bibli_data_table</span> <span class='kw'>%&gt;%</span>
+   <span class='fu'>keyword_extract</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>text</span> <span class='kw'>=</span> <span class='st'>"abstract"</span>,<span class='kw'>dict</span> <span class='kw'>=</span> <span class='no'>my_dict</span>) <span class='kw'>%&gt;%</span>
+   <span class='fu'><a href='keyword_merge.html'>keyword_merge</a></span>(<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 27,174 x 2</span><span>
+#&gt;       id keyword                      
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                        
+#&gt; </span><span style='color: #555555;'> 1</span><span>   619 18th century                 
+#&gt; </span><span style='color: #555555;'> 2</span><span>  </span><span style='text-decoration: underline;'>1</span><span>223 18th century                 
+#&gt; </span><span style='color: #555555;'> 3</span><span>  </span><span style='text-decoration: underline;'>1</span><span>154 1password                    
+#&gt; </span><span style='color: #555555;'> 4</span><span>    81 1science                     
+#&gt; </span><span style='color: #555555;'> 5</span><span>   983 1science                     
+#&gt; </span><span style='color: #555555;'> 6</span><span>    15 2016 us presidential election
+#&gt; </span><span style='color: #555555;'> 7</span><span>   662 3d environment               
+#&gt; </span><span style='color: #555555;'> 8</span><span>   910 fourth museum assembly       
+#&gt; </span><span style='color: #555555;'> 9</span><span>   624 55th library week            
+#&gt; </span><span style='color: #555555;'>10</span><span>   747 aasl standards               
+#&gt; </span><span style='color: #555555;'># ... with 27,164 more rows</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

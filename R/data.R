@@ -17,8 +17,4 @@
 
 "bibli_data_table"
 
-#' @title English stop words collected in tidytext package
-#' @description
-#' See \code{\link[tidytext]{stop_words}} from \pkg{tidytext} package.
 
-"stop_words"

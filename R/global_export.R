@@ -2,7 +2,7 @@
 #' @importFrom magrittr `%>%`
 #' @export
 
-# pipe symbol from magrittr
+# pipe operator from magrittr
 magrittr::`%>%`
 
 # community detection algorithm from tidygraph

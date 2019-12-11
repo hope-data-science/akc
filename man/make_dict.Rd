@@ -18,6 +18,16 @@ Construting a dictionary using a string vector with user defined vocabulary.
 \details{
 Build a user defined vocabulary for keyword extraction (\code{\link[akc]{keyword_extract}}).
 }
+\examples{
+library(akc)
+library(dplyr)
+
+bibli_data_table \%>\%
+  keyword_clean() \%>\%
+  pull(keyword) \%>\%
+  make_dict() -> dict
+
+}
 \seealso{
 \code{\link[akc]{keyword_extract}}
 }

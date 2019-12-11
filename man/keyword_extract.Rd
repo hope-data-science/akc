@@ -4,15 +4,7 @@
 \alias{keyword_extract}
 \title{Extract keywords from raw text}
 \usage{
-keyword_extract(
-  dt,
-  id = "id",
-  text,
-  dict,
-  stopword_vector = stop_words$word,
-  n_max = 4,
-  n_min = 1
-)
+keyword_extract(dt, id = "id", text, dict, n_max = 4, n_min = 1)
 }
 \arguments{
 \item{dt}{A data.frame containing at least two columns with document ID and text strings for extraction.}
@@ -23,9 +15,6 @@ keyword_extract(
 
 \item{dict}{A data.table with two columns,namely "id" and "keyword"(set as key).
 This should be exported by \code{\link[akc]{make_dict}} function.}
-
-\item{stopword_vector}{A character vector containing the stop words.
-Default uses \code{tidytext::stop_words$word}.}
 
 \item{n_max}{The number of words in the n-gram. This must be an integer greater than or equal to 1.
 Default uses 4.}
@@ -46,21 +35,23 @@ own dictionary with a character vector containing the vocabularies.
 In the procedure of keyword extraction from \pkg{akc},first the raw text would be split
 into independent clause (namely split by puctuations of \code{[,;!?.]}). Then the ngrams of the
 clauses would be extracted. Finally, the phrases represented by ngrams should be in the dictionary
-created by the user (using \code{make_dict}).The user could also specify the \emph{n} of ngrams,
-and the stop words could be changed to another character vector.
+created by the user (using \code{make_dict}).The user could also specify the \emph{n} of ngrams.
+
+This function could take some time if the sample size is large, it is suggested to use system.time to do
+some test first. Nonetheless, it has been optimized by data.table codes already and has good performance for big data.
 }
 \examples{
-library(akc)
-library(dplyr)
+ library(akc)
+ library(dplyr)
 
-bibli_data_table \%>\%
-  keyword_clean(id = "id",keyword = "keyword") \%>\%
-  pull(keyword) \%>\%
-  make_dict -> my_dict
+ bibli_data_table \%>\%
+   keyword_clean(id = "id",keyword = "keyword") \%>\%
+   pull(keyword) \%>\%
+   make_dict -> my_dict
 
-bibli_data_table \%>\%
-  keyword_extract(id = "id",text = "abstract",dict = my_dict) \%>\%
-  keyword_merge(keyword = "keyword")
+ bibli_data_table \%>\%
+   keyword_extract(id = "id",text = "abstract",dict = my_dict) \%>\%
+   keyword_merge(keyword = "keyword")
 }
 \seealso{
 \code{\link[akc]{make_dict}}
