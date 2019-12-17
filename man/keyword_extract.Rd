@@ -41,17 +41,20 @@ This function could take some time if the sample size is large, it is suggested 
 some test first. Nonetheless, it has been optimized by data.table codes already and has good performance for big data.
 }
 \examples{
+
  library(akc)
  library(dplyr)
 
- bibli_data_table \%>\%
-   keyword_clean(id = "id",keyword = "keyword") \%>\%
-   pull(keyword) \%>\%
-   make_dict -> my_dict
+  bibli_data_table \%>\%
+    keyword_clean(id = "id",keyword = "keyword") \%>\%
+    pull(keyword) \%>\%
+    make_dict -> my_dict
 
- bibli_data_table \%>\%
-   keyword_extract(id = "id",text = "abstract",dict = my_dict) \%>\%
-   keyword_merge(keyword = "keyword")
+ \donttest{
+  bibli_data_table \%>\%
+    keyword_extract(id = "id",text = "abstract",dict = my_dict) \%>\%
+    keyword_merge(keyword = "keyword")
+ }
 }
 \seealso{
 \code{\link[akc]{make_dict}}

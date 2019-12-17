@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">akc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.9</span>
       </span>
     </div>
 
@@ -100,7 +100,7 @@
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
-<p>Short for automatic knowledge classification, <strong>akc</strong> is an R package used to carry out keyword classification based on netword science (mainly community detection techniques), using bibliometric data. However, these provided functions are general, and could be extended to solve other tasks in text mining as well. Main functions are listed as below:</p>
+<p>Short for automatic knowledge classification, <strong>akc</strong> is an R package used to carry out keyword classification based on network science (mainly community detection techniques), using bibliometric data. However, these provided functions are general, and could be extended to solve other tasks in text mining as well. Main functions are listed as below:</p>
 <ul>
 <li>
 <code>keyword_clean</code> - Automatic keyword cleaning and transfer to tidy format</li>
@@ -199,7 +199,7 @@ Logo of akc package.
 <a class="sourceLine" id="cb3-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/keyword_merge.html">keyword_merge</a></span>() -&gt;<span class="st"> </span>merged_data</a>
 <a class="sourceLine" id="cb3-3" title="3"></a>
 <a class="sourceLine" id="cb3-4" title="4">merged_data</a>
-<a class="sourceLine" id="cb3-5" title="5"><span class="co">#&gt; # A tibble: 5,512 x 2</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="co">#&gt; # A tibble: 5,378 x 2</span></a>
 <a class="sourceLine" id="cb3-6" title="6"><span class="co">#&gt;       id keyword                      </span></a>
 <a class="sourceLine" id="cb3-7" title="7"><span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;                        </span></a>
 <a class="sourceLine" id="cb3-8" title="8"><span class="co">#&gt;  1  1163 10.7202/1063788ar            </span></a>
@@ -212,7 +212,7 @@ Logo of akc package.
 <a class="sourceLine" id="cb3-15" title="15"><span class="co">#&gt;  8    42 21st-century skills          </span></a>
 <a class="sourceLine" id="cb3-16" title="16"><span class="co">#&gt;  9  1114 21st century skills          </span></a>
 <a class="sourceLine" id="cb3-17" title="17"><span class="co">#&gt; 10  1051 24-hour opening              </span></a>
-<a class="sourceLine" id="cb3-18" title="18"><span class="co">#&gt; # ... with 5,502 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-18" title="18"><span class="co">#&gt; # ... with 5,368 more rows</span></a></code></pre></div>
 </div>
 <div id="keyword-grouping" class="section level3">
 <h3 class="hasAnchor">
@@ -222,28 +222,28 @@ Logo of akc package.
 <a class="sourceLine" id="cb4-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/keyword_group.html">keyword_group</a></span>() -&gt;<span class="st"> </span>grouped_data</a>
 <a class="sourceLine" id="cb4-3" title="3"></a>
 <a class="sourceLine" id="cb4-4" title="4">grouped_data</a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="co">#&gt; # A tbl_graph: 211 nodes and 1365 edges</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="co">#&gt; # A tbl_graph: 208 nodes and 1341 edges</span></a>
 <a class="sourceLine" id="cb4-6" title="6"><span class="co">#&gt; #</span></a>
 <a class="sourceLine" id="cb4-7" title="7"><span class="co">#&gt; # An undirected simple graph with 1 component</span></a>
 <a class="sourceLine" id="cb4-8" title="8"><span class="co">#&gt; #</span></a>
-<a class="sourceLine" id="cb4-9" title="9"><span class="co">#&gt; # Node Data: 211 x 3 (active)</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="co">#&gt; # Node Data: 208 x 3 (active)</span></a>
 <a class="sourceLine" id="cb4-10" title="10"><span class="co">#&gt;   name                     freq group</span></a>
 <a class="sourceLine" id="cb4-11" title="11"><span class="co">#&gt;   &lt;chr&gt;                   &lt;int&gt; &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb4-12" title="12"><span class="co">#&gt; 1 academic librarians         7     3</span></a>
-<a class="sourceLine" id="cb4-13" title="13"><span class="co">#&gt; 2 academic libraries        145     3</span></a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="co">#&gt; 1 academic librarians         7     1</span></a>
+<a class="sourceLine" id="cb4-13" title="13"><span class="co">#&gt; 2 academic libraries        145     1</span></a>
 <a class="sourceLine" id="cb4-14" title="14"><span class="co">#&gt; 3 acquisitions               12     2</span></a>
-<a class="sourceLine" id="cb4-15" title="15"><span class="co">#&gt; 4 africa                      6     5</span></a>
+<a class="sourceLine" id="cb4-15" title="15"><span class="co">#&gt; 4 africa                      6     1</span></a>
 <a class="sourceLine" id="cb4-16" title="16"><span class="co">#&gt; 5 altmetrics                  7     2</span></a>
-<a class="sourceLine" id="cb4-17" title="17"><span class="co">#&gt; 6 artificial intelligence     4     3</span></a>
-<a class="sourceLine" id="cb4-18" title="18"><span class="co">#&gt; # ... with 205 more rows</span></a>
+<a class="sourceLine" id="cb4-17" title="17"><span class="co">#&gt; 6 artificial intelligence     4     1</span></a>
+<a class="sourceLine" id="cb4-18" title="18"><span class="co">#&gt; # ... with 202 more rows</span></a>
 <a class="sourceLine" id="cb4-19" title="19"><span class="co">#&gt; #</span></a>
-<a class="sourceLine" id="cb4-20" title="20"><span class="co">#&gt; # Edge Data: 1,365 x 3</span></a>
+<a class="sourceLine" id="cb4-20" title="20"><span class="co">#&gt; # Edge Data: 1,341 x 3</span></a>
 <a class="sourceLine" id="cb4-21" title="21"><span class="co">#&gt;    from    to     n</span></a>
 <a class="sourceLine" id="cb4-22" title="22"><span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;dbl&gt;</span></a>
 <a class="sourceLine" id="cb4-23" title="23"><span class="co">#&gt; 1     1     2     4</span></a>
 <a class="sourceLine" id="cb4-24" title="24"><span class="co">#&gt; 2     2     3     2</span></a>
-<a class="sourceLine" id="cb4-25" title="25"><span class="co">#&gt; 3     2    49     1</span></a>
-<a class="sourceLine" id="cb4-26" title="26"><span class="co">#&gt; # ... with 1,362 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-25" title="25"><span class="co">#&gt; 3     2    48     1</span></a>
+<a class="sourceLine" id="cb4-26" title="26"><span class="co">#&gt; # ... with 1,338 more rows</span></a></code></pre></div>
 </div>
 <div id="output-the-table-of-results" class="section level3">
 <h3 class="hasAnchor">
@@ -251,15 +251,14 @@ Logo of akc package.
 <p>The output table would show the top 10 keywords (by occurrence) and their frequency. Keywords are separated by “;”.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">grouped_data <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb5-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/keyword_table.html">keyword_table</a></span>(<span class="dt">top =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="co">#&gt; # A tibble: 6 x 2</span></a>
-<a class="sourceLine" id="cb5-4" title="4"><span class="co">#&gt;   group `keywords(TOP 10)`                                                 </span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="co">#&gt; # A tibble: 5 x 2</span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="co">#&gt;   Group `Keywords(TOP 10)`                                                 </span></a>
 <a class="sourceLine" id="cb5-5" title="5"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;                                                              </span></a>
-<a class="sourceLine" id="cb5-6" title="6"><span class="co">#&gt; 1     1 public libraries(74);libraries(66);digital libraries(31);collabora~</span></a>
-<a class="sourceLine" id="cb5-7" title="7"><span class="co">#&gt; 2     2 open access(32);bibliometrics(31);library and information science(~</span></a>
-<a class="sourceLine" id="cb5-8" title="8"><span class="co">#&gt; 3     3 academic libraries(145);information literacy(58);library services(~</span></a>
-<a class="sourceLine" id="cb5-9" title="9"><span class="co">#&gt; 4     4 university libraries(39);pakistan(9);digital preservation(6);infor~</span></a>
-<a class="sourceLine" id="cb5-10" title="10"><span class="co">#&gt; 5     5 librarianship(18);knowledge management(12);research data managemen~</span></a>
-<a class="sourceLine" id="cb5-11" title="11"><span class="co">#&gt; 6     6 national libraries(10);cataloguing(6);knowledge organization(6);re~</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-6" title="6"><span class="co">#&gt; 1     1 academic libraries (145); library services (27); librarians (25); ~</span></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="co">#&gt; 2     2 open access (32); bibliometrics (31); library and information scie~</span></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="co">#&gt; 3     3 public libraries (74); information literacy (58); university libra~</span></a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="co">#&gt; 4     4 libraries (66); digital libraries (31); higher education (16); ass~</span></a>
+<a class="sourceLine" id="cb5-10" title="10"><span class="co">#&gt; 5     5 professional development (9); data (7); culture (7); technical ser~</span></a></code></pre></div>
 </div>
 <div id="visualize-the-results" class="section level3">
 <h3 class="hasAnchor">
@@ -281,7 +280,7 @@ Logo of akc package.
 <a class="sourceLine" id="cb7-6" title="6">bibli_data_table <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb7-7" title="7"><span class="st">  </span><span class="kw"><a href="../reference/keyword_extract.html">keyword_extract</a></span>(<span class="dt">id =</span> <span class="st">"id"</span>,<span class="dt">text =</span> <span class="st">"abstract"</span>,<span class="dt">dict =</span> my_dict) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb7-8" title="8"><span class="st">  </span><span class="kw"><a href="../reference/keyword_merge.html">keyword_merge</a></span>(<span class="dt">keyword =</span> <span class="st">"keyword"</span>)</a>
-<a class="sourceLine" id="cb7-9" title="9"><span class="co">#&gt; # A tibble: 27,174 x 2</span></a>
+<a class="sourceLine" id="cb7-9" title="9"><span class="co">#&gt; # A tibble: 27,130 x 2</span></a>
 <a class="sourceLine" id="cb7-10" title="10"><span class="co">#&gt;       id keyword                      </span></a>
 <a class="sourceLine" id="cb7-11" title="11"><span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;                        </span></a>
 <a class="sourceLine" id="cb7-12" title="12"><span class="co">#&gt;  1   619 18th century                 </span></a>
@@ -294,7 +293,7 @@ Logo of akc package.
 <a class="sourceLine" id="cb7-19" title="19"><span class="co">#&gt;  8   910 fourth museum assembly       </span></a>
 <a class="sourceLine" id="cb7-20" title="20"><span class="co">#&gt;  9   624 55th library week            </span></a>
 <a class="sourceLine" id="cb7-21" title="21"><span class="co">#&gt; 10   747 aasl standards               </span></a>
-<a class="sourceLine" id="cb7-22" title="22"><span class="co">#&gt; # ... with 27,164 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-22" title="22"><span class="co">#&gt; # ... with 27,120 more rows</span></a></code></pre></div>
 </div>
 </div>
 <div id="end" class="section level2">

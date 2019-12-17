@@ -24,12 +24,12 @@ keyword_table = function(tibble_graph,top = 10){
     tibble_graph %>%
       as_tibble() %>%
       transmute(keyword = name,value = freq,group) %>%
-      mutate(keyword_value = str_c(keyword,"(",value,")")) %>%
+      mutate(keyword_value = str_c(keyword," (",value,")")) %>%
       group_by(group) %>%
       arrange(desc(value)) %>%
       top_n(top,value) %>%
-      summarise(keyword = str_c(keyword_value,collapse = ";")) %>%
-      rename(!!str_c("keywords(TOP ",top,")") := keyword)
+      summarise(keyword = str_c(keyword_value,collapse = "; ")) %>%
+      rename(Group = group,!!str_c("Keywords(TOP ",top,")") := keyword)
   }else{
    stop("keyword_table only receives class 'tbl_graph'.")
   }

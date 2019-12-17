@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 ```
  
 ## Introduction 
-  Short for automatic knowledge classification, **akc** is an R package used to carry out keyword classification based on netword science (mainly community detection techniques), using bibliometric data. However, these provided functions are general, and could be extended to solve other tasks in text mining as well. Main functions are listed as below:
+  Short for automatic knowledge classification, **akc** is an R package used to carry out keyword classification based on network science (mainly community detection techniques), using bibliometric data. However, these provided functions are general, and could be extended to solve other tasks in text mining as well. Main functions are listed as below:
   
 - `keyword_clean` - Automatic keyword cleaning and transfer to tidy format 
 - `keyword_extract` - Extract keywords from raw text 

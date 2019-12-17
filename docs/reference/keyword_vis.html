@@ -75,7 +75,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">akc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.9</span>
       </span>
     </div>
 
@@ -135,7 +135,7 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>keyword_vis</span>(<span class='no'>tibble_graph</span>, <span class='kw'>facet</span> <span class='kw'>=</span> <span class='no'>T</span>, <span class='kw'>max_nodes</span> <span class='kw'>=</span> <span class='fl'>10</span>)</pre>
+    <pre class="usage"><span class='fu'>keyword_vis</span>(<span class='no'>tibble_graph</span>, <span class='kw'>facet</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>max_nodes</span> <span class='kw'>=</span> <span class='fl'>10</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -160,8 +160,8 @@
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>When <code>facet == T</code>,the function returns a faceted figure with limited number of nodes
-(adjuseted by <code>max_nodes</code> parameter).When <code>facet == F</code>,all the nodes would be displayed in one
+    <p>When <code>facet == TRUE</code>,the function returns a faceted figure with limited number of nodes
+(adjuseted by <code>max_nodes</code> parameter).When <code>facet == FALSE</code>,all the nodes would be displayed in one
 network.Colors are used to specify the groups, the size of nodes is proportional to the keyword frequency,
 while the alpha of edges is proportional to the co-occurrence relationship between keywords.</p>
     
@@ -171,26 +171,23 @@ while the alpha of edges is proportional to the co-occurrence relationship betwe
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>## not run
-# library(akc)
-#
-# bibli_data_table %>%
-#   keyword_clean(id = "id",keyword = "keyword") %>%
-#   keyword_group(id = "id",keyword = "keyword") %>%
-#   keyword_vis()
-#
-# # without facet
-# bibli_data_table %>%
-#   keyword_clean(id = "id",keyword = "keyword") %>%
-#   keyword_group(id = "id",keyword = "keyword") %>%
-#   keyword_vis(facet = FALSE)
-#
-# # remove legends
-# bibli_data_table %>%
-#   keyword_clean(id = "id",keyword = "keyword") %>%
-#   keyword_group(id = "id",keyword = "keyword") %>%
-#   keyword_vis() + ggplot2::guides(fill = FALSE)
-
+    <pre class="examples"><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>akc</span>)
+<span class='co'># \donttest{</span>
+<span class='no'>bibli_data_table</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='keyword_clean.html'>keyword_clean</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='keyword_group.html'>keyword_group</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>keyword_vis</span>()</div><div class='img'><img src='keyword_vis-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># without facet</span>
+<span class='no'>bibli_data_table</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='keyword_clean.html'>keyword_clean</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='keyword_group.html'>keyword_group</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>keyword_vis</span>(<span class='kw'>facet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='keyword_vis-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># remove legends</span>
+<span class='no'>bibli_data_table</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='keyword_clean.html'>keyword_clean</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='keyword_group.html'>keyword_group</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>keyword_vis</span>() + <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/guides.html'>guides</a></span>(<span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='keyword_vis-3.png' alt='' width='700' height='433' /></div><div class='input'># }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

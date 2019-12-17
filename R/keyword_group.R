@@ -60,8 +60,8 @@ keyword_group = function(dt,id = "id",keyword = "keyword",
 
   dt %>%
     inner_join(freq_table %>% select(keyword),by = "keyword") %>%
-    pairwise_count(keyword,id,upper = F) %>%
-    graph_from_data_frame(directed = F) %>%
+    pairwise_count(keyword,id,upper = FALSE) %>%
+    graph_from_data_frame(directed = FALSE) %>%
     as_tbl_graph() %>%
     inner_join(freq_table,by = c("name"="keyword")) %>%
     rename(freq = n) %>%

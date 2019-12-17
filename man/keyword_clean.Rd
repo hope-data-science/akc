@@ -9,9 +9,9 @@ keyword_clean(
   id = "id",
   keyword = "keyword",
   sep = ";",
-  rmParentheses = T,
-  rmNumber = T,
-  lemmatize = F
+  rmParentheses = TRUE,
+  rmNumber = TRUE,
+  lemmatize = FALSE
 )
 }
 \arguments{

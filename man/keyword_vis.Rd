@@ -4,7 +4,7 @@
 \alias{keyword_vis}
 \title{Visualization of grouped keyword co-occurrence network}
 \usage{
-keyword_vis(tibble_graph, facet = T, max_nodes = 10)
+keyword_vis(tibble_graph, facet = TRUE, max_nodes = 10)
 }
 \arguments{
 \item{tibble_graph}{A \code{tbl_graph} output by \code{\link[akc]{keyword_group}}.}
@@ -20,32 +20,32 @@ An object yielded by \code{\link[ggraph]{ggraph}}
 Visualization of network-based keyword clustering, with frequency and co-occurrence information attached.
 }
 \details{
-When \code{facet == T},the function returns a faceted figure with limited number of nodes
-(adjuseted by \code{max_nodes} parameter).When \code{facet == F},all the nodes would be displayed in one
+When \code{facet == TRUE},the function returns a faceted figure with limited number of nodes
+(adjuseted by \code{max_nodes} parameter).When \code{facet == FALSE},all the nodes would be displayed in one
 network.Colors are used to specify the groups, the size of nodes is proportional to the keyword frequency,
 while the alpha of edges is proportional to the co-occurrence relationship between keywords.
 }
 \examples{
-## not run
-# library(akc)
-#
-# bibli_data_table \%>\%
-#   keyword_clean(id = "id",keyword = "keyword") \%>\%
-#   keyword_group(id = "id",keyword = "keyword") \%>\%
-#   keyword_vis()
-#
-# # without facet
-# bibli_data_table \%>\%
-#   keyword_clean(id = "id",keyword = "keyword") \%>\%
-#   keyword_group(id = "id",keyword = "keyword") \%>\%
-#   keyword_vis(facet = FALSE)
-#
-# # remove legends
-# bibli_data_table \%>\%
-#   keyword_clean(id = "id",keyword = "keyword") \%>\%
-#   keyword_group(id = "id",keyword = "keyword") \%>\%
-#   keyword_vis() + ggplot2::guides(fill = FALSE)
 
+library(akc)
+\donttest{
+bibli_data_table \%>\%
+  keyword_clean(id = "id",keyword = "keyword") \%>\%
+  keyword_group(id = "id",keyword = "keyword") \%>\%
+  keyword_vis()
+
+# without facet
+bibli_data_table \%>\%
+  keyword_clean(id = "id",keyword = "keyword") \%>\%
+  keyword_group(id = "id",keyword = "keyword") \%>\%
+  keyword_vis(facet = FALSE)
+
+# remove legends
+bibli_data_table \%>\%
+  keyword_clean(id = "id",keyword = "keyword") \%>\%
+  keyword_group(id = "id",keyword = "keyword") \%>\%
+  keyword_vis() + ggplot2::guides(fill = FALSE)
+}
 }
 \seealso{
 \code{\link[ggraph]{ggraph}}

@@ -23,17 +23,20 @@
 #' @return A data.frame(tibble) with two columns, namely document ID and extracted keyword.
 #' @seealso \code{\link[akc]{make_dict}}
 #' @examples
+#'
 #'  library(akc)
 #'  library(dplyr)
 #'
-#'  bibli_data_table %>%
-#'    keyword_clean(id = "id",keyword = "keyword") %>%
-#'    pull(keyword) %>%
-#'    make_dict -> my_dict
+#'   bibli_data_table %>%
+#'     keyword_clean(id = "id",keyword = "keyword") %>%
+#'     pull(keyword) %>%
+#'     make_dict -> my_dict
 #'
-#'  bibli_data_table %>%
-#'    keyword_extract(id = "id",text = "abstract",dict = my_dict) %>%
-#'    keyword_merge(keyword = "keyword")
+#'  \donttest{
+#'   bibli_data_table %>%
+#'     keyword_extract(id = "id",text = "abstract",dict = my_dict) %>%
+#'     keyword_merge(keyword = "keyword")
+#'  }
 #' @export
 
 keyword_extract = function(dt,id = "id",text,

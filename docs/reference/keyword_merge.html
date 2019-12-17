@@ -76,7 +76,7 @@ recieves a tidy table (data.frame) with document ID and keyword waiting to be me
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">akc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.9</span>
       </span>
     </div>
 
@@ -170,7 +170,8 @@ Default uses "lemma".</p></td>
     <p>While <code>keyword_clean</code> has provided a robust way to lemmatize the keywords, the returned token
 might not be the most common way to use.This function first gets the stem or lemma of
 every keyword using <code>stem_strings</code> or <code>lemmatize_strings</code> from <span class="pkg">textstem</span> package,
-then find the most frequent form for each stem or lemma. Last, every keyword
+then find the most frequent form (if more than 1,randomly select one)
+for each stem or lemma. Last, every keyword
 would be replaced by the most frequent keyword which share the same stem or lemma with it.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -183,7 +184,7 @@ would be replaced by the most frequent keyword which share the same stem or lemm
 
 <span class='no'>bibli_data_table</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='keyword_clean.html'>keyword_clean</a></span>(<span class='kw'>lemmatize</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>keyword_merge</span>(<span class='kw'>reduce_form</span> <span class='kw'>=</span> <span class='st'>"stem"</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 5,560 x 2</span><span>
+  <span class='fu'>keyword_merge</span>(<span class='kw'>reduce_form</span> <span class='kw'>=</span> <span class='st'>"stem"</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 5,378 x 2</span><span>
 #&gt;       id keyword                      
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                        
 #&gt; </span><span style='color: #555555;'> 1</span><span>  </span><span style='text-decoration: underline;'>1</span><span>163 10.7202/1063788ar            
@@ -196,10 +197,10 @@ would be replaced by the most frequent keyword which share the same stem or lemm
 #&gt; </span><span style='color: #555555;'> 8</span><span>  </span><span style='text-decoration: underline;'>1</span><span>051 24-hour opening              
 #&gt; </span><span style='color: #555555;'> 9</span><span>   662 3d environment               
 #&gt; </span><span style='color: #555555;'>10</span><span>  </span><span style='text-decoration: underline;'>1</span><span>252 3d reconstruction            
-#&gt; </span><span style='color: #555555;'># ... with 5,550 more rows</span><span></div><div class='input'>
+#&gt; </span><span style='color: #555555;'># ... with 5,368 more rows</span><span></div><div class='input'>
 <span class='no'>bibli_data_table</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='keyword_clean.html'>keyword_clean</a></span>(<span class='kw'>lemmatize</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>keyword_merge</span>(<span class='kw'>reduce_form</span> <span class='kw'>=</span> <span class='st'>"lemma"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 5,512 x 2</span><span>
+  <span class='fu'>keyword_merge</span>(<span class='kw'>reduce_form</span> <span class='kw'>=</span> <span class='st'>"lemma"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 5,378 x 2</span><span>
 #&gt;       id keyword                      
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                        
 #&gt; </span><span style='color: #555555;'> 1</span><span>  </span><span style='text-decoration: underline;'>1</span><span>163 10.7202/1063788ar            
@@ -212,7 +213,7 @@ would be replaced by the most frequent keyword which share the same stem or lemm
 #&gt; </span><span style='color: #555555;'> 8</span><span>    42 21st-century skills          
 #&gt; </span><span style='color: #555555;'> 9</span><span>  </span><span style='text-decoration: underline;'>1</span><span>114 21st century skills          
 #&gt; </span><span style='color: #555555;'>10</span><span>  </span><span style='text-decoration: underline;'>1</span><span>051 24-hour opening              
-#&gt; </span><span style='color: #555555;'># ... with 5,502 more rows</span><span></div></span></pre>
+#&gt; </span><span style='color: #555555;'># ... with 5,368 more rows</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

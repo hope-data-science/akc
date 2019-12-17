@@ -38,11 +38,11 @@
 #' bibli_data_table %>%
 #'   keyword_clean(id = "id",keyword = "keyword")
 
-keyword_clean <- function(df,id = "id",keyword = "keyword",
+keyword_clean = function(df,id = "id",keyword = "keyword",
                           sep = ";",
-                          rmParentheses = T,
-                          rmNumber = T,
-                          lemmatize = F){
+                          rmParentheses = TRUE,
+                          rmNumber = TRUE,
+                          lemmatize = FALSE){
   df %>%
     as_tibble() %>%
     transmute(id = .data[[id]],keyword = .data[[keyword]]) %>%
@@ -50,13 +50,13 @@ keyword_clean <- function(df,id = "id",keyword = "keyword",
     mutate(keyword = str_squish(keyword)) %>%
     filter(keyword != "") -> dt
 
-  if(rmParentheses == T) {
+  if(rmParentheses == TRUE) {
     dt = dt %>% mutate(keyword = str_replace_all(keyword,"\\(.+?\\)",""))
   }
 
-  if(rmNumber == T) dt = dt %>% filter(!str_detect(keyword,"^[:digit:]*$"))
+  if(rmNumber == TRUE) dt = dt %>% filter(!str_detect(keyword,"^[:digit:]*$"))
 
-  if(lemmatize == T) {
+  if(lemmatize == TRUE) {
     dt = dt %>% mutate(keyword = lemmatize_strings(keyword))
   }
 

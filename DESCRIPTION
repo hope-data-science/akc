@@ -1,13 +1,13 @@
 Package: akc
 Title: Automatic Knowledge Classification
-Version: 0.8.8
+Version: 0.8.9
 Authors@R: 
     person(given = "Tian-Yuan",
            family = "Huang",
            role = c("aut", "cre"),
            email = "huang.tian-yuan@qq.com",
            comment = c(ORCID = "0000-0002-3591-4203"))
-Description: A tidy framework for automatic knowledge classification and visualization based on keyword co-occurrence network.
+Description: A tidy framework for automatic knowledge classification and visualization. Currently, the core functionality of the framework is mainly supported by modularity-based clustering (community detection) in keyword co-occurrence network, and focuses on co-word analysis of bibliometric research. However, the designed functions in akc are general, and could be extended to solve other tasks in text mining as well. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
