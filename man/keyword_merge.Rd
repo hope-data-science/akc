@@ -34,6 +34,7 @@ would be replaced by the most frequent keyword which share the same stem or lemm
 \examples{
 library(akc)
 
+\donttest{
 bibli_data_table \%>\%
   keyword_clean(lemmatize = FALSE) \%>\%
   keyword_merge(reduce_form = "stem")
@@ -41,6 +42,8 @@ bibli_data_table \%>\%
 bibli_data_table \%>\%
   keyword_clean(lemmatize = FALSE) \%>\%
   keyword_merge(reduce_form = "lemma")
+}
+
 }
 \seealso{
 \code{\link[textstem]{stem_strings}}, \code{\link[textstem]{lemmatize_strings}}

@@ -15,11 +15,13 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -39,15 +41,15 @@
 
 
 
-<meta property="og:title" content="Extract keywords from raw text — keyword_extract" />
 
+<meta property="og:title" content="Extract keywords from raw text — keyword_extract" />
 <meta property="og:description" content="When we have raw text like abstract or article but not keywords, we might prefer extracting
 keywords first. The least prerequisite data to be provided are a data.frame with document id and raw text,
 and a user defined dictionary should be provided. One could use make_dict function to construct his(her)
 own dictionary with a character vector containing the vocabularies." />
-
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -78,7 +80,7 @@ own dictionary with a character vector containing the vocabularies." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">akc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.0</span>
       </span>
     </div>
 
@@ -106,7 +108,6 @@ own dictionary with a character vector containing the vocabularies." />
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/hope-data-science/akc">
@@ -133,16 +134,14 @@ own dictionary with a character vector containing the vocabularies." />
     </div>
 
     <div class="ref-description">
-    
     <p>When we have raw text like abstract or article but not keywords, we might prefer extracting
 keywords first. The least prerequisite data to be provided are a data.frame with document id and raw text,
 and a user defined dictionary should be provided. One could use <code><a href='make_dict.html'>make_dict</a></code> function to construct his(her)
 own dictionary with a character vector containing the vocabularies.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>keyword_extract</span>(<span class='no'>dt</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>, <span class='no'>text</span>, <span class='no'>dict</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>n_min</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -174,11 +173,10 @@ Default uses 4.</p></td>
 Default uses 1.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A data.frame(tibble) with two columns, namely document ID and extracted keyword.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>In the procedure of keyword extraction from <span class="pkg">akc</span>,first the raw text would be split
@@ -187,11 +185,9 @@ clauses would be extracted. Finally, the phrases represented by ngrams should be
 created by the user (using <code>make_dict</code>).The user could also specify the <em>n</em> of ngrams.</p>
 <p>This function could take some time if the sample size is large, it is suggested to use system.time to do
 some test first. Nonetheless, it has been optimized by data.table codes already and has good performance for big data.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='make_dict.html'>make_dict</a></code></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
@@ -204,7 +200,7 @@ some test first. Nonetheless, it has been optimized by data.table codes already 
 #&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'>
   <span class='no'>bibli_data_table</span> <span class='kw'>%&gt;%</span>
     <span class='fu'><a href='keyword_clean.html'>keyword_clean</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/pull.html'>pull</a></span>(<span class='no'>keyword</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='https://rdrr.io/pkg/dplyr/man/pull.html'>pull</a></span>(<span class='no'>keyword</span>) <span class='kw'>%&gt;%</span>
     <span class='no'>make_dict</span> <span class='kw'>-&gt;</span> <span class='no'>my_dict</span>
 
  <span class='co'># \donttest{</span>
@@ -223,20 +219,16 @@ some test first. Nonetheless, it has been optimized by data.table codes already 
 #&gt; </span><span style='color: #555555;'> 8</span><span>   910 fourth museum assembly       
 #&gt; </span><span style='color: #555555;'> 9</span><span>   624 55th library week            
 #&gt; </span><span style='color: #555555;'>10</span><span>   747 aasl standards               
-#&gt; </span><span style='color: #555555;'># ... with 27,120 more rows</span><span></div><div class='input'> # }
+#&gt; </span><span style='color: #555555;'># … with 27,120 more rows</span><span></div><div class='input'> # }
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

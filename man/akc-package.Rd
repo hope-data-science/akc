@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-A tidy framework for automatic knowledge classification and visualization. Currently, the core functionality of the framework is mainly supported by modularity-based clustering (community detection) in keyword co-occurrence network, and focuses on co-word analysis of bibliometric research. However, the designed functions in akc are general, and could be extended to solve other tasks in text mining as well.
+A tidy framework for automatic knowledge classification and visualization. Currently, the core functionality of the framework is mainly supported by modularity-based clustering (community detection) in keyword co-occurrence network, and focuses on co-word analysis of bibliometric research. However, the designed functions in 'akc' are general, and could be extended to solve other tasks in text mining as well.
 }
 \seealso{
 Useful links:

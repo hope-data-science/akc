@@ -21,6 +21,7 @@
 #' @examples
 #' library(akc)
 #'
+#' \donttest{
 #' bibli_data_table %>%
 #'   keyword_clean(lemmatize = FALSE) %>%
 #'   keyword_merge(reduce_form = "stem")
@@ -28,6 +29,9 @@
 #' bibli_data_table %>%
 #'   keyword_clean(lemmatize = FALSE) %>%
 #'   keyword_merge(reduce_form = "lemma")
+#' }
+#'
+
 
 keyword_merge = function(dt,id = "id",keyword = "keyword",
                           reduce_form = "lemma"){
