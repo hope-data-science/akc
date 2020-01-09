@@ -48,7 +48,8 @@ keyword_vis = function(tibble_graph,facet = TRUE,max_nodes = 10){
       group_by(group) %>%
       top_n(max_nodes,freq) %>%
       ungroup() %>%
-      mutate(Group = str_c("Group ",group)) %>%
+      #mutate(Group = str_c("Group ",group)) %>%
+      mutate(Group = str_c("Group ",group) %>% reorder(group)) %>%
       ggraph("kk") +
       geom_edge_link(aes(alpha = n),show.legend = FALSE) +
       geom_node_point(aes(size = freq),show.legend = FALSE) +
@@ -60,7 +61,8 @@ keyword_vis = function(tibble_graph,facet = TRUE,max_nodes = 10){
       group_by(group) %>%
       top_n(max_nodes,freq) %>%
       ungroup() %>%
-      mutate(Group = str_c("Group ",group)) %>%
+      #mutate(Group = str_c("Group ",group)) %>%
+      mutate(Group = str_c("Group ",group) %>% reorder(group)) %>%
       ggraph("kk") +
       geom_edge_link(aes(alpha = n),show.legend = FALSE) +
       geom_node_point(aes(size = freq),show.legend = FALSE) +

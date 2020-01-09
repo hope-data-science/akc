@@ -1,6 +1,6 @@
 Package: akc
 Title: Automatic Knowledge Classification
-Version: 0.9.0
+Version: 0.9.1
 Authors@R: 
     person(given = "Tian-Yuan",
            family = "Huang",

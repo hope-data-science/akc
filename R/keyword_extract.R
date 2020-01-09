@@ -4,12 +4,14 @@
 #' @description When we have raw text like abstract or article but not keywords, we might prefer extracting
 #' keywords first. The least prerequisite data to be provided are a data.frame with document id and raw text,
 #' and a user defined dictionary should be provided. One could use \code{\link[akc]{make_dict}} function to construct his(her)
-#' own dictionary with a character vector containing the vocabularies.
+#' own dictionary with a character vector containing the vocabularies. If the dictionary is not provided,
+#' the function would return all the ngram tokens without filtering (not recommended).
 #' @param dt A data.frame containing at least two columns with document ID and text strings for extraction.
 #' @param id Quoted characters specifying the column name of document ID.Default uses "id".
 #' @param text Quoted characters specifying the column name of raw text for extraction.
 #' @param dict A data.table with two columns,namely "id" and "keyword"(set as key).
-#' This should be exported by \code{\link[akc]{make_dict}} function.
+#' This should be exported by \code{\link[akc]{make_dict}} function. The default uses \code{NULL},
+#' which means the output keywords are not filtered by the dictionary (usually not recommended).
 #' @param n_max The number of words in the n-gram. This must be an integer greater than or equal to 1.
 #' Default uses 4.
 #' @param n_min This must be an integer greater than or equal to 1, and less than or equal to n_max.
@@ -34,13 +36,12 @@
 #'
 #'  \donttest{
 #'   bibli_data_table %>%
-#'     keyword_extract(id = "id",text = "abstract",dict = my_dict) %>%
-#'     keyword_merge(keyword = "keyword")
+#'     keyword_extract(id = "id",text = "abstract",dict = my_dict)
 #'  }
 #' @export
 
 keyword_extract = function(dt,id = "id",text,
-                           dict,n_max = 4,n_min = 1){
+                           dict = NULL,n_max = 4,n_min = 1){
 
   dt %>%
     as_tibble() %>%
@@ -50,10 +51,13 @@ keyword_extract = function(dt,id = "id",text,
     unnest_tokens(keyword,keyword,token = "ngrams",n = n_max,n_min = n_min) %>%
     select(-id2) %>%
     unique() %>%
+    na.omit()-> df
+
+  if(is.null(dict)) df
+  else df %>%
     data.table(key = "keyword") %>%
     merge(dict,by = "keyword") %>%
-    as_tibble() %>%
-    select(id,keyword)
+    as_tibble()
 
 }
 

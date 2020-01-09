@@ -1,4 +1,13 @@
 
+## v0.9.1 20200109
+1. For `keyword_extract`,give the alternative option to let parameter `dict = NULL`, then the keywords would not be filtered by the dictionary. This could be useful in some circumstances.
+2. Because data.table has some deprecated functions, we remove some of the functions imported from `data.table`. This might be urgent. Details are listed in <https://github.com/hope-data-science/akc/issues/1#issuecomment-572388600>.
+3. For `keyword_vis`,change `mutate(Group = str_c("Group ",group))` to `mutate(Group = str_c("Group ",group) %>% reorder(group))`. This means that when there are more than 10 plots, it would be ordered as 1~10, but not 1,10,2...
+
+## v0.9.0 20200107
+Fix the Description, adding quotes to API name.
+In the future the frame work will be extended to use more methods for keyword clustering in the tidy framework.
+
 ## v0.8.9 20191217
 1.There might be two max values in keyword_merge, previously keep both, now randomly save only one.
 2.Correct some typos in the vignette.
