@@ -10,10 +10,12 @@ Generally provides a tidy framework of data manipulation supported by *dplyr*, *
 ## Installation
 
 ```R
+install.packages("akc")
+# or
 devtools::install_github("hope-data-science/akc")
 ```
 
-
+Note: As `akc` utilizes many state-of-the-art functions from various excellent R packages, it might take a while to install the whole suite, especially when you are still not a heavy R user (then lots of packages might not be installed in advance). Nevertheless, the patience pays off. The well-organized framework will save you much more time afterward. 
 
 ## Further information
 
