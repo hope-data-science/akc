@@ -78,7 +78,7 @@ recieves a tidy table (data.frame) with document ID and keyword waiting to be me
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">akc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.2</span>
       </span>
     </div>
 
@@ -155,8 +155,9 @@ recieves a tidy table (data.frame) with document ID and keyword waiting to be me
     </tr>
     <tr>
       <th>reduce_form</th>
-      <td><p>Should the merge terms have the same stem("stem") or lemma("lemma")?
-Default uses "lemma".</p></td>
+      <td><p>Merge keywords with the same stem("stem") or lemma("lemma"). See details.
+Default uses "lemma". Another advanced option is "partof". If a non-unigram (A) is part (subset) of
+another non-unigram (B), then the longer one(B) would be replaced by the longer one(A).</p></td>
     </tr>
     </table>
 
@@ -171,6 +172,14 @@ every keyword using <code>stem_strings</code> or <code>lemmatize_strings</code> 
 then find the most frequent form (if more than 1,randomly select one)
 for each stem or lemma. Last, every keyword
 would be replaced by the most frequent keyword which share the same stem or lemma with it.</p>
+<p>When the `reduce_form` is set to "partof", then for non-unigrams in the same document,
+if one non-unigram is the subset of another, then they would be merged into the shorter one,
+which is considered to be more general (e.g. "time series" and "time series analysis" would be
+merged into "time series" if they co-occur in the same document). This could reduce the redundant
+information. This is only applied to multi-word phrases, because using it for one word would
+oversimplify the token and cause information loss (therefore, "time series" and "time" would not be
+merged into "time"). This is an advanced option that should be used with caution (A trade-off between
+information generalization and detailed information retention).</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/textstem/man/stem_strings.html'>stem_strings</a></code>, <code><a href='https://rdrr.io/pkg/textstem/man/lemmatize_strings.html'>lemmatize_strings</a></code></p></div>
@@ -181,7 +190,7 @@ would be replaced by the most frequent keyword which share the same stem or lemm
 <span class='co'># \donttest{</span>
 <span class='no'>bibli_data_table</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='keyword_clean.html'>keyword_clean</a></span>(<span class='kw'>lemmatize</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>keyword_merge</span>(<span class='kw'>reduce_form</span> <span class='kw'>=</span> <span class='st'>"stem"</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 5,378 x 2</span><span>
+  <span class='fu'>keyword_merge</span>(<span class='kw'>reduce_form</span> <span class='kw'>=</span> <span class='st'>"stem"</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 5,372 x 2</span><span>
 #&gt;       id keyword                      
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                        
 #&gt; </span><span style='color: #555555;'> 1</span><span>  </span><span style='text-decoration: underline;'>1</span><span>163 10.7202/1063788ar            
@@ -194,10 +203,10 @@ would be replaced by the most frequent keyword which share the same stem or lemm
 #&gt; </span><span style='color: #555555;'> 8</span><span>  </span><span style='text-decoration: underline;'>1</span><span>051 24-hour opening              
 #&gt; </span><span style='color: #555555;'> 9</span><span>   662 3d environment               
 #&gt; </span><span style='color: #555555;'>10</span><span>  </span><span style='text-decoration: underline;'>1</span><span>252 3d reconstruction            
-#&gt; </span><span style='color: #555555;'># … with 5,368 more rows</span><span></div><div class='input'>
+#&gt; </span><span style='color: #555555;'># … with 5,362 more rows</span><span></div><div class='input'>
 <span class='no'>bibli_data_table</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='keyword_clean.html'>keyword_clean</a></span>(<span class='kw'>lemmatize</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>keyword_merge</span>(<span class='kw'>reduce_form</span> <span class='kw'>=</span> <span class='st'>"lemma"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 5,378 x 2</span><span>
+  <span class='fu'>keyword_merge</span>(<span class='kw'>reduce_form</span> <span class='kw'>=</span> <span class='st'>"lemma"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 5,372 x 2</span><span>
 #&gt;       id keyword                      
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                        
 #&gt; </span><span style='color: #555555;'> 1</span><span>  </span><span style='text-decoration: underline;'>1</span><span>163 10.7202/1063788ar            
@@ -210,7 +219,7 @@ would be replaced by the most frequent keyword which share the same stem or lemm
 #&gt; </span><span style='color: #555555;'> 8</span><span>    42 21st-century skills          
 #&gt; </span><span style='color: #555555;'> 9</span><span>  </span><span style='text-decoration: underline;'>1</span><span>114 21st century skills          
 #&gt; </span><span style='color: #555555;'>10</span><span>  </span><span style='text-decoration: underline;'>1</span><span>051 24-hour opening              
-#&gt; </span><span style='color: #555555;'># … with 5,368 more rows</span><span></div><div class='input'># }
+#&gt; </span><span style='color: #555555;'># … with 5,362 more rows</span><span></div><div class='input'># }
 
 </div></span></pre>
   </div>

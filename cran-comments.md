@@ -1,4 +1,7 @@
 
+## v0.9.2
+Add a new option for `keyword_merge`,namely "partof". This option could help merge tokens with relatively same meaning in the same document. For instance, "time series" and "time series analysis" would be merged into "time series". This method could only be applied to more-than-one-word phrases, which means "time series" and "time" would never be merged into "time" (which is considered as information loss). This alternative is an advanced method and should be used with caution.
+
 ## v0.9.1 20200109
 1. For `keyword_extract`,give the alternative option to let parameter `dict = NULL`, then the keywords would not be filtered by the dictionary. This could be useful in some circumstances.
 2. Because data.table has some deprecated functions, we remove some of the functions imported from `data.table`. This might be urgent. Details are listed in <https://github.com/hope-data-science/akc/issues/1#issuecomment-572388600>.

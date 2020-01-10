@@ -13,8 +13,9 @@ keyword_merge(dt, id = "id", keyword = "keyword", reduce_form = "lemma")
 
 \item{keyword}{Quoted characters specifying the column name of keyword.Default uses "keyword".}
 
-\item{reduce_form}{Should the merge terms have the same stem("stem") or lemma("lemma")?
-Default uses "lemma".}
+\item{reduce_form}{Merge keywords with the same stem("stem") or lemma("lemma"). See details.
+Default uses "lemma". Another advanced option is "partof". If a non-unigram (A) is part (subset) of
+another non-unigram (B), then the longer one(B) would be replaced by the longer one(A).}
 }
 \value{
 A tbl, namely a tidy table with document ID and merged keyword.
@@ -30,6 +31,15 @@ every keyword using \code{\link{stem_strings}} or \code{\link{lemmatize_strings}
 then find the most frequent form (if more than 1,randomly select one)
 for each stem or lemma. Last, every keyword
 would be replaced by the most frequent keyword which share the same stem or lemma with it.
+
+When the `reduce_form` is set to "partof", then for non-unigrams in the same document,
+if one non-unigram is the subset of another, then they would be merged into the shorter one,
+which is considered to be more general (e.g. "time series" and "time series analysis" would be
+merged into "time series" if they co-occur in the same document). This could reduce the redundant
+information. This is only applied to multi-word phrases, because using it for one word would
+oversimplify the token and cause information loss (therefore, "time series" and "time" would not be
+merged into "time"). This is an advanced option that should be used with caution (A trade-off between
+information generalization and detailed information retention).
 }
 \examples{
 library(akc)
