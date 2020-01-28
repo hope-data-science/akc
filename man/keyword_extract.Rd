@@ -4,7 +4,15 @@
 \alias{keyword_extract}
 \title{Extract keywords from raw text}
 \usage{
-keyword_extract(dt, id = "id", text, dict = NULL, n_max = 4, n_min = 1)
+keyword_extract(
+  dt,
+  id = "id",
+  text,
+  dict = NULL,
+  stopword = NULL,
+  n_max = 4,
+  n_min = 1
+)
 }
 \arguments{
 \item{dt}{A data.frame containing at least two columns with document ID and text strings for extraction.}
@@ -16,6 +24,8 @@ keyword_extract(dt, id = "id", text, dict = NULL, n_max = 4, n_min = 1)
 \item{dict}{A data.table with two columns,namely "id" and "keyword"(set as key).
 This should be exported by \code{\link[akc]{make_dict}} function. The default uses \code{NULL},
 which means the output keywords are not filtered by the dictionary (usually not recommended).}
+
+\item{stopword}{A vector containing the stop words to be used. Default uses \code{NULL}.}
 
 \item{n_max}{The number of words in the n-gram. This must be an integer greater than or equal to 1.
 Default uses 4.}
@@ -52,9 +62,14 @@ some test first. Nonetheless, it has been optimized by data.table codes already 
     pull(keyword) \%>\%
     make_dict -> my_dict
 
+  tidytext::stop_words \%>\%
+    pull(word) \%>\%
+    unique() -> my_stopword
+
  \donttest{
   bibli_data_table \%>\%
-    keyword_extract(id = "id",text = "abstract",dict = my_dict)
+    keyword_extract(id = "id",text = "abstract",
+    dict = my_dict,stopword = my_stopword)
  }
 }
 \seealso{

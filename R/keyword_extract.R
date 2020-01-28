@@ -12,6 +12,7 @@
 #' @param dict A data.table with two columns,namely "id" and "keyword"(set as key).
 #' This should be exported by \code{\link[akc]{make_dict}} function. The default uses \code{NULL},
 #' which means the output keywords are not filtered by the dictionary (usually not recommended).
+#' @param stopword A vector containing the stop words to be used. Default uses \code{NULL}.
 #' @param n_max The number of words in the n-gram. This must be an integer greater than or equal to 1.
 #' Default uses 4.
 #' @param n_min This must be an integer greater than or equal to 1, and less than or equal to n_max.
@@ -34,14 +35,21 @@
 #'     pull(keyword) %>%
 #'     make_dict -> my_dict
 #'
+#'   tidytext::stop_words %>%
+#'     pull(word) %>%
+#'     unique() -> my_stopword
+#'
 #'  \donttest{
 #'   bibli_data_table %>%
-#'     keyword_extract(id = "id",text = "abstract",dict = my_dict)
+#'     keyword_extract(id = "id",text = "abstract",
+#'     dict = my_dict,stopword = my_stopword)
 #'  }
 #' @export
 
 keyword_extract = function(dt,id = "id",text,
-                           dict = NULL,n_max = 4,n_min = 1){
+                           dict = NULL,
+                           stopword = NULL,
+                           n_max = 4,n_min = 1){
 
   dt %>%
     as_tibble() %>%
@@ -53,11 +61,13 @@ keyword_extract = function(dt,id = "id",text,
     unique() %>%
     na.omit()-> df
 
-  if(is.null(dict)) df
+  if(!is.null(stopword)) df %>% anti_join(tibble(keyword = stopword)) -> df
+  if(is.null(dict)) df %>% select(id,keyword)
   else df %>%
     data.table(key = "keyword") %>%
     merge(dict,by = "keyword") %>%
-    as_tibble()
+    as_tibble() %>%
+    select(id,keyword)
 
 }
 

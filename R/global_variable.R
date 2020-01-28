@@ -5,6 +5,7 @@
 
 globalVariables(c("token","keyword_most","name","freq","keywords",
                   "group","keyword","value","keyword_value","id2",
-                  "Group","stop_words","dt","df","stopword_vector"))
+                  "Group","stop_words","dt","df","stopword_vector",
+                  "item1","item2"))
 
 globalVariables(c(":=","!!",".",".SD"))

@@ -4,7 +4,7 @@
 \alias{keyword_vis}
 \title{Visualization of grouped keyword co-occurrence network}
 \usage{
-keyword_vis(tibble_graph, facet = TRUE, max_nodes = 10)
+keyword_vis(tibble_graph, facet = TRUE, max_nodes = 10, alpha = 0.7)
 }
 \arguments{
 \item{tibble_graph}{A \code{tbl_graph} output by \code{\link[akc]{keyword_group}}.}
@@ -12,6 +12,8 @@ keyword_vis(tibble_graph, facet = TRUE, max_nodes = 10)
 \item{facet}{Whether the figure should use facet or not.}
 
 \item{max_nodes}{The maximum number of nodes displayed in each group.}
+
+\item{alpha}{The transparency of label. Must lie between 0 and 1. Default uses 0.7.}
 }
 \value{
 An object yielded by \code{\link[ggraph]{ggraph}}

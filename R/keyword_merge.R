@@ -7,7 +7,7 @@
 #' @param keyword Quoted characters specifying the column name of keyword.Default uses "keyword".
 #' @param reduce_form Merge keywords with the same stem("stem") or lemma("lemma"). See details.
 #' Default uses "lemma". Another advanced option is "partof". If a non-unigram (A) is part (subset) of
-#' another non-unigram (B), then the longer one(B) would be replaced by the longer one(A).
+#' another non-unigram (B), then the longer one(B) would be replaced by the shorter one(A).
 #' @details  While \code{keyword_clean} has provided a robust way to lemmatize the keywords, the returned token
 #' might not be the most common way to use.This function first gets the stem or lemma of
 #' every keyword using \code{\link{stem_strings}} or \code{\link{lemmatize_strings}} from \pkg{textstem} package,
@@ -75,23 +75,29 @@ keyword_merge = function(dt,id = "id",keyword = "keyword",
     # if a multigram is a subset of another multigram in the same document,merge to
     # the multigram with the shorter length
     # e.g. "time series" and "time series analysis" would be merged to "time series"
-    dt2 %>%
-      .[str_detect(keyword," ")] %>%
-      as_tibble() %>%
-      pairwise_count(keyword,id) %>%
-      mutate(value = str_detect(item1,item2)) %>%
-      filter(value == TRUE) %>%
-      transmute(keyword = item1,replace = item2) %>%
-      as.data.table() %>%
-      unique()-> dt3
+    repeat{
+      dt2 %>%
+        .[str_detect(keyword," ")] %>%
+        as_tibble() %>%
+        pairwise_count(keyword,id) %>%
+        mutate(value = str_detect(item1,item2)) %>%
+        filter(value == TRUE) %>%
+        transmute(keyword = item1,replace = item2) %>%
+        as.data.table() %>%
+        unique()-> dt3
 
-    dt2 %>%
-      merge(dt3,all.x = TRUE,by = "keyword") %>%
-      .[!is.na(replace),keyword:=replace] %>%
-      .[,replace := NULL] %>%
-      unique() %>%
+      dt2 %>%
+        merge(dt3,all.x = TRUE,by = "keyword") %>%
+        .[!is.na(replace),keyword:=replace] %>%
+        .[,replace := NULL] %>%
+        unique() -> final
+      if(setequal(dt2,final)) break
+      else dt2 = final
+    }
+    final%>%
       as_tibble() %>%
       select(id,keyword)
+
   }
 
 }

@@ -15,7 +15,7 @@ keyword_merge(dt, id = "id", keyword = "keyword", reduce_form = "lemma")
 
 \item{reduce_form}{Merge keywords with the same stem("stem") or lemma("lemma"). See details.
 Default uses "lemma". Another advanced option is "partof". If a non-unigram (A) is part (subset) of
-another non-unigram (B), then the longer one(B) would be replaced by the longer one(A).}
+another non-unigram (B), then the longer one(B) would be replaced by the shorter one(A).}
 }
 \value{
 A tbl, namely a tidy table with document ID and merged keyword.
