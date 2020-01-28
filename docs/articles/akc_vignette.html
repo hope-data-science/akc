@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">akc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.3</span>
       </span>
     </div>
 
@@ -155,17 +155,17 @@ Logo of akc package.
 <a class="sourceLine" id="cb1-15" title="15"><span class="co">#&gt; # A tibble: 1,448 x 4</span></a>
 <a class="sourceLine" id="cb1-16" title="16"><span class="co">#&gt;       id title                  keyword                 abstract                </span></a>
 <a class="sourceLine" id="cb1-17" title="17"><span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;                  &lt;chr&gt;                   &lt;chr&gt;                   </span></a>
-<a class="sourceLine" id="cb1-18" title="18"><span class="co">#&gt;  1     1 Keeping the doors ope… Austerity; community c… "English public librari…</span></a>
-<a class="sourceLine" id="cb1-19" title="19"><span class="co">#&gt;  2     2 Comparison of Sloveni… Comparative librarians… "This paper aims to pro…</span></a>
-<a class="sourceLine" id="cb1-20" title="20"><span class="co">#&gt;  3     3 Analysis of the facto… Continuation will of v… "This study aims to dev…</span></a>
-<a class="sourceLine" id="cb1-21" title="21"><span class="co">#&gt;  4     4 Redefining Library an… Curriculum; education … "The purpose of this st…</span></a>
-<a class="sourceLine" id="cb1-22" title="22"><span class="co">#&gt;  5     5 Can in-house use data… Check-out use; circula… "Libraries worldwide ar…</span></a>
-<a class="sourceLine" id="cb1-23" title="23"><span class="co">#&gt;  6     6 Practices of communit… Community councillors;… "The purpose of the res…</span></a>
-<a class="sourceLine" id="cb1-24" title="24"><span class="co">#&gt;  7     7 Exploring Becoming, D… Library and Informatio… "Professional identity …</span></a>
-<a class="sourceLine" id="cb1-25" title="25"><span class="co">#&gt;  8     8 Predictors of burnout… Emotional exhaustion; … "Work stress and profes…</span></a>
-<a class="sourceLine" id="cb1-26" title="26"><span class="co">#&gt;  9     9 The Roma and document… Academic libraries; co… "This paper explores th…</span></a>
-<a class="sourceLine" id="cb1-27" title="27"><span class="co">#&gt; 10    10 Mediation effect of k… Job performance; knowl… "This paper proposes a …</span></a>
-<a class="sourceLine" id="cb1-28" title="28"><span class="co">#&gt; # … with 1,438 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb1-18" title="18"><span class="co">#&gt;  1     1 Keeping the doors ope~ Austerity; community c~ "English public librari~</span></a>
+<a class="sourceLine" id="cb1-19" title="19"><span class="co">#&gt;  2     2 Comparison of Sloveni~ Comparative librarians~ "This paper aims to pro~</span></a>
+<a class="sourceLine" id="cb1-20" title="20"><span class="co">#&gt;  3     3 Analysis of the facto~ Continuation will of v~ "This study aims to dev~</span></a>
+<a class="sourceLine" id="cb1-21" title="21"><span class="co">#&gt;  4     4 Redefining Library an~ Curriculum; education ~ "The purpose of this st~</span></a>
+<a class="sourceLine" id="cb1-22" title="22"><span class="co">#&gt;  5     5 Can in-house use data~ Check-out use; circula~ "Libraries worldwide ar~</span></a>
+<a class="sourceLine" id="cb1-23" title="23"><span class="co">#&gt;  6     6 Practices of communit~ Community councillors;~ "The purpose of the res~</span></a>
+<a class="sourceLine" id="cb1-24" title="24"><span class="co">#&gt;  7     7 Exploring Becoming, D~ Library and Informatio~ "Professional identity ~</span></a>
+<a class="sourceLine" id="cb1-25" title="25"><span class="co">#&gt;  8     8 Predictors of burnout~ Emotional exhaustion; ~ "Work stress and profes~</span></a>
+<a class="sourceLine" id="cb1-26" title="26"><span class="co">#&gt;  9     9 The Roma and document~ Academic libraries; co~ "This paper explores th~</span></a>
+<a class="sourceLine" id="cb1-27" title="27"><span class="co">#&gt; 10    10 Mediation effect of k~ Job performance; knowl~ "This paper proposes a ~</span></a>
+<a class="sourceLine" id="cb1-28" title="28"><span class="co">#&gt; # ... with 1,438 more rows</span></a></code></pre></div>
 <p>The data set contains bibliometric data on topic of “academic library”,it is a data.frame of 4 columns(with docuent ID,article title,keyword and abstract), more information could be found via <code>?bibli_data_data</code>.If the user want to carry out tasks by simply copying the example codes,make sure to arrange the data in the same format as <code>biblio_data_table</code> and set the same names for the corresponding columns.</p>
 </div>
 <div id="keyword-cleaning" class="section level3">
@@ -189,7 +189,7 @@ Logo of akc package.
 <a class="sourceLine" id="cb2-15" title="15"><span class="co">#&gt;  8     2 comparative librarianship        </span></a>
 <a class="sourceLine" id="cb2-16" title="16"><span class="co">#&gt;  9     2 korea                            </span></a>
 <a class="sourceLine" id="cb2-17" title="17"><span class="co">#&gt; 10     2 library legislation              </span></a>
-<a class="sourceLine" id="cb2-18" title="18"><span class="co">#&gt; # … with 5,368 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-18" title="18"><span class="co">#&gt; # ... with 5,368 more rows</span></a></code></pre></div>
 </div>
 <div id="keyword-merging" class="section level3">
 <h3 class="hasAnchor">
@@ -212,7 +212,7 @@ Logo of akc package.
 <a class="sourceLine" id="cb3-15" title="15"><span class="co">#&gt;  8    42 21st-century skills          </span></a>
 <a class="sourceLine" id="cb3-16" title="16"><span class="co">#&gt;  9  1114 21st century skills          </span></a>
 <a class="sourceLine" id="cb3-17" title="17"><span class="co">#&gt; 10  1051 24-hour opening              </span></a>
-<a class="sourceLine" id="cb3-18" title="18"><span class="co">#&gt; # … with 5,362 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-18" title="18"><span class="co">#&gt; # ... with 5,362 more rows</span></a></code></pre></div>
 </div>
 <div id="keyword-grouping" class="section level3">
 <h3 class="hasAnchor">
@@ -235,7 +235,7 @@ Logo of akc package.
 <a class="sourceLine" id="cb4-15" title="15"><span class="co">#&gt; 4 africa                      6     1</span></a>
 <a class="sourceLine" id="cb4-16" title="16"><span class="co">#&gt; 5 altmetrics                  7     3</span></a>
 <a class="sourceLine" id="cb4-17" title="17"><span class="co">#&gt; 6 artificial intelligence     4     1</span></a>
-<a class="sourceLine" id="cb4-18" title="18"><span class="co">#&gt; # … with 201 more rows</span></a>
+<a class="sourceLine" id="cb4-18" title="18"><span class="co">#&gt; # ... with 201 more rows</span></a>
 <a class="sourceLine" id="cb4-19" title="19"><span class="co">#&gt; #</span></a>
 <a class="sourceLine" id="cb4-20" title="20"><span class="co">#&gt; # Edge Data: 1,332 x 3</span></a>
 <a class="sourceLine" id="cb4-21" title="21"><span class="co">#&gt;    from    to     n</span></a>
@@ -243,7 +243,7 @@ Logo of akc package.
 <a class="sourceLine" id="cb4-23" title="23"><span class="co">#&gt; 1     1     2     4</span></a>
 <a class="sourceLine" id="cb4-24" title="24"><span class="co">#&gt; 2     2     3     2</span></a>
 <a class="sourceLine" id="cb4-25" title="25"><span class="co">#&gt; 3     2    48     1</span></a>
-<a class="sourceLine" id="cb4-26" title="26"><span class="co">#&gt; # … with 1,329 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-26" title="26"><span class="co">#&gt; # ... with 1,329 more rows</span></a></code></pre></div>
 </div>
 <div id="output-the-table-of-results" class="section level3">
 <h3 class="hasAnchor">
@@ -254,11 +254,11 @@ Logo of akc package.
 <a class="sourceLine" id="cb5-3" title="3"><span class="co">#&gt; # A tibble: 5 x 2</span></a>
 <a class="sourceLine" id="cb5-4" title="4"><span class="co">#&gt;   Group `Keywords(TOP 10)`                                                      </span></a>
 <a class="sourceLine" id="cb5-5" title="5"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;                                                                   </span></a>
-<a class="sourceLine" id="cb5-6" title="6"><span class="co">#&gt; 1     1 academic libraries (145); information literacy (58); university librari…</span></a>
-<a class="sourceLine" id="cb5-7" title="7"><span class="co">#&gt; 2     2 public libraries (74); libraries (65); digital libraries (31); library …</span></a>
-<a class="sourceLine" id="cb5-8" title="8"><span class="co">#&gt; 3     3 open access (32); bibliometrics (31); library and information science (…</span></a>
-<a class="sourceLine" id="cb5-9" title="9"><span class="co">#&gt; 4     4 leadership (12); library management (12); research data management (12)…</span></a>
-<a class="sourceLine" id="cb5-10" title="10"><span class="co">#&gt; 5     5 national libraries (10); culture (7); cataloguing (6); knowledge organi…</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-6" title="6"><span class="co">#&gt; 1     1 academic libraries (145); information literacy (58); university librari~</span></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="co">#&gt; 2     2 public libraries (74); libraries (65); digital libraries (31); library ~</span></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="co">#&gt; 3     3 open access (32); bibliometrics (31); library and information science (~</span></a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="co">#&gt; 4     4 leadership (12); library management (12); research data management (12)~</span></a>
+<a class="sourceLine" id="cb5-10" title="10"><span class="co">#&gt; 5     5 national libraries (10); culture (7); cataloguing (6); knowledge organi~</span></a></code></pre></div>
 </div>
 <div id="visualize-the-results" class="section level3">
 <h3 class="hasAnchor">
@@ -293,7 +293,7 @@ Logo of akc package.
 <a class="sourceLine" id="cb7-19" title="19"><span class="co">#&gt;  8   910 fourth museum assembly       </span></a>
 <a class="sourceLine" id="cb7-20" title="20"><span class="co">#&gt;  9   624 55th library week            </span></a>
 <a class="sourceLine" id="cb7-21" title="21"><span class="co">#&gt; 10   747 aasl standards               </span></a>
-<a class="sourceLine" id="cb7-22" title="22"><span class="co">#&gt; # … with 27,120 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-22" title="22"><span class="co">#&gt; # ... with 27,120 more rows</span></a></code></pre></div>
 </div>
 </div>
 <div id="end" class="section level2">

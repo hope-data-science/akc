@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">akc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.3</span>
       </span>
     </div>
 
@@ -134,7 +134,7 @@
     <p>Visualization of network-based keyword clustering, with frequency and co-occurrence information attached.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>keyword_vis</span>(<span class='no'>tibble_graph</span>, <span class='kw'>facet</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>max_nodes</span> <span class='kw'>=</span> <span class='fl'>10</span>)</pre>
+    <pre class="usage"><span class='fu'>keyword_vis</span>(<span class='no'>tibble_graph</span>, <span class='kw'>facet</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>max_nodes</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.7</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -150,6 +150,10 @@
     <tr>
       <th>max_nodes</th>
       <td><p>The maximum number of nodes displayed in each group.</p></td>
+    </tr>
+    <tr>
+      <th>alpha</th>
+      <td><p>The transparency of label. Must lie between 0 and 1. Default uses 0.7.</p></td>
     </tr>
     </table>
 

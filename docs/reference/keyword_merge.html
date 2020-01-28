@@ -78,7 +78,7 @@ recieves a tidy table (data.frame) with document ID and keyword waiting to be me
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">akc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.3</span>
       </span>
     </div>
 
@@ -157,7 +157,7 @@ recieves a tidy table (data.frame) with document ID and keyword waiting to be me
       <th>reduce_form</th>
       <td><p>Merge keywords with the same stem("stem") or lemma("lemma"). See details.
 Default uses "lemma". Another advanced option is "partof". If a non-unigram (A) is part (subset) of
-another non-unigram (B), then the longer one(B) would be replaced by the longer one(A).</p></td>
+another non-unigram (B), then the longer one(B) would be replaced by the shorter one(A).</p></td>
     </tr>
     </table>
 
@@ -203,7 +203,7 @@ information generalization and detailed information retention).</p>
 #&gt; </span><span style='color: #555555;'> 8</span><span>  </span><span style='text-decoration: underline;'>1</span><span>051 24-hour opening              
 #&gt; </span><span style='color: #555555;'> 9</span><span>   662 3d environment               
 #&gt; </span><span style='color: #555555;'>10</span><span>  </span><span style='text-decoration: underline;'>1</span><span>252 3d reconstruction            
-#&gt; </span><span style='color: #555555;'># … with 5,362 more rows</span><span></div><div class='input'>
+#&gt; </span><span style='color: #555555;'># ... with 5,362 more rows</span><span></div><div class='input'>
 <span class='no'>bibli_data_table</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='keyword_clean.html'>keyword_clean</a></span>(<span class='kw'>lemmatize</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>keyword_merge</span>(<span class='kw'>reduce_form</span> <span class='kw'>=</span> <span class='st'>"lemma"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 5,372 x 2</span><span>
@@ -219,7 +219,7 @@ information generalization and detailed information retention).</p>
 #&gt; </span><span style='color: #555555;'> 8</span><span>    42 21st-century skills          
 #&gt; </span><span style='color: #555555;'> 9</span><span>  </span><span style='text-decoration: underline;'>1</span><span>114 21st century skills          
 #&gt; </span><span style='color: #555555;'>10</span><span>  </span><span style='text-decoration: underline;'>1</span><span>051 24-hour opening              
-#&gt; </span><span style='color: #555555;'># … with 5,362 more rows</span><span></div><div class='input'># }
+#&gt; </span><span style='color: #555555;'># ... with 5,362 more rows</span><span></div><div class='input'># }
 
 </div></span></pre>
   </div>

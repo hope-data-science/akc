@@ -81,7 +81,7 @@ the function would return all the ngram tokens without filtering (not recommende
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">akc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.3</span>
       </span>
     </div>
 
@@ -142,7 +142,15 @@ own dictionary with a character vector containing the vocabularies. If the dicti
 the function would return all the ngram tokens without filtering (not recommended).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>keyword_extract</span>(<span class='no'>dt</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>, <span class='no'>text</span>, <span class='kw'>dict</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>n_min</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>keyword_extract</span>(
+  <span class='no'>dt</span>,
+  <span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,
+  <span class='no'>text</span>,
+  <span class='kw'>dict</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>stopword</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>4</span>,
+  <span class='kw'>n_min</span> <span class='kw'>=</span> <span class='fl'>1</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -164,6 +172,10 @@ the function would return all the ngram tokens without filtering (not recommende
       <td><p>A data.table with two columns,namely "id" and "keyword"(set as key).
 This should be exported by <code><a href='make_dict.html'>make_dict</a></code> function. The default uses <code>NULL</code>,
 which means the output keywords are not filtered by the dictionary (usually not recommended).</p></td>
+    </tr>
+    <tr>
+      <th>stopword</th>
+      <td><p>A vector containing the stop words to be used. Default uses <code>NULL</code>.</p></td>
     </tr>
     <tr>
       <th>n_max</th>
@@ -206,22 +218,27 @@ some test first. Nonetheless, it has been optimized by data.table codes already 
     <span class='fu'><a href='https://dplyr.tidyverse.org/reference/pull.html'>pull</a></span>(<span class='no'>keyword</span>) <span class='kw'>%&gt;%</span>
     <span class='no'>make_dict</span> <span class='kw'>-&gt;</span> <span class='no'>my_dict</span>
 
+  <span class='kw pkg'>tidytext</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/tidytext/man/stop_words.html'>stop_words</a></span> <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/pull.html'>pull</a></span>(<span class='no'>word</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span>() <span class='kw'>-&gt;</span> <span class='no'>my_stopword</span>
+
  <span class='co'># \donttest{</span>
   <span class='no'>bibli_data_table</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'>keyword_extract</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>text</span> <span class='kw'>=</span> <span class='st'>"abstract"</span>,<span class='kw'>dict</span> <span class='kw'>=</span> <span class='no'>my_dict</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 27,130 x 2</span><span>
-#&gt;    keyword                          id
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                         </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> 18th century                    619
-#&gt; </span><span style='color: #555555;'> 2</span><span> 18th century                   </span><span style='text-decoration: underline;'>1</span><span>223
-#&gt; </span><span style='color: #555555;'> 3</span><span> 1password                      </span><span style='text-decoration: underline;'>1</span><span>154
-#&gt; </span><span style='color: #555555;'> 4</span><span> 1science                         81
-#&gt; </span><span style='color: #555555;'> 5</span><span> 1science                        983
-#&gt; </span><span style='color: #555555;'> 6</span><span> 2016 us presidential election    15
-#&gt; </span><span style='color: #555555;'> 7</span><span> 3d environment                  662
-#&gt; </span><span style='color: #555555;'> 8</span><span> 55th library week               624
-#&gt; </span><span style='color: #555555;'> 9</span><span> aasl standards                  747
-#&gt; </span><span style='color: #555555;'>10</span><span> aboriginal                      284
-#&gt; </span><span style='color: #555555;'># … with 27,120 more rows</span><span></div><div class='input'> # }
+    <span class='fu'>keyword_extract</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>text</span> <span class='kw'>=</span> <span class='st'>"abstract"</span>,
+    <span class='kw'>dict</span> <span class='kw'>=</span> <span class='no'>my_dict</span>,<span class='kw'>stopword</span> <span class='kw'>=</span> <span class='no'>my_stopword</span>)</div><div class='output co'>#&gt; <span class='message'>Joining, by = "keyword"</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 25,140 x 2</span><span>
+#&gt;       id keyword                      
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                        
+#&gt; </span><span style='color: #555555;'> 1</span><span>   619 18th century                 
+#&gt; </span><span style='color: #555555;'> 2</span><span>  </span><span style='text-decoration: underline;'>1</span><span>223 18th century                 
+#&gt; </span><span style='color: #555555;'> 3</span><span>  </span><span style='text-decoration: underline;'>1</span><span>154 1password                    
+#&gt; </span><span style='color: #555555;'> 4</span><span>    81 1science                     
+#&gt; </span><span style='color: #555555;'> 5</span><span>   983 1science                     
+#&gt; </span><span style='color: #555555;'> 6</span><span>    15 2016 us presidential election
+#&gt; </span><span style='color: #555555;'> 7</span><span>   662 3d environment               
+#&gt; </span><span style='color: #555555;'> 8</span><span>   624 55th library week            
+#&gt; </span><span style='color: #555555;'> 9</span><span>   747 aasl standards               
+#&gt; </span><span style='color: #555555;'>10</span><span>   284 aboriginal                   
+#&gt; </span><span style='color: #555555;'># ... with 25,130 more rows</span><span></div><div class='input'> # }
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
