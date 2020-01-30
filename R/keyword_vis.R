@@ -31,11 +31,6 @@
 #'   keyword_group(id = "id",keyword = "keyword") %>%
 #'   keyword_vis(facet = FALSE)
 #'
-#' # remove legends
-#' bibli_data_table %>%
-#'   keyword_clean(id = "id",keyword = "keyword") %>%
-#'   keyword_group(id = "id",keyword = "keyword") %>%
-#'   keyword_vis() + ggplot2::guides(fill = FALSE)
 #' }
 
 
@@ -74,3 +69,8 @@ keyword_vis = function(tibble_graph,facet = TRUE,max_nodes = 10,alpha = 0.7){
   }
 
 }
+
+
+
+
+

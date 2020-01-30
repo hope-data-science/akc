@@ -1,0 +1,109 @@
+---
+title: "Tutorial for knowledge classification from raw text"
+output: rmarkdown::html_vignette
+author: Huang Tian-Yuan (Hope)
+vignette: >
+  %\VignetteIndexEntry{tutorial_raw_text}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+  This tutorial gives an example of how to use `akc` package to carry out automatic knowledge classification based on raw text. First, load the packages we need.
+```{r setup}
+library(akc)
+library(dplyr)
+```
+
+## Inspect the data
+  In the dataset, we have the ID, title, keyword and abstract of documents. We are going to use the keyword as the dictionary to extract keywords from the abstract.
+```{r}
+bibli_data_table
+```
+
+## Get the dictionary from keyword field
+  `keyword_clean` is designed to split the keywords and removed pure numbers and contents in the parentheses. All letters would be converted to lower case. Details see the help of `keyword_clean`, use "?keyword_clean".
+  After cleaning, we'll use these keywords to establish a dictionary.
+```{r}
+bibli_data_table %>%
+  keyword_clean() %>%
+  pull(keyword) %>%
+  make_dict() -> my_dict
+```
+
+## Extract keywords from abstract
+  Using `keyword_extract` to extract keywords from the abstract. Here, we also exclude the stop words using the "stopword" parameter.
+```{r}
+# get stop words from `tidytext` package
+tidytext::stop_words %>%
+    pull(word) %>%
+    unique() -> my_stopword
+  
+bibli_data_table %>%
+    keyword_extract(id = "id",text = "abstract",
+    dict = my_dict,stopword = my_stopword) -> extracted_keywords
+
+```
+  
+## Merge keywords with same meanings
+  While this process has consider lots of factors, such as stemming, lemmatizing, etc. Here I'll provide a easy implementation. For advanced usage, use "?keyword_merge" to find out.
+```{r}
+extracted_keywords %>% 
+  keyword_merge() -> merged_keywords
+```
+  
+## Divide keywords into groups (automatic classification)
+  This process will construct a keyword co-occurrence network and use community detection to group the keywords automatically. You can use "top" or "min_freq" to control how many keywords should be included in the network. "top" means how many keywords with largest frequency should be included. "min_freq" means the included keywords should emerge at least how many times. Default uses `top = 200` and `min_freq = 1`.
+```{r}
+merged_keywords %>% 
+  keyword_group() -> grouped_keywords
+```
+  
+## Get the grouped table
+  Getting the result as a table could be easy by:
+```{r}
+grouped_keywords %>% 
+  as_tibble()
+```
+   
+   If you only wants the top keywords to be displayed, `keyword_table` provides another relatively formal table:
+```{r}
+grouped_keywords %>% 
+  keyword_table()
+```
+  In such implementation, only two groups are found. You can specify the number of top keywords using "top" parameter.
+  
+## Visualization of the network
+
+  Currently, `keyword_vis`,`keyword_network` and `keyword_cloud` could all be used to draw plots for the network, but in differnt forms. Let's try to draw a word cloud first:
+```{r}
+grouped_keywords %>% 
+  keyword_cloud()
+```
+   
+   If you want to draw a network, use `keyword_network`:
+```{r}
+grouped_keywords %>% 
+  keyword_network()
+```
+   
+  In the plot, "N=106" means altogether there are 106 keywords in the group, though only the top 10 by frequency are showed in the graph. If you only want to visualize the second group and display 20 nodes, try:
+```{r}
+grouped_keywords %>% 
+  keyword_network(group_no = 2,max_nodes = 20)
+```
+   
+   Have fun playing with akc!
+
+
+
+
+
+
+
+
