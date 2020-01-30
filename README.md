@@ -1,5 +1,5 @@
 # akc: Automatic knowledge classification <img src="man/figures/logo.png" align="right" alt="" width="120" />
-[![](https://www.r-pkg.org/badges/version/akc?color=orange)](https://cran.r-project.org/package=akc) ![](http://cranlogs.r-pkg.org/badges/grand-total/akc?color=green) ![](https://img.shields.io/badge/lifecycle-maturing-blue.svg) [![Last-changedate](https://img.shields.io/badge/last%20update-2020--01--26-yellowgreen.svg)](/commits/master)
+[![](https://www.r-pkg.org/badges/version/akc?color=orange)](https://cran.r-project.org/package=akc) ![](http://cranlogs.r-pkg.org/badges/grand-total/akc?color=green) ![](https://img.shields.io/badge/lifecycle-maturing-blue.svg) [![](https://img.shields.io/github/last-commit/hope-data-science/akc.svg)](https://github.com/hope-data-science/akc/commits/master)
 
 Short for automatic knowledge classification, *akc* is an R package used to carry out keyword classification based on network science (mainly community detection techniques), using bibliometric data. However, these provided functions are general, and could be extended to solve other tasks in text mining as well.   
 
@@ -21,4 +21,4 @@ Note: As `akc` utilizes many state-of-the-art functions from various excellent R
 
 ## Further information
 
-See [vignette](<https://hope-data-science.github.io/akc/articles/akc_vignette.html>).
+See [vignette](<https://hope-data-science.github.io/akc/articles/akc_vignette.html>) and [tutorial](<https://hope-data-science.github.io/akc/articles/tutorial_raw_text.html>) .

@@ -1,4 +1,15 @@
 
+## 0.9.4
+1. Add "stopword" parameter to `keyword_extract`.
+2. Add `keyword_cloud` function for visualization of keywords.
+3. Add `keyword_network` function to provide more flexible network visualization.
+4. Add a new vignette as tutorial titled as "Tutorial for knowledge classification from raw text".
+
+## v0.9.3 20200126
+1. Rearrange the column order of `keyword_extract`,put "id" first.
+2. When use the "partof" method in `keyword_merge`, iterate this process until no more "partof" method to make new changes to the data.frame.
+3. Add parameter "alpha" to `keyword_vis` to control transparency.
+
 ## v0.9.2
 Add a new option for `keyword_merge`,namely "partof". This option could help merge tokens with relatively same meaning in the same document. For instance, "time series" and "time series analysis" would be merged into "time series". This method could only be applied to more-than-one-word phrases, which means "time series" and "time" would never be merged into "time" (which is considered as information loss). This alternative is an advanced method and should be used with caution.
 
