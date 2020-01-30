@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Visualization of grouped keyword co-occurrence network — keyword_vis • akc</title>
+<title>Draw word cloud for grouped keywords — keyword_cloud • akc</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,8 +42,9 @@
 
 
 
-<meta property="og:title" content="Visualization of grouped keyword co-occurrence network — keyword_vis" />
-<meta property="og:description" content="Visualization of network-based keyword clustering, with frequency and co-occurrence information attached." />
+<meta property="og:title" content="Draw word cloud for grouped keywords — keyword_cloud" />
+<meta property="og:description" content="This function should be used to plot the object exported by
+keyword_group. It could draw a robust word cloud of keywords." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -128,16 +129,17 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Visualization of grouped keyword co-occurrence network</h1>
-    <small class="dont-index">Source: <a href='https://github.com/hope-data-science/akc/blob/master/R/keyword_vis.R'><code>R/keyword_vis.R</code></a></small>
-    <div class="hidden name"><code>keyword_vis.Rd</code></div>
+    <h1>Draw word cloud for grouped keywords</h1>
+    <small class="dont-index">Source: <a href='https://github.com/hope-data-science/akc/blob/master/R/keyword_cloud.R'><code>R/keyword_cloud.R</code></a></small>
+    <div class="hidden name"><code>keyword_cloud.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Visualization of network-based keyword clustering, with frequency and co-occurrence information attached.</p>
+    <p>This function should be used to plot the object exported by
+<code><a href='keyword_group.html'>keyword_group</a></code>. It could draw a robust word cloud of keywords.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>keyword_vis</span>(<span class='no'>tibble_graph</span>, <span class='kw'>facet</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>max_nodes</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.7</span>)</pre>
+    <pre class="usage"><span class='fu'>keyword_cloud</span>(<span class='no'>tibble_graph</span>, <span class='kw'>top</span> <span class='kw'>=</span> <span class='fl'>50</span>, <span class='kw'>max_size</span> <span class='kw'>=</span> <span class='fl'>20</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -147,53 +149,46 @@
       <td><p>A <code>tbl_graph</code> output by <code><a href='keyword_group.html'>keyword_group</a></code>.</p></td>
     </tr>
     <tr>
-      <th>facet</th>
-      <td><p>Whether the figure should use facet or not.</p></td>
+      <th>top</th>
+      <td><p>How many top keywords (by frequency) should be plot? Default uses 50.</p></td>
     </tr>
     <tr>
-      <th>max_nodes</th>
-      <td><p>The maximum number of nodes displayed in each group.</p></td>
-    </tr>
-    <tr>
-      <th>alpha</th>
-      <td><p>The transparency of label. Must lie between 0 and 1. Default uses 0.7.</p></td>
+      <th>max_size</th>
+      <td><p>Size of largest keyword.Default uses 20.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>An object yielded by <code><a href='https://rdrr.io/pkg/ggraph/man/ggraph.html'>ggraph</a></code></p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>When <code>facet == TRUE</code>,the function returns a faceted figure with limited number of nodes
-(adjuseted by <code>max_nodes</code> parameter).When <code>facet == FALSE</code>,all the nodes would be displayed in one
-network.Colors are used to specify the groups, the size of nodes is proportional to the keyword frequency,
-while the alpha of edges is proportional to the co-occurrence relationship between keywords.</p>
+    <p>In the output graph, the size of keywords is proportional to the keyword
+frequency, keywords in different colours belong to different group. For advanced
+usage of word cloud, use <span class="pkg">ggwordcloud</span> directly with the grouped keywords
+yielded by <code><a href='keyword_group.html'>keyword_group</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/ggraph/man/ggraph.html'>ggraph</a></code></p></div>
+    <div class='dont-index'><p><code><a href='keyword_group.html'>keyword_group</a></code>,
+<code><a href='https://rdrr.io/pkg/ggwordcloud/man/geom_text_wordcloud.html'>geom_text_wordcloud_area</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>akc</span>)
-<span class='co'># \donttest{</span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: 'dplyr'</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:stats':</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:base':</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>akc</span>)
+
 <span class='no'>bibli_data_table</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='keyword_clean.html'>keyword_clean</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='keyword_group.html'>keyword_group</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>keyword_vis</span>()</div><div class='img'><img src='keyword_vis-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># without facet</span>
-<span class='no'>bibli_data_table</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='keyword_clean.html'>keyword_clean</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='keyword_group.html'>keyword_group</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>keyword_vis</span>(<span class='kw'>facet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='keyword_vis-2.png' alt='' width='700' height='433' /></div><div class='input'>
-# }
-</div></pre>
+  <span class='fu'><a href='keyword_group.html'>keyword_group</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>) <span class='kw'>-&gt;</span> <span class='no'>grouped_keyword</span>
+
+<span class='no'>grouped_keyword</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>keyword_cloud</span>()</div><div class='img'><img src='keyword_cloud-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
       <li><a href="#details">Details</a></li>
       <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>

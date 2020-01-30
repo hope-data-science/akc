@@ -3,4 +3,5 @@ pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
   akc_vignette: akc_vignette.html
+  tutorial_raw_text: tutorial_raw_text.html
 

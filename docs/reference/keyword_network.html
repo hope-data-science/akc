@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Visualization of grouped keyword co-occurrence network — keyword_vis • akc</title>
+<title>Flexiable visualization of network (alternative to 'keyword_vis') — keyword_network • akc</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,8 +42,9 @@
 
 
 
-<meta property="og:title" content="Visualization of grouped keyword co-occurrence network — keyword_vis" />
-<meta property="og:description" content="Visualization of network-based keyword clustering, with frequency and co-occurrence information attached." />
+<meta property="og:title" content="Flexiable visualization of network (alternative to 'keyword_vis') — keyword_network" />
+<meta property="og:description" content="Providing flexible visualization of keyword_vis. The
+group size would be showed, and user could extract specific group to visualize." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -128,16 +129,23 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Visualization of grouped keyword co-occurrence network</h1>
-    <small class="dont-index">Source: <a href='https://github.com/hope-data-science/akc/blob/master/R/keyword_vis.R'><code>R/keyword_vis.R</code></a></small>
-    <div class="hidden name"><code>keyword_vis.Rd</code></div>
+    <h1>Flexiable visualization of network (alternative to 'keyword_vis')</h1>
+    <small class="dont-index">Source: <a href='https://github.com/hope-data-science/akc/blob/master/R/keyword_network.R'><code>R/keyword_network.R</code></a></small>
+    <div class="hidden name"><code>keyword_network.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Visualization of network-based keyword clustering, with frequency and co-occurrence information attached.</p>
+    <p>Providing flexible visualization of <code><a href='keyword_vis.html'>keyword_vis</a></code>. The
+group size would be showed, and user could extract specific group to visualize.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>keyword_vis</span>(<span class='no'>tibble_graph</span>, <span class='kw'>facet</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>max_nodes</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.7</span>)</pre>
+    <pre class="usage"><span class='fu'>keyword_network</span>(
+  <span class='no'>tibble_graph</span>,
+  <span class='kw'>group_no</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>facet</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>max_nodes</span> <span class='kw'>=</span> <span class='fl'>10</span>,
+  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.7</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -145,6 +153,11 @@
     <tr>
       <th>tibble_graph</th>
       <td><p>A <code>tbl_graph</code> output by <code><a href='keyword_group.html'>keyword_group</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>group_no</th>
+      <td><p>If one wants to visualize a specific group, gives the group number.
+Default uses <code>NULL</code>,which returns all the groups.</p></td>
     </tr>
     <tr>
       <th>facet</th>
@@ -165,28 +178,36 @@
     <p>An object yielded by <code><a href='https://rdrr.io/pkg/ggraph/man/ggraph.html'>ggraph</a></code></p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>When <code>facet == TRUE</code>,the function returns a faceted figure with limited number of nodes
-(adjuseted by <code>max_nodes</code> parameter).When <code>facet == FALSE</code>,all the nodes would be displayed in one
+    <p>If the <code>group_no</code> is not specified, when <code>facet == TRUE</code>,
+the function returns a faceted figure with limited number of nodes
+(adjuseted by <code>max_nodes</code> parameter). The "N=" shows the total size of the group.</p>
+<p>When <code>facet == FALSE</code>,all the nodes would be displayed in one
 network.Colors are used to specify the groups, the size of nodes is proportional to the keyword frequency,
 while the alpha of edges is proportional to the co-occurrence relationship between keywords.</p>
+<p>If the <code>group_no</code> is specified, returns the network visualization of the group.
+If you want to display all the nodes, set <code>max_nodes</code> to <code>Inf</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/ggraph/man/ggraph.html'>ggraph</a></code></p></div>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/ggraph/man/ggraph.html'>ggraph</a></code>,<code><a href='keyword_vis.html'>keyword_vis</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>akc</span>)
+ <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>akc</span>)
 <span class='co'># \donttest{</span>
-<span class='no'>bibli_data_table</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='keyword_clean.html'>keyword_clean</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='keyword_group.html'>keyword_group</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>keyword_vis</span>()</div><div class='img'><img src='keyword_vis-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># without facet</span>
-<span class='no'>bibli_data_table</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='keyword_clean.html'>keyword_clean</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='keyword_group.html'>keyword_group</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>keyword_vis</span>(<span class='kw'>facet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='keyword_vis-2.png' alt='' width='700' height='433' /></div><div class='input'>
-# }
+ <span class='no'>bibli_data_table</span> <span class='kw'>%&gt;%</span>
+   <span class='fu'><a href='keyword_clean.html'>keyword_clean</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>) <span class='kw'>%&gt;%</span>
+   <span class='fu'><a href='keyword_group.html'>keyword_group</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>) <span class='kw'>%&gt;%</span>
+   <span class='fu'>keyword_network</span>()</div><div class='output co'>#&gt; <span class='message'>Joining, by = c("name", "freq", "group")</span></div><div class='img'><img src='keyword_network-1.png' alt='' width='700' height='433' /></div><div class='input'>
+ <span class='co'># without facet</span>
+ <span class='no'>bibli_data_table</span> <span class='kw'>%&gt;%</span>
+   <span class='fu'><a href='keyword_clean.html'>keyword_clean</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>) <span class='kw'>%&gt;%</span>
+   <span class='fu'><a href='keyword_group.html'>keyword_group</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>) <span class='kw'>%&gt;%</span>
+   <span class='fu'>keyword_network</span>(<span class='kw'>facet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='message'>Joining, by = c("name", "freq", "group")</span></div><div class='img'><img src='keyword_network-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># get Group 5</span>
+ <span class='no'>bibli_data_table</span> <span class='kw'>%&gt;%</span>
+   <span class='fu'><a href='keyword_clean.html'>keyword_clean</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>) <span class='kw'>%&gt;%</span>
+   <span class='fu'><a href='keyword_group.html'>keyword_group</a></span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"id"</span>,<span class='kw'>keyword</span> <span class='kw'>=</span> <span class='st'>"keyword"</span>) <span class='kw'>%&gt;%</span>
+   <span class='fu'>keyword_network</span>(<span class='kw'>group_no</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='img'><img src='keyword_network-3.png' alt='' width='700' height='433' /></div><div class='input'># }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
