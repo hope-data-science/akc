@@ -4,10 +4,13 @@
 \alias{keyword_cloud}
 \title{Draw word cloud for grouped keywords}
 \usage{
-keyword_cloud(tibble_graph, top = 50, max_size = 20)
+keyword_cloud(tibble_graph, group_no = NULL, top = 50, max_size = 20)
 }
 \arguments{
 \item{tibble_graph}{A \code{tbl_graph} output by \code{\link[akc]{keyword_group}}.}
+
+\item{group_no}{If one wants to visualize a specific group, gives the group number.
+Default uses \code{NULL},which returns all the groups.}
 
 \item{top}{How many top keywords (by frequency) should be plot? Default uses 50.}
 
@@ -34,6 +37,9 @@ bibli_data_table \%>\%
 
 grouped_keyword \%>\%
   keyword_cloud()
+
+grouped_keyword \%>\%
+  keyword_cloud(group_no = 1)
 }
 \seealso{
 \code{\link[akc]{keyword_group}},

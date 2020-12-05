@@ -4,13 +4,15 @@
 \name{bibli_data_table}
 \alias{bibli_data_table}
 \title{A selected dataset of bibliometric data on the topic of "Library science"}
-\format{A data frame with 1448 rows and 4 variables:
+\format{
+A data frame with 1448 rows and 4 variables:
 \describe{
  \item{id}{Unique article identifier for each article}
  \item{title}{Title of the article}
  \item{keyword}{Keyword list of the article}
  \item{abstract}{Abstract of the article}
-}}
+}
+}
 \source{
 \url{http://www.webofknowledge.com/}
 }

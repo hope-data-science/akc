@@ -52,6 +52,12 @@ If you want to display all the nodes, set \code{max_nodes} to \code{Inf}.
    keyword_group(id = "id",keyword = "keyword") \%>\%
    keyword_network()
 
+# use color with `scale_fill_`
+ bibli_data_table \%>\%
+   keyword_clean(id = "id",keyword = "keyword") \%>\%
+   keyword_group(id = "id",keyword = "keyword") \%>\%
+   keyword_network() + ggplot2::scale_fill_viridis_d()
+
  # without facet
  bibli_data_table \%>\%
    keyword_clean(id = "id",keyword = "keyword") \%>\%

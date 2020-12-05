@@ -22,8 +22,8 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{magrittr}{\code{\link[magrittr]{\%>\%}}}
+  \item{magrittr}{\code{\link[magrittr:pipe]{\%>\%}}}
 
-  \item{tidygraph}{\code{\link[tidygraph]{group_biconnected_component}}, \code{\link[tidygraph]{group_components}}, \code{\link[tidygraph]{group_edge_betweenness}}, \code{\link[tidygraph]{group_fast_greedy}}, \code{\link[tidygraph]{group_infomap}}, \code{\link[tidygraph]{group_label_prop}}, \code{\link[tidygraph]{group_leading_eigen}}, \code{\link[tidygraph]{group_louvain}}, \code{\link[tidygraph]{group_optimal}}, \code{\link[tidygraph]{group_spinglass}}, \code{\link[tidygraph]{group_walktrap}}}
+  \item{tidygraph}{\code{\link[tidygraph:group_graph]{group_biconnected_component}}, \code{\link[tidygraph:group_graph]{group_components}}, \code{\link[tidygraph:group_graph]{group_edge_betweenness}}, \code{\link[tidygraph:group_graph]{group_fast_greedy}}, \code{\link[tidygraph:group_graph]{group_infomap}}, \code{\link[tidygraph:group_graph]{group_label_prop}}, \code{\link[tidygraph:group_graph]{group_leading_eigen}}, \code{\link[tidygraph:group_graph]{group_louvain}}, \code{\link[tidygraph:group_graph]{group_optimal}}, \code{\link[tidygraph:group_graph]{group_spinglass}}, \code{\link[tidygraph:group_graph]{group_walktrap}}}
 }}
 

@@ -61,9 +61,9 @@ bibli_data_table \%>\%
 
 }
 \references{
-de Sousa, Fabiano Berardo, and Liang Zhao. "Evaluating and comparing the igraph community detection algorithms." 2014 Brazilian Conference on Intelligent Systems. IEEE, 2014.\url{https://ieeexplore_ieee.xilesou.top/abstract/document/6984865/}
+de Sousa, Fabiano Berardo, and Liang Zhao. "Evaluating and comparing the igraph community detection algorithms." 2014 Brazilian Conference on Intelligent Systems. IEEE, 2014.
 
-Yang, Z., Algesheimer, R., & Tessone, C. J. (2016). A comparative analysis of community detection algorithms on artificial networks. Scientific reports, 6, 30750.\url{https://www_nature.xilesou.top/articles/srep30750}
+Yang, Z., Algesheimer, R., & Tessone, C. J. (2016). A comparative analysis of community detection algorithms on artificial networks. Scientific reports, 6, 30750.
 }
 \seealso{
 \code{\link[tidygraph]{tbl_graph}}, \code{\link[tidygraph]{group_graph}}
