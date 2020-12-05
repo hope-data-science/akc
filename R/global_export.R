@@ -1,7 +1,7 @@
 
+
 #' @importFrom magrittr `%>%`
 #' @export
-
 # pipe operator from magrittr
 magrittr::`%>%`
 

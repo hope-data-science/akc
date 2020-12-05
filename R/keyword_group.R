@@ -19,8 +19,8 @@
 #' largest frequency would be selected and the minimum occurrence of keywords could be specified.
 #' For suggestions of community detection algorithm, see the references provided below.
 #' @references
-#' de Sousa, Fabiano Berardo, and Liang Zhao. "Evaluating and comparing the igraph community detection algorithms." 2014 Brazilian Conference on Intelligent Systems. IEEE, 2014.\url{https://ieeexplore_ieee.xilesou.top/abstract/document/6984865/}
-#' @references Yang, Z., Algesheimer, R., & Tessone, C. J. (2016). A comparative analysis of community detection algorithms on artificial networks. Scientific reports, 6, 30750.\url{https://www_nature.xilesou.top/articles/srep30750}
+#' de Sousa, Fabiano Berardo, and Liang Zhao. "Evaluating and comparing the igraph community detection algorithms." 2014 Brazilian Conference on Intelligent Systems. IEEE, 2014.
+#' @references Yang, Z., Algesheimer, R., & Tessone, C. J. (2016). A comparative analysis of community detection algorithms on artificial networks. Scientific reports, 6, 30750.
 #' @seealso  \code{\link[tidygraph]{tbl_graph}}, \code{\link[tidygraph]{group_graph}}
 #' @import tidygraph
 #' @import dplyr
@@ -58,14 +58,15 @@ keyword_group = function(dt,id = "id",keyword = "keyword",
     top_n(top,n) %>%
     filter(n >= min_freq) -> freq_table
 
-  dt %>%
-    inner_join(freq_table %>% select(keyword),by = "keyword") %>%
-    pairwise_count(keyword,id,upper = FALSE) %>%
-    graph_from_data_frame(directed = FALSE) %>%
-    as_tbl_graph() %>%
-    inner_join(freq_table,by = c("name"="keyword")) %>%
-    rename(freq = n) %>%
-    mutate(group = com_detect_fun())  # community detection,this algorithm could be changed
-  # other options could be found in tidygraph::group_graph
-
+  suppressWarnings(
+    dt %>%
+      inner_join(freq_table %>% select(keyword),by = "keyword") %>%
+      pairwise_count(keyword,id,upper = FALSE) %>%
+      graph_from_data_frame(directed = FALSE) %>%
+      as_tbl_graph() %>%
+      inner_join(freq_table,by = c("name"="keyword")) %>%
+      rename(freq = n) %>%
+      mutate(group = com_detect_fun())  # community detection,this algorithm could be changed
+    # other options could be found in tidygraph::group_graph
+  )
 }

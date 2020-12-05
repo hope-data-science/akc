@@ -32,7 +32,7 @@
 #'  bibli_data_table %>%
 #'    keyword_clean(id = "id",keyword = "keyword") %>%
 #'    keyword_group(id = "id",keyword = "keyword") %>%
-#'    keyword_network() + ggplot2::ggplot2::scale_fill_viridis_d()
+#'    keyword_network() + ggplot2::scale_fill_viridis_d()
 #'
 #'  # without facet
 #'  bibli_data_table %>%
@@ -52,46 +52,46 @@ keyword_network = function(tibble_graph, group_no = NULL,
 
   if(!is.tbl_graph(tibble_graph)) stop("keyword_vis only receives class 'tbl_graph'.")
 
-  if(is.null(group_no)){
-    tibble_graph %>%
-      as_tibble() %>%
-      add_count(group,name = "group_no") -> net_group_no
-
-    tibble_graph %>%
-      inner_join(net_group_no) %>%
-      group_by(group) %>%
-      top_n(max_nodes,freq) %>%
-      ungroup() %>%
-      #mutate(Group = str_c("Group ",group)) %>%
-      #mutate(Group = str_c("Group ",group) %>% reorder(group)) %>%
-      mutate(Group = str_c("Group ",group," (N=",group_no,")") %>%
-               reorder(group)) %>%
-      ggraph("kk") +
-      geom_edge_link0(aes(alpha = n),show.legend = FALSE) +
-      geom_node_point(aes(size = freq),show.legend = FALSE) +
-      geom_node_label(aes(label = name,fill = Group),repel = TRUE,alpha = alpha) +
-      guides(fill = FALSE) +
-      theme_no_axes() -> g
-
-    if(facet == TRUE) g = g + facet_nodes(~Group)
-
-    g
-  } else {
-    max_group_no <- tibble_graph %>% as_tibble() %>% .$group %>% max()
-    if(group_no > max_group_no)
-      stop(paste0("The group does not exist, maximum group number is ",max_group_no))
-    else{
+  suppressWarnings(
+    if(is.null(group_no)){
       tibble_graph %>%
-        filter(group == group_no) %>%
+        as_tibble() %>%
+        add_count(group,name = "group_no") -> net_group_no
+
+      tibble_graph %>%
+        inner_join(net_group_no) %>%
+        group_by(group) %>%
         top_n(max_nodes,freq) %>%
+        ungroup() %>%
+        mutate(Group = str_c("Group ",group," (N=",group_no,")") %>%
+                 reorder(group)) %>%
         ggraph("kk") +
         geom_edge_link0(aes(alpha = n),show.legend = FALSE) +
         geom_node_point(aes(size = freq),show.legend = FALSE) +
-        geom_node_label(aes(label = name),repel = TRUE,alpha = alpha) +
+        geom_node_label(aes(label = name,fill = Group),repel = TRUE,alpha = alpha) +
         guides(fill = FALSE) +
-        theme_no_axes()
+        theme_no_axes() -> g
+
+      if(facet == TRUE) g = g + facet_nodes(~Group)
+
+      g
+    } else {
+      max_group_no <- tibble_graph %>% as_tibble() %>% .$group %>% max()
+      if(group_no > max_group_no)
+        stop(paste0("The group does not exist, maximum group number is ",max_group_no))
+      else{
+        tibble_graph %>%
+          filter(group == group_no) %>%
+          top_n(max_nodes,freq) %>%
+          ggraph("kk") +
+          geom_edge_link0(aes(alpha = n),show.legend = FALSE) +
+          geom_node_point(aes(size = freq),show.legend = FALSE) +
+          geom_node_label(aes(label = name),repel = TRUE,alpha = alpha) +
+          guides(fill = FALSE) +
+          theme_no_axes()
+      }
     }
-  }
+  )
 }
 
 

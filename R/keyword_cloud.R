@@ -28,7 +28,7 @@
 #' grouped_keyword %>%
 #'   keyword_cloud()
 #'
-#' grouped_keywords %>%
+#' grouped_keyword %>%
 #'   keyword_cloud(group_no = 1)
 
 keyword_cloud = function(tibble_graph,group_no = NULL,top = 50,max_size = 20){
@@ -42,16 +42,17 @@ keyword_cloud = function(tibble_graph,group_no = NULL,top = 50,max_size = 20){
     scale_size_area(max_size = max_size) +
     scale_x_discrete(breaks = NULL,name = "") +
     theme_minimal()
-  else
+  else{
     tibble_graph %>%
-    as_tibble() %>%
-    filter(group == group_no) %>%
-    top_n(top,freq) %>%
-    ggplot(aes(label = name,size = freq)) +
-    geom_text_wordcloud_area() +
-    scale_size_area(max_size = max_size) +
-    scale_x_discrete(breaks = NULL,name = "") +
-    theme_minimal()
+      as_tibble() %>%
+      filter(group == group_no) %>%
+      top_n(top,freq) %>%
+      ggplot(aes(label = name,size = freq)) +
+      geom_text_wordcloud_area() +
+      scale_size_area(max_size = max_size) +
+      #scale_x_discrete(breaks = NULL,name = "") +
+      theme_minimal()
+  }
 }
 
 

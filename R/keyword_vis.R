@@ -39,35 +39,36 @@ keyword_vis = function(tibble_graph,facet = TRUE,max_nodes = 10,alpha = 0.7){
 
   if(!is.tbl_graph(tibble_graph)) stop("keyword_vis only receives class 'tbl_graph'.")
 
-  if(facet == FALSE){
-    tibble_graph %>%
-      group_by(group) %>%
-      top_n(max_nodes,freq) %>%
-      ungroup() %>%
-      #mutate(Group = str_c("Group ",group)) %>%
-      mutate(Group = str_c("Group ",group) %>% reorder(group)) %>%
-      ggraph("kk") +
-      geom_edge_link(aes(alpha = n),show.legend = FALSE) +
-      geom_node_point(aes(size = freq),show.legend = FALSE) +
-      geom_node_label(aes(label = name,fill = Group),repel = TRUE,alpha = alpha) +
-      guides(fill = FALSE) +
-      theme_no_axes()
-  }else{
-    tibble_graph %>%
-      group_by(group) %>%
-      top_n(max_nodes,freq) %>%
-      ungroup() %>%
-      #mutate(Group = str_c("Group ",group)) %>%
-      mutate(Group = str_c("Group ",group) %>% reorder(group)) %>%
-      ggraph("kk") +
-      geom_edge_link(aes(alpha = n),show.legend = FALSE) +
-      geom_node_point(aes(size = freq),show.legend = FALSE) +
-      geom_node_label(aes(label = name,fill = Group),repel = TRUE,alpha = alpha) +
-      guides(fill = FALSE) +
-      facet_nodes(~Group) +
-      theme_no_axes()
-  }
-
+  suppressWarnings(
+    if(facet == FALSE){
+      tibble_graph %>%
+        group_by(group) %>%
+        top_n(max_nodes,freq) %>%
+        ungroup() %>%
+        #mutate(Group = str_c("Group ",group)) %>%
+        mutate(Group = str_c("Group ",group) %>% reorder(group)) %>%
+        ggraph("kk") +
+        geom_edge_link(aes(alpha = n),show.legend = FALSE) +
+        geom_node_point(aes(size = freq),show.legend = FALSE) +
+        geom_node_label(aes(label = name,fill = Group),repel = TRUE,alpha = alpha) +
+        guides(fill = FALSE) +
+        theme_no_axes()
+    }else{
+      tibble_graph %>%
+        group_by(group) %>%
+        top_n(max_nodes,freq) %>%
+        ungroup() %>%
+        #mutate(Group = str_c("Group ",group)) %>%
+        mutate(Group = str_c("Group ",group) %>% reorder(group)) %>%
+        ggraph("kk") +
+        geom_edge_link(aes(alpha = n),show.legend = FALSE) +
+        geom_node_point(aes(size = freq),show.legend = FALSE) +
+        geom_node_label(aes(label = name,fill = Group),repel = TRUE,alpha = alpha) +
+        guides(fill = FALSE) +
+        facet_nodes(~Group) +
+        theme_no_axes()
+    }
+  )
 }
 
 
