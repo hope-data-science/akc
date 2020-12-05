@@ -2,15 +2,18 @@
 library(pacman)
 p_load(devtools,usethis,roxygen2,pkgdown)
 
+p_load(tidygraph,ggraph,igraph,dplyr,tidytext,ggwordcloud,stringr)
+
 options(pkgdown.internet = FALSE)
 
-
+rm(list = ls())
 document()
-# install()
 install(upgrade = "never",dependencies = F)
-.rs.restartR()
-# 3
 build_site()
+
+.rs.restartR()
+options(rmarkdown.html_vignette.check_title = FALSE)
+
 
 submit_cran()
 

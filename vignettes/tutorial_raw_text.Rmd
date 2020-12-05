@@ -86,6 +86,12 @@ grouped_keywords %>%
   keyword_cloud()
 ```
    
+   To get the word cloud of one group,use:
+```{r}
+grouped_keywords %>% 
+  keyword_cloud(group_no = 1)
+```
+   
    If you want to draw a network, use `keyword_network`:
 ```{r}
 grouped_keywords %>% 

@@ -1,5 +1,13 @@
 
-## 0.9.4
+## 0.9.5
+1. Add "group_no" to `keyword_cloud` to get single group of word cloud.
+2. Add `doc_group` function to classify documents automatically.
+3. Fix problem mentioned in <https://github.com/hope-data-science/akc/pull/4>.
+4. Suppress warnings caused by `widyr::pairwise_count`,see <https://stackoverflow.com/questions/63977452/warning-message-pairwise-count-function> (`keyword_group`).
+5. Suppress warnings caused by `group_by` in the new dplyr version(`keyword_vis` & `keyword_network`).
+6. Urls in `keyword_group` are removed because these links might be unstable. However, through the reference users could still find the source paper via searching.
+
+## 0.9.4 20200130
 1. Add "stopword" parameter to `keyword_extract`.
 2. Add `keyword_cloud` function for visualization of keywords.
 3. Add `keyword_network` function to provide more flexible network visualization.
