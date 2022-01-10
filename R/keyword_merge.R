@@ -8,6 +8,15 @@
 #' @param reduce_form Merge keywords with the same stem("stem") or lemma("lemma"). See details.
 #' Default uses "lemma". Another advanced option is "partof". If a non-unigram (A) is part (subset) of
 #' another non-unigram (B), then the longer one(B) would be replaced by the shorter one(A).
+#' @param lemmatize_dict A dictionary of base terms and lemmas to use for replacement.
+#'  Only used when the \bold{lemmatize} parameter is \code{TRUE}.
+#'  The first column should be the full word form in lower case
+#'  while the second column is the corresponding replacement lemma.
+#'  Default uses \code{NULL}, this would apply the default dictionary used in
+#'  \code{\link[textstem]{lemmatize_strings}} function. Applicable when \bold{reduce_form} takes "lemma".
+#' @param stem_lang The name of a recognized language.
+#'  The list of supported languages could be found at \code{\link[SnowballC]{getStemLanguages}}.
+#'  Applicable when \bold{reduce_form} takes "stem".
 #' @details  While \code{keyword_clean} has provided a robust way to lemmatize the keywords, the returned token
 #' might not be the most common way to use.This function first gets the stem or lemma of
 #' every keyword using \code{\link{stem_strings}} or \code{\link{lemmatize_strings}} from \pkg{textstem} package,
@@ -43,7 +52,9 @@
 
 
 keyword_merge = function(dt,id = "id",keyword = "keyword",
-                          reduce_form = "lemma"){
+                          reduce_form = "lemma",
+                         lemmatize_dict = NULL,
+                         stem_lang = "porter"){
   if(!is.data.frame(dt)) stop("keyword_merge should receive a data.frame.")
 
   dt %>%
@@ -52,7 +63,7 @@ keyword_merge = function(dt,id = "id",keyword = "keyword",
     unique()-> dt2
 
   if(reduce_form == "stem"){
-    copy(dt2)[,token := stem_strings(keyword)][] -> dt3
+    copy(dt2)[,token := stem_strings(keyword,language = stem_lang)][] -> dt3
 
     copy(dt3)[, .(n = .N), keyby = .(token, keyword)][
       ,.SD[n ==max(n)][1], keyby = .(token)][
@@ -61,7 +72,10 @@ keyword_merge = function(dt,id = "id",keyword = "keyword",
     merge(dt3,token_keyword,by = "token")[, .(id = id, keyword = keyword_most)] %>%
       as_tibble()
   }else if(reduce_form == "lemma"){
-    copy(dt2)[,token := lemmatize_strings(keyword)][] -> dt3
+    if(is.null(lemmatize_dict))
+      copy(dt2)[,token := lemmatize_strings(keyword)][] -> dt3
+    else
+      copy(dt2)[,token := lemmatize_strings(keyword,dictionary = lemmatize_dict)][] -> dt3
 
     copy(dt3)[, .(n = .N), keyby = .(token, keyword)][
       ,.SD[n ==max(n)][1], keyby = .(token)][
@@ -79,7 +93,8 @@ keyword_merge = function(dt,id = "id",keyword = "keyword",
       dt2 %>%
         .[str_detect(keyword," ")] %>%
         as_tibble() %>%
-        pairwise_count(keyword,id) %>%
+        # pairwise_count(keyword,id) %>%
+        tidyfst::pairwise_count_dt(id,keyword) %>%
         mutate(value = str_detect(item1,item2)) %>%
         filter(value == TRUE) %>%
         transmute(keyword = item1,replace = item2) %>%
@@ -102,75 +117,4 @@ keyword_merge = function(dt,id = "id",keyword = "keyword",
 
 }
 
-## original codes did not consider there would be two or more max value
-# keyword_merge = function(dt,id = "id",keyword = "keyword",
-#                          reduce_form = "lemma"){
-#   if(!is.data.frame(dt)) stop("keyword_merge should receive a data.frame.")
-#
-#   dt %>%
-#     as.data.table() %>%
-#     setnames(old = c(id,keyword),new = c("id","keyword")) -> dt2
-#
-#   if(reduce_form == "stem"){
-#     copy(dt2)[,token := stem_strings(keyword)][] -> dt3
-#
-#     copy(dt3)[, .(n = .N), keyby = .(token, keyword)][
-#       ,.SD[n ==max(n)], keyby = .(token)][
-#         ,.(token = token, keyword_most = keyword)] -> token_keyword
-#
-#     merge(dt3,token_keyword,by = "token")[, .(id = id, keyword = keyword_most)] %>%
-#       as_tibble()
-#   }else if(reduce_form == "lemma"){
-#     copy(dt2)[,token := lemmatize_strings(keyword)][] -> dt3
-#
-#     copy(dt3)[, .(n = .N), keyby = .(token, keyword)][
-#       ,.SD[n ==max(n)], keyby = .(token)][
-#         ,.(token = token, keyword_most = keyword)] -> token_keyword
-#
-#     merge(dt3,token_keyword,by = "token")[, .(id = id, keyword = keyword_most)] %>%
-#       as_tibble()
-#   }
-#
-# }
 
-## orignial codes using dplyr
-
-# keyword_merge = function(dt,id = "id",keyword = "keyword",
-#                          reduce_form = "lemma"){
-#   if(!is.data.frame(dt)) stop("keyword_merge should receive a data.frame.")
-#
-#   dt %>%
-#     as_tibble() %>%
-#     transmute(id = .data[[id]],keyword = .data[[keyword]]) -> dt2
-#
-#   if(reduce_form == "stem"){
-#     dt2 %>%
-#       mutate(token = stem_strings(keyword)) -> dt3
-#
-#     dt3 %>%
-#       group_by(token) %>%
-#       count(keyword) %>%
-#       filter(n == max(n)) %>%
-#       ungroup %>%
-#       transmute(token,keyword_most = keyword) -> token_keyword
-#
-#     dt3 %>%
-#       inner_join(token_keyword,by = "token") %>%
-#       transmute(id,keyword = keyword_most)
-#   }else if(reduce_form == "lemma"){
-#     dt2 %>%
-#       mutate(token = lemmatize_strings(keyword)) -> dt3
-#
-#     dt3 %>%
-#       group_by(token) %>%
-#       count(keyword) %>%
-#       filter(n == max(n)) %>%
-#       ungroup %>%
-#       transmute(token,keyword_most = keyword) -> token_keyword
-#
-#     dt3 %>%
-#       inner_join(token_keyword,by = "token") %>%
-#       transmute(id,keyword = keyword_most)
-#   }
-#
-# }

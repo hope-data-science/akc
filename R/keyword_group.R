@@ -24,9 +24,9 @@
 #' @seealso  \code{\link[tidygraph]{tbl_graph}}, \code{\link[tidygraph]{group_graph}}
 #' @import tidygraph
 #' @import dplyr
+#' @importFrom tidyfst pairwise_count_dt
 #' @importFrom rlang .data
 #' @importFrom igraph graph_from_data_frame
-#' @importFrom widyr pairwise_count
 #' @export
 #' @examples
 #' library(akc)
@@ -58,15 +58,20 @@ keyword_group = function(dt,id = "id",keyword = "keyword",
     top_n(top,n) %>%
     filter(n >= min_freq) -> freq_table
 
-  suppressWarnings(
+  # suppressWarnings(
     dt %>%
       inner_join(freq_table %>% select(keyword),by = "keyword") %>%
-      pairwise_count(keyword,id,upper = FALSE) %>%
+      # pairwise_count(keyword,id,upper = FALSE) %>%
+      tidyfst::pairwise_count_dt(id,keyword) %>%
       graph_from_data_frame(directed = FALSE) %>%
       as_tbl_graph() %>%
       inner_join(freq_table,by = c("name"="keyword")) %>%
       rename(freq = n) %>%
       mutate(group = com_detect_fun())  # community detection,this algorithm could be changed
     # other options could be found in tidygraph::group_graph
-  )
+  # )
 }
+
+
+
+

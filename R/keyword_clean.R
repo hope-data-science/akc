@@ -12,6 +12,12 @@
 #' @param rmNumber Remove the pure number sequence or no. Default uses TRUE.
 #' @param lemmatize Lemmatize the keywords or not. Lemmatization is supported by `lemmatize_strings` function
 #' in `textstem` package.Default uses FALSE.
+#' @param lemmatize_dict A dictionary of base terms and lemmas to use for replacement.
+#'  Only used when the \bold{lemmatize} parameter is \code{TRUE}.
+#'  The first column should be the full word form in lower case
+#'  while the second column is the corresponding replacement lemma.
+#'  Default uses \code{NULL}, this would apply the default dictionary used in
+#'  \code{\link[textstem]{lemmatize_strings}} function.
 #' @details The entire cleaning processes include:
 #' 1.Split the text with separators;
 #' 2.Reomve the contents in the parentheses (including the parentheses);
@@ -42,7 +48,8 @@ keyword_clean = function(df,id = "id",keyword = "keyword",
                           sep = ";",
                           rmParentheses = TRUE,
                           rmNumber = TRUE,
-                          lemmatize = FALSE){
+                          lemmatize = FALSE,
+                         lemmatize_dict = NULL){
   df %>%
     as_tibble() %>%
     transmute(id = .data[[id]],keyword = .data[[keyword]]) %>%
@@ -57,7 +64,10 @@ keyword_clean = function(df,id = "id",keyword = "keyword",
   if(rmNumber == TRUE) dt = dt %>% filter(!str_detect(keyword,"^[:digit:]*$"))
 
   if(lemmatize == TRUE) {
-    dt = dt %>% mutate(keyword = lemmatize_strings(keyword))
+    if(is.null(lemmatize_dict))
+      dt = dt %>% mutate(keyword = lemmatize_strings(keyword))
+    else
+      dt = dt %>% mutate(keyword = lemmatize_strings(keyword,dictionary = lemmatize_dict))
   }
 
   dt

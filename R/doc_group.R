@@ -30,7 +30,8 @@ doc_group = function(dt,id = "id",keyword = "keyword",
   dt %>%
     as_tibble() %>%
     transmute(id = .data[[id]],keyword = .data[[keyword]]) %>%
-    pairwise_count(id,keyword,upper = FALSE) %>%
+    # pairwise_count(id,keyword,upper = FALSE) %>%
+    tidyfst::pairwise_count_dt(keyword,id) %>%
     graph_from_data_frame(directed = FALSE) %>%
     as_tbl_graph() %>%
     mutate(group = com_detect_fun()) %>%

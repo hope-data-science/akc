@@ -69,7 +69,7 @@ keyword_network = function(tibble_graph, group_no = NULL,
         geom_edge_link0(aes(alpha = n),show.legend = FALSE) +
         geom_node_point(aes(size = freq),show.legend = FALSE) +
         geom_node_label(aes(label = name,fill = Group),repel = TRUE,alpha = alpha) +
-        guides(fill = FALSE) +
+        guides(fill = "none") +
         theme_no_axes() -> g
 
       if(facet == TRUE) g = g + facet_nodes(~Group)
@@ -87,11 +87,12 @@ keyword_network = function(tibble_graph, group_no = NULL,
           geom_edge_link0(aes(alpha = n),show.legend = FALSE) +
           geom_node_point(aes(size = freq),show.legend = FALSE) +
           geom_node_label(aes(label = name),repel = TRUE,alpha = alpha) +
-          guides(fill = FALSE) +
+          guides(fill = "none") +
           theme_no_axes()
       }
     }
   )
+
 }
 
 
