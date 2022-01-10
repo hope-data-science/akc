@@ -1,4 +1,11 @@
 
+## 0.9.6
+1. We have added the parameter `lemmatize_dict` in the `keyword_clean` function, users can now use a customized dictionary in this function.
+2. Added `lemmatize_dict` and `stem_lang` parameter for `keyword_merge` function, so as to utilize other language and dictionary options when using 'textstem' package.
+3. Update codes in the `keyword_vis` and `keyword_network` function, the former code `guides(fill = FALSE)` has changed to `guides(fill = "none")`
+4. Import `tidyfst::pairwise_count_dt` instead of `widyr::pairwise_count`, so as to suppress the warning and run faster.
+5. Add unit test for the package.
+
 ## 0.9.5
 1. Add "group_no" to `keyword_cloud` to get single group of word cloud.
 2. Add `doc_group` function to classify documents automatically.

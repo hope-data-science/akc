@@ -1,6 +1,6 @@
 Package: akc
 Title: Automatic Knowledge Classification
-Version: 0.9.5
+Version: 0.9.6
 Authors@R: 
     person(given = "Tian-Yuan",
            family = "Huang",
@@ -23,14 +23,16 @@ Imports:
     textstem,
     tibble,
     tidytext,
-    widyr,
     rlang,
     magrittr,
     data.table (>= 1.13.0),
-    ggwordcloud (>= 0.5.0)
+    ggwordcloud (>= 0.5.0),
+    tidyfst
 URL: https://github.com/hope-data-science/akc
 RoxygenNote: 7.1.1
 Suggests: 
+    testthat (>= 3.0.0),
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+Config/testthat/edition: 3

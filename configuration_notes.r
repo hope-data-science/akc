@@ -1,17 +1,23 @@
 
 library(pacman)
-p_load(devtools,usethis,roxygen2,pkgdown)
+p_load(devtools,usethis,roxygen2,pkgdown,testthat)
 
-p_load(tidygraph,ggraph,igraph,dplyr,tidytext,ggwordcloud,stringr)
+p_load(tidygraph,ggraph,igraph,dplyr,tidytext,ggwordcloud,stringr,ggforce)
 
-options(pkgdown.internet = FALSE)
+
 
 rm(list = ls())
 document()
 install(upgrade = "never",dependencies = F)
-build_site()
+test_package("akc")
 
 .rs.restartR()
+
+
+options(pkgdown.internet = FALSE)
+build_site()
+
+
 options(rmarkdown.html_vignette.check_title = FALSE)
 
 
