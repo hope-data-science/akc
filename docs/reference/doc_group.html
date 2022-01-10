@@ -82,7 +82,7 @@ group the documents." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">akc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.6</span>
       </span>
     </div>
 
@@ -90,7 +90,7 @@ group the documents." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -116,7 +116,7 @@ group the documents." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/hope-data-science/akc/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -189,37 +189,30 @@ and the edges mean the two documents share same keywords with each other.</p>
  <span class='va'>bibli_data_table</span> <span class='op'>%&gt;%</span>
    <span class='fu'><a href='keyword_clean.html'>keyword_clean</a></span><span class='op'>(</span>id <span class='op'>=</span> <span class='st'>"id"</span>,keyword <span class='op'>=</span> <span class='st'>"keyword"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
    <span class='fu'>doc_group</span><span class='op'>(</span>id <span class='op'>=</span> <span class='st'>"id"</span>,keyword <span class='op'>=</span> <span class='st'>"keyword"</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>grouped_doc</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: `distinct_()` is deprecated as of dplyr 0.7.0.</span>
-#&gt; <span class='warning'>Please use `distinct()` instead.</span>
-#&gt; <span class='warning'>See vignette('programming') for more help</span>
-#&gt; <span class='warning'><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
-#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='output co'>#&gt; <span class='warning'>Warning: `tbl_df()` is deprecated as of dplyr 1.0.0.</span>
-#&gt; <span class='warning'>Please use `tibble::as_tibble()` instead.</span>
-#&gt; <span class='warning'></span><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
-#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='input'>
+
  <span class='va'>grouped_doc</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tbl_graph: 894 nodes and 20317 edges
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tbl_graph: 894 nodes and 20317 edges
 #&gt; #
 #&gt; # An undirected simple graph with 2 components
 #&gt; #
-#&gt; # Node Data: 894 x 2 (active)</span><span>
+#&gt; # Node Data: 894 x 2 (active)</span>
 #&gt;   id    group
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> 1         4
-#&gt; </span><span style='color: #555555;'>2</span><span> 4         1
-#&gt; </span><span style='color: #555555;'>3</span><span> 5         1
-#&gt; </span><span style='color: #555555;'>4</span><span> 2         4
-#&gt; </span><span style='color: #555555;'>5</span><span> 6         2
-#&gt; </span><span style='color: #555555;'>6</span><span> 9         3
-#&gt; </span><span style='color: #555555;'># ... with 888 more rows</span><span>
-#&gt; </span><span style='color: #555555;'>#
-#&gt; # Edge Data: 20,317 x 3</span><span>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span> 647       1
+#&gt; <span style='color: #BCBCBC;'>2</span> 219       1
+#&gt; <span style='color: #BCBCBC;'>3</span> 264       4
+#&gt; <span style='color: #BCBCBC;'>4</span> 1095      1
+#&gt; <span style='color: #BCBCBC;'>5</span> 830       1
+#&gt; <span style='color: #BCBCBC;'>6</span> 227       1
+#&gt; <span style='color: #949494;'># ... with 888 more rows</span>
+#&gt; <span style='color: #949494;'>#
+#&gt; # Edge Data: 20,317 x 3</span>
 #&gt;    from    to     n
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     4     1
-#&gt; </span><span style='color: #555555;'>2</span><span>     2    31     1
-#&gt; </span><span style='color: #555555;'>3</span><span>     3     6     1
-#&gt; </span><span style='color: #555555;'># ... with 20,314 more rows</span><span></div></span></pre>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>     1   186     9
+#&gt; <span style='color: #BCBCBC;'>2</span>     2   440     8
+#&gt; <span style='color: #BCBCBC;'>3</span>     3   298     6
+#&gt; <span style='color: #949494;'># ... with 20,314 more rows</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

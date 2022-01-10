@@ -81,7 +81,7 @@ document ID and keywords." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">akc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.6</span>
       </span>
     </div>
 
@@ -89,7 +89,7 @@ document ID and keywords." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -115,7 +115,7 @@ document ID and keywords." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/hope-data-science/akc/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -149,7 +149,8 @@ document ID and keywords.</p>
   sep <span class='op'>=</span> <span class='st'>";"</span>,
   rmParentheses <span class='op'>=</span> <span class='cn'>TRUE</span>,
   rmNumber <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  lemmatize <span class='op'>=</span> <span class='cn'>FALSE</span>
+  lemmatize <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  lemmatize_dict <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -185,6 +186,15 @@ uses TRUE.</p></td>
       <td><p>Lemmatize the keywords or not. Lemmatization is supported by `lemmatize_strings` function
 in `textstem` package.Default uses FALSE.</p></td>
     </tr>
+    <tr>
+      <th>lemmatize_dict</th>
+      <td><p>A dictionary of base terms and lemmas to use for replacement.
+Only used when the <b>lemmatize</b> parameter is <code>TRUE</code>.
+The first column should be the full word form in lower case
+while the second column is the corresponding replacement lemma.
+Default uses <code>NULL</code>, this would apply the default dictionary used in
+<code><a href='https://rdrr.io/pkg/textstem/man/lemmatize_strings.html'>lemmatize_strings</a></code> function.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -210,36 +220,36 @@ merge the keywords afterward.</p>
     <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/hope-data-science/akc'>akc</a></span><span class='op'>)</span>
 
 <span class='va'>bibli_data_table</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1,448 x 4</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1,448 x 4</span>
 #&gt;       id title                  keyword                 abstract                
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                   
-#&gt; </span><span style='color: #555555;'> 1</span><span>     1 Keeping the doors ope~ Austerity; community c~ </span><span style='color: #555555;'>"</span><span>English public librari~
-#&gt; </span><span style='color: #555555;'> 2</span><span>     2 Comparison of Sloveni~ Comparative librarians~ </span><span style='color: #555555;'>"</span><span>This paper aims to pro~
-#&gt; </span><span style='color: #555555;'> 3</span><span>     3 Analysis of the facto~ Continuation will of v~ </span><span style='color: #555555;'>"</span><span>This study aims to dev~
-#&gt; </span><span style='color: #555555;'> 4</span><span>     4 Redefining Library an~ Curriculum; education ~ </span><span style='color: #555555;'>"</span><span>The purpose of this st~
-#&gt; </span><span style='color: #555555;'> 5</span><span>     5 Can in-house use data~ Check-out use; circula~ </span><span style='color: #555555;'>"</span><span>Libraries worldwide ar~
-#&gt; </span><span style='color: #555555;'> 6</span><span>     6 Practices of communit~ Community councillors;~ </span><span style='color: #555555;'>"</span><span>The purpose of the res~
-#&gt; </span><span style='color: #555555;'> 7</span><span>     7 Exploring Becoming, D~ Library and Informatio~ </span><span style='color: #555555;'>"</span><span>Professional identity ~
-#&gt; </span><span style='color: #555555;'> 8</span><span>     8 Predictors of burnout~ Emotional exhaustion; ~ </span><span style='color: #555555;'>"</span><span>Work stress and profes~
-#&gt; </span><span style='color: #555555;'> 9</span><span>     9 The Roma and document~ Academic libraries; co~ </span><span style='color: #555555;'>"</span><span>This paper explores th~
-#&gt; </span><span style='color: #555555;'>10</span><span>    10 Mediation effect of k~ Job performance; knowl~ </span><span style='color: #555555;'>"</span><span>This paper proposes a ~
-#&gt; </span><span style='color: #555555;'># ... with 1,438 more rows</span><span></div><div class='input'>
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                  <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                   
+#&gt; <span style='color: #BCBCBC;'> 1</span>     1 Keeping the doors ope~ Austerity; community c~ <span style='color: #949494;'>"</span>English public librari~
+#&gt; <span style='color: #BCBCBC;'> 2</span>     2 Comparison of Sloveni~ Comparative librarians~ <span style='color: #949494;'>"</span>This paper aims to pro~
+#&gt; <span style='color: #BCBCBC;'> 3</span>     3 Analysis of the facto~ Continuation will of v~ <span style='color: #949494;'>"</span>This study aims to dev~
+#&gt; <span style='color: #BCBCBC;'> 4</span>     4 Redefining Library an~ Curriculum; education ~ <span style='color: #949494;'>"</span>The purpose of this st~
+#&gt; <span style='color: #BCBCBC;'> 5</span>     5 Can in-house use data~ Check-out use; circula~ <span style='color: #949494;'>"</span>Libraries worldwide ar~
+#&gt; <span style='color: #BCBCBC;'> 6</span>     6 Practices of communit~ Community councillors;~ <span style='color: #949494;'>"</span>The purpose of the res~
+#&gt; <span style='color: #BCBCBC;'> 7</span>     7 Exploring Becoming, D~ Library and Informatio~ <span style='color: #949494;'>"</span>Professional identity ~
+#&gt; <span style='color: #BCBCBC;'> 8</span>     8 Predictors of burnout~ Emotional exhaustion; ~ <span style='color: #949494;'>"</span>Work stress and profes~
+#&gt; <span style='color: #BCBCBC;'> 9</span>     9 The Roma and document~ Academic libraries; co~ <span style='color: #949494;'>"</span>This paper explores th~
+#&gt; <span style='color: #BCBCBC;'>10</span>    10 Mediation effect of k~ Job performance; knowl~ <span style='color: #949494;'>"</span>This paper proposes a ~
+#&gt; <span style='color: #949494;'># ... with 1,438 more rows</span></div><div class='input'>
 <span class='va'>bibli_data_table</span> <span class='op'>%&gt;%</span>
   <span class='fu'>keyword_clean</span><span class='op'>(</span>id <span class='op'>=</span> <span class='st'>"id"</span>,keyword <span class='op'>=</span> <span class='st'>"keyword"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 5,378 x 2</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 5,378 x 2</span>
 #&gt;       id keyword                          
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                            
-#&gt; </span><span style='color: #555555;'> 1</span><span>     1 austerity                        
-#&gt; </span><span style='color: #555555;'> 2</span><span>     1 community capacity               
-#&gt; </span><span style='color: #555555;'> 3</span><span>     1 library professional             
-#&gt; </span><span style='color: #555555;'> 4</span><span>     1 public libraries                 
-#&gt; </span><span style='color: #555555;'> 5</span><span>     1 public service delivery          
-#&gt; </span><span style='color: #555555;'> 6</span><span>     1 volunteer relationship management
-#&gt; </span><span style='color: #555555;'> 7</span><span>     1 volunteering                     
-#&gt; </span><span style='color: #555555;'> 8</span><span>     2 comparative librarianship        
-#&gt; </span><span style='color: #555555;'> 9</span><span>     2 korea                            
-#&gt; </span><span style='color: #555555;'>10</span><span>     2 library legislation              
-#&gt; </span><span style='color: #555555;'># ... with 5,368 more rows</span><span></div></span></pre>
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                            
+#&gt; <span style='color: #BCBCBC;'> 1</span>     1 austerity                        
+#&gt; <span style='color: #BCBCBC;'> 2</span>     1 community capacity               
+#&gt; <span style='color: #BCBCBC;'> 3</span>     1 library professional             
+#&gt; <span style='color: #BCBCBC;'> 4</span>     1 public libraries                 
+#&gt; <span style='color: #BCBCBC;'> 5</span>     1 public service delivery          
+#&gt; <span style='color: #BCBCBC;'> 6</span>     1 volunteer relationship management
+#&gt; <span style='color: #BCBCBC;'> 7</span>     1 volunteering                     
+#&gt; <span style='color: #BCBCBC;'> 8</span>     2 comparative librarianship        
+#&gt; <span style='color: #BCBCBC;'> 9</span>     2 korea                            
+#&gt; <span style='color: #BCBCBC;'>10</span>     2 library legislation              
+#&gt; <span style='color: #949494;'># ... with 5,368 more rows</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">akc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.6</span>
       </span>
     </div>
 
@@ -46,7 +46,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -72,7 +72,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/hope-data-science/akc/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -86,8 +86,7 @@
 
       
 
-      </header><script src="akc_vignette_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="akc_vignette_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="akc_vignette_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
+      </header><script src="akc_vignette_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Automatic knowledge classification based on keyword co-occurrrence network</h1>
@@ -142,8 +141,8 @@ Logo of akc package.
 <div id="load-package-and-inspect-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#load-package-and-inspect-data" class="anchor"></a>Load package and inspect data</h3>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co"># load pakcage</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># load pakcage</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hope-data-science/akc">akc</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="co">#&gt; </span>
@@ -170,15 +169,15 @@ Logo of akc package.
 <span class="co">#&gt;  8     8 Predictors of burnout~ Emotional exhaustion; ~ "Work stress and profes~</span>
 <span class="co">#&gt;  9     9 The Roma and document~ Academic libraries; co~ "This paper explores th~</span>
 <span class="co">#&gt; 10    10 Mediation effect of k~ Job performance; knowl~ "This paper proposes a ~</span>
-<span class="co">#&gt; # ... with 1,438 more rows</span></pre></div>
+<span class="co">#&gt; # ... with 1,438 more rows</span></code></pre></div>
 <p>The data set contains bibliometric data on topic of “academic library”,it is a data.frame of 4 columns(with docuent ID,article title,keyword and abstract), more information could be found via <code>?bibli_data_data</code>.If the user want to carry out tasks by simply copying the example codes,make sure to arrange the data in the same format as <code>biblio_data_table</code> and set the same names for the corresponding columns.</p>
 </div>
 <div id="keyword-cleaning" class="section level3">
 <h3 class="hasAnchor">
 <a href="#keyword-cleaning" class="anchor"></a>Keyword cleaning</h3>
 <p>The entire cleaning processes include: 1.Split the text with separators; 2.Reomve the contents in the parentheses (including the parentheses); 3.Remove whitespaces from start and end of string and reduces repeated whitespaces inside a string; 4.Remove all the null character string and pure number sequences; 5.Convert all letters to lower case; 6.Lemmatization (not in default setting because it is not recommended unless you need a relatively rough result. For better merging, use <code>keyword_merge</code> displayed below).</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="va">bibli_data_table</span> <span class="op">%&gt;%</span> 
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">bibli_data_table</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/keyword_clean.html">keyword_clean</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">clean_data</span>
 
 <span class="va">clean_data</span>
@@ -195,14 +194,14 @@ Logo of akc package.
 <span class="co">#&gt;  8     2 comparative librarianship        </span>
 <span class="co">#&gt;  9     2 korea                            </span>
 <span class="co">#&gt; 10     2 library legislation              </span>
-<span class="co">#&gt; # ... with 5,368 more rows</span></pre></div>
+<span class="co">#&gt; # ... with 5,368 more rows</span></code></pre></div>
 </div>
 <div id="keyword-merging" class="section level3">
 <h3 class="hasAnchor">
 <a href="#keyword-merging" class="anchor"></a>Keyword merging</h3>
 <p>Merge keywords that have common stem or lemma, and return the majority form of the word.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="va">clean_data</span> <span class="op">%&gt;%</span> 
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">clean_data</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/keyword_merge.html">keyword_merge</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">merged_data</span>
 
 <span class="va">merged_data</span>
@@ -219,14 +218,14 @@ Logo of akc package.
 <span class="co">#&gt;  8    42 21st-century skills          </span>
 <span class="co">#&gt;  9  1114 21st century skills          </span>
 <span class="co">#&gt; 10  1051 24-hour opening              </span>
-<span class="co">#&gt; # ... with 5,362 more rows</span></pre></div>
+<span class="co">#&gt; # ... with 5,362 more rows</span></code></pre></div>
 </div>
 <div id="keyword-grouping" class="section level3">
 <h3 class="hasAnchor">
 <a href="#keyword-grouping" class="anchor"></a>Keyword grouping</h3>
 <p>Create a tbl_graph(a class provided by <code>tidygraph</code> package) from the tidy table with document ID and keyword. Each entry(row) should contain only one keyword in the tidy format.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="va">merged_data</span> <span class="op">%&gt;%</span> 
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">merged_data</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/keyword_group.html">keyword_group</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">grouped_data</span>
 
 <span class="va">grouped_data</span>
@@ -235,55 +234,55 @@ Logo of akc package.
 <span class="co">#&gt; # An undirected simple graph with 1 component</span>
 <span class="co">#&gt; #</span>
 <span class="co">#&gt; # Node Data: 207 x 3 (active)</span>
-<span class="co">#&gt;   name                     freq group</span>
-<span class="co">#&gt;   &lt;chr&gt;                   &lt;int&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1 academic librarians         7     1</span>
-<span class="co">#&gt; 2 academic libraries        145     1</span>
-<span class="co">#&gt; 3 acquisitions               12     3</span>
-<span class="co">#&gt; 4 africa                      6     1</span>
-<span class="co">#&gt; 5 altmetrics                  7     3</span>
-<span class="co">#&gt; 6 artificial intelligence     4     1</span>
+<span class="co">#&gt;   name                  freq group</span>
+<span class="co">#&gt;   &lt;chr&gt;                &lt;int&gt; &lt;int&gt;</span>
+<span class="co">#&gt; 1 information literacy    58     2</span>
+<span class="co">#&gt; 2 academic libraries     145     2</span>
+<span class="co">#&gt; 3 archives                12     1</span>
+<span class="co">#&gt; 4 open access             32     3</span>
+<span class="co">#&gt; 5 bibliometrics           31     3</span>
+<span class="co">#&gt; 6 higher education        16     1</span>
 <span class="co">#&gt; # ... with 201 more rows</span>
 <span class="co">#&gt; #</span>
 <span class="co">#&gt; # Edge Data: 1,332 x 3</span>
 <span class="co">#&gt;    from    to     n</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1     2     4</span>
-<span class="co">#&gt; 2     2     3     2</span>
-<span class="co">#&gt; 3     2    48     1</span>
-<span class="co">#&gt; # ... with 1,329 more rows</span></pre></div>
+<span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;</span>
+<span class="co">#&gt; 1     1    97    14</span>
+<span class="co">#&gt; 2     1     2    12</span>
+<span class="co">#&gt; 3     2    14     8</span>
+<span class="co">#&gt; # ... with 1,329 more rows</span></code></pre></div>
 </div>
 <div id="output-the-table-of-results" class="section level3">
 <h3 class="hasAnchor">
 <a href="#output-the-table-of-results" class="anchor"></a>Output the table of results</h3>
 <p>The output table would show the top 10 keywords (by occurrence) and their frequency. Keywords are separated by “;”.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="va">grouped_data</span> <span class="op">%&gt;%</span> 
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">grouped_data</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/keyword_table.html">keyword_table</a></span><span class="op">(</span>top <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 5 x 2</span>
 <span class="co">#&gt;   Group `Keywords(TOP 10)`                                                      </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;                                                                   </span>
-<span class="co">#&gt; 1     1 academic libraries (145); information literacy (58); university librari~</span>
-<span class="co">#&gt; 2     2 public libraries (74); libraries (65); digital libraries (31); library ~</span>
+<span class="co">#&gt; 1     1 public libraries (74); libraries (65); digital libraries (31); library ~</span>
+<span class="co">#&gt; 2     2 academic libraries (145); information literacy (58); librarians (25); l~</span>
 <span class="co">#&gt; 3     3 open access (32); bibliometrics (31); library and information science (~</span>
-<span class="co">#&gt; 4     4 leadership (12); library management (12); research data management (12)~</span>
-<span class="co">#&gt; 5     5 national libraries (10); culture (7); cataloguing (6); knowledge organi~</span></pre></div>
+<span class="co">#&gt; 4     4 university libraries (39); collection management (13); leadership (12);~</span>
+<span class="co">#&gt; 5     5 social media (23); spain (9); sustainability (6); disinformation (5); f~</span></code></pre></div>
 </div>
 <div id="visualize-the-results" class="section level3">
 <h3 class="hasAnchor">
 <a href="#visualize-the-results" class="anchor"></a>Visualize the results</h3>
 <p>Keyword co-occurrence network in different groups. Colors are used to specify the groups, the size of nodes is proportional to the keyword frequency, while the alpha of edges is proportional to the co-occurrence relationship between keywords.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="va">grouped_data</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/keyword_vis.html">keyword_vis</a></span><span class="op">(</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">grouped_data</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/keyword_vis.html">keyword_vis</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="akc_vignette_files/figure-html/unnamed-chunk-7-1.png" width="960"></p>
 </div>
 <div id="keyword-extraction-from-abstract" class="section level3">
 <h3 class="hasAnchor">
 <a href="#keyword-extraction-from-abstract" class="anchor"></a>Keyword extraction from abstract</h3>
 <p>To extract keywords from the abstract using the keywords as a dictionary. More pre-processing filter should be implemented afterward, such as cleaning, keyword merging and filtering by term frequency or tf-idf. It is suggested to keep the size down before using <code>keyword_group</code>.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="va">bibli_data_table</span> <span class="op">%&gt;%</span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">bibli_data_table</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/keyword_clean.html">keyword_clean</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"id"</span>,keyword <span class="op">=</span> <span class="st">"keyword"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">keyword</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="va">make_dict</span> <span class="op">-&gt;</span> <span class="va">my_dict</span>
@@ -304,7 +303,7 @@ Logo of akc package.
 <span class="co">#&gt;  8   910 fourth museum assembly       </span>
 <span class="co">#&gt;  9   624 55th library week            </span>
 <span class="co">#&gt; 10   747 aasl standards               </span>
-<span class="co">#&gt; # ... with 27,120 more rows</span></pre></div>
+<span class="co">#&gt; # ... with 27,120 more rows</span></code></pre></div>
 </div>
 </div>
 <div id="end" class="section level2">

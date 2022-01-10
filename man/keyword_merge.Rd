@@ -4,7 +4,14 @@
 \alias{keyword_merge}
 \title{Merge keywords that supposed to have same meanings}
 \usage{
-keyword_merge(dt, id = "id", keyword = "keyword", reduce_form = "lemma")
+keyword_merge(
+  dt,
+  id = "id",
+  keyword = "keyword",
+  reduce_form = "lemma",
+  lemmatize_dict = NULL,
+  stem_lang = "porter"
+)
 }
 \arguments{
 \item{dt}{A data.frame containing at least two columns with document ID and keyword.}
@@ -16,6 +23,17 @@ keyword_merge(dt, id = "id", keyword = "keyword", reduce_form = "lemma")
 \item{reduce_form}{Merge keywords with the same stem("stem") or lemma("lemma"). See details.
 Default uses "lemma". Another advanced option is "partof". If a non-unigram (A) is part (subset) of
 another non-unigram (B), then the longer one(B) would be replaced by the shorter one(A).}
+
+\item{lemmatize_dict}{A dictionary of base terms and lemmas to use for replacement.
+Only used when the \bold{lemmatize} parameter is \code{TRUE}.
+The first column should be the full word form in lower case
+while the second column is the corresponding replacement lemma.
+Default uses \code{NULL}, this would apply the default dictionary used in
+\code{\link[textstem]{lemmatize_strings}} function. Applicable when \bold{reduce_form} takes "lemma".}
+
+\item{stem_lang}{The name of a recognized language.
+The list of supported languages could be found at \code{\link[SnowballC]{getStemLanguages}}.
+Applicable when \bold{reduce_form} takes "stem".}
 }
 \value{
 A tbl, namely a tidy table with document ID and merged keyword.

@@ -84,7 +84,7 @@ the function would return all the ngram tokens without filtering (not recommende
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">akc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.6</span>
       </span>
     </div>
 
@@ -92,7 +92,7 @@ the function would return all the ngram tokens without filtering (not recommende
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -118,7 +118,7 @@ the function would return all the ngram tokens without filtering (not recommende
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/hope-data-science/akc/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -228,21 +228,21 @@ some test first. Nonetheless, it has been optimized by data.table codes already 
   <span class='va'>bibli_data_table</span> <span class='op'>%&gt;%</span>
     <span class='fu'>keyword_extract</span><span class='op'>(</span>id <span class='op'>=</span> <span class='st'>"id"</span>,text <span class='op'>=</span> <span class='st'>"abstract"</span>,
     dict <span class='op'>=</span> <span class='va'>my_dict</span>,stopword <span class='op'>=</span> <span class='va'>my_stopword</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Joining, by = "keyword"</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 25,140 x 2</span><span>
+</div><div class='output co'>#&gt; <span class='message'>Joining, by = "keyword"</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 25,140 x 2</span>
 #&gt;       id keyword                      
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                        
-#&gt; </span><span style='color: #555555;'> 1</span><span>   619 18th century                 
-#&gt; </span><span style='color: #555555;'> 2</span><span>  </span><span style='text-decoration: underline;'>1</span><span>223 18th century                 
-#&gt; </span><span style='color: #555555;'> 3</span><span>  </span><span style='text-decoration: underline;'>1</span><span>154 1password                    
-#&gt; </span><span style='color: #555555;'> 4</span><span>    81 1science                     
-#&gt; </span><span style='color: #555555;'> 5</span><span>   983 1science                     
-#&gt; </span><span style='color: #555555;'> 6</span><span>    15 2016 us presidential election
-#&gt; </span><span style='color: #555555;'> 7</span><span>   662 3d environment               
-#&gt; </span><span style='color: #555555;'> 8</span><span>   624 55th library week            
-#&gt; </span><span style='color: #555555;'> 9</span><span>   747 aasl standards               
-#&gt; </span><span style='color: #555555;'>10</span><span>   284 aboriginal                   
-#&gt; </span><span style='color: #555555;'># ... with 25,130 more rows</span><span></div><div class='input'> <span class='co'># }</span>
-</div></span></pre>
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                        
+#&gt; <span style='color: #BCBCBC;'> 1</span>   619 18th century                 
+#&gt; <span style='color: #BCBCBC;'> 2</span>  <span style='text-decoration: underline;'>1</span>223 18th century                 
+#&gt; <span style='color: #BCBCBC;'> 3</span>  <span style='text-decoration: underline;'>1</span>154 1password                    
+#&gt; <span style='color: #BCBCBC;'> 4</span>    81 1science                     
+#&gt; <span style='color: #BCBCBC;'> 5</span>   983 1science                     
+#&gt; <span style='color: #BCBCBC;'> 6</span>    15 2016 us presidential election
+#&gt; <span style='color: #BCBCBC;'> 7</span>   662 3d environment               
+#&gt; <span style='color: #BCBCBC;'> 8</span>   624 55th library week            
+#&gt; <span style='color: #BCBCBC;'> 9</span>   747 aasl standards               
+#&gt; <span style='color: #BCBCBC;'>10</span>   284 aboriginal                   
+#&gt; <span style='color: #949494;'># ... with 25,130 more rows</span></div><div class='input'> <span class='co'># }</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

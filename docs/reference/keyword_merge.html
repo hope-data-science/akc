@@ -81,7 +81,7 @@ recieves a tidy table (data.frame) with document ID and keyword waiting to be me
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">akc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.6</span>
       </span>
     </div>
 
@@ -89,7 +89,7 @@ recieves a tidy table (data.frame) with document ID and keyword waiting to be me
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -115,7 +115,7 @@ recieves a tidy table (data.frame) with document ID and keyword waiting to be me
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/hope-data-science/akc/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -142,7 +142,14 @@ recieves a tidy table (data.frame) with document ID and keyword waiting to be me
 recieves a tidy table (data.frame) with document ID and keyword waiting to be merged.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>keyword_merge</span><span class='op'>(</span><span class='va'>dt</span>, id <span class='op'>=</span> <span class='st'>"id"</span>, keyword <span class='op'>=</span> <span class='st'>"keyword"</span>, reduce_form <span class='op'>=</span> <span class='st'>"lemma"</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>keyword_merge</span><span class='op'>(</span>
+  <span class='va'>dt</span>,
+  id <span class='op'>=</span> <span class='st'>"id"</span>,
+  keyword <span class='op'>=</span> <span class='st'>"keyword"</span>,
+  reduce_form <span class='op'>=</span> <span class='st'>"lemma"</span>,
+  lemmatize_dict <span class='op'>=</span> <span class='cn'>NULL</span>,
+  stem_lang <span class='op'>=</span> <span class='st'>"porter"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -164,6 +171,21 @@ recieves a tidy table (data.frame) with document ID and keyword waiting to be me
       <td><p>Merge keywords with the same stem("stem") or lemma("lemma"). See details.
 Default uses "lemma". Another advanced option is "partof". If a non-unigram (A) is part (subset) of
 another non-unigram (B), then the longer one(B) would be replaced by the shorter one(A).</p></td>
+    </tr>
+    <tr>
+      <th>lemmatize_dict</th>
+      <td><p>A dictionary of base terms and lemmas to use for replacement.
+Only used when the <b>lemmatize</b> parameter is <code>TRUE</code>.
+The first column should be the full word form in lower case
+while the second column is the corresponding replacement lemma.
+Default uses <code>NULL</code>, this would apply the default dictionary used in
+<code><a href='https://rdrr.io/pkg/textstem/man/lemmatize_strings.html'>lemmatize_strings</a></code> function. Applicable when <b>reduce_form</b> takes "lemma".</p></td>
+    </tr>
+    <tr>
+      <th>stem_lang</th>
+      <td><p>The name of a recognized language.
+The list of supported languages could be found at <code><a href='https://rdrr.io/pkg/SnowballC/man/getStemLanguages.html'>getStemLanguages</a></code>.
+Applicable when <b>reduce_form</b> takes "stem".</p></td>
     </tr>
     </table>
 
@@ -197,39 +219,39 @@ information generalization and detailed information retention).</p>
 <span class='va'>bibli_data_table</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='keyword_clean.html'>keyword_clean</a></span><span class='op'>(</span>lemmatize <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>keyword_merge</span><span class='op'>(</span>reduce_form <span class='op'>=</span> <span class='st'>"stem"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 5,372 x 2</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 5,372 x 2</span>
 #&gt;       id keyword                      
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                        
-#&gt; </span><span style='color: #555555;'> 1</span><span>  </span><span style='text-decoration: underline;'>1</span><span>163 10.7202/1063788ar            
-#&gt; </span><span style='color: #555555;'> 2</span><span>   619 18th century                 
-#&gt; </span><span style='color: #555555;'> 3</span><span>  </span><span style='text-decoration: underline;'>1</span><span>154 1password                    
-#&gt; </span><span style='color: #555555;'> 4</span><span>    81 1science                     
-#&gt; </span><span style='color: #555555;'> 5</span><span>  </span><span style='text-decoration: underline;'>1</span><span>424 2016 us presidential election
-#&gt; </span><span style='color: #555555;'> 6</span><span>    42 21st-century skills          
-#&gt; </span><span style='color: #555555;'> 7</span><span>  </span><span style='text-decoration: underline;'>1</span><span>114 21st century skills          
-#&gt; </span><span style='color: #555555;'> 8</span><span>  </span><span style='text-decoration: underline;'>1</span><span>051 24-hour opening              
-#&gt; </span><span style='color: #555555;'> 9</span><span>   662 3d environment               
-#&gt; </span><span style='color: #555555;'>10</span><span>  </span><span style='text-decoration: underline;'>1</span><span>252 3d reconstruction            
-#&gt; </span><span style='color: #555555;'># ... with 5,362 more rows</span><span></div><div class='input'>
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                        
+#&gt; <span style='color: #BCBCBC;'> 1</span>  <span style='text-decoration: underline;'>1</span>163 10.7202/1063788ar            
+#&gt; <span style='color: #BCBCBC;'> 2</span>   619 18th century                 
+#&gt; <span style='color: #BCBCBC;'> 3</span>  <span style='text-decoration: underline;'>1</span>154 1password                    
+#&gt; <span style='color: #BCBCBC;'> 4</span>    81 1science                     
+#&gt; <span style='color: #BCBCBC;'> 5</span>  <span style='text-decoration: underline;'>1</span>424 2016 us presidential election
+#&gt; <span style='color: #BCBCBC;'> 6</span>    42 21st-century skills          
+#&gt; <span style='color: #BCBCBC;'> 7</span>  <span style='text-decoration: underline;'>1</span>114 21st century skills          
+#&gt; <span style='color: #BCBCBC;'> 8</span>  <span style='text-decoration: underline;'>1</span>051 24-hour opening              
+#&gt; <span style='color: #BCBCBC;'> 9</span>   662 3d environment               
+#&gt; <span style='color: #BCBCBC;'>10</span>  <span style='text-decoration: underline;'>1</span>252 3d reconstruction            
+#&gt; <span style='color: #949494;'># ... with 5,362 more rows</span></div><div class='input'>
 <span class='va'>bibli_data_table</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='keyword_clean.html'>keyword_clean</a></span><span class='op'>(</span>lemmatize <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>keyword_merge</span><span class='op'>(</span>reduce_form <span class='op'>=</span> <span class='st'>"lemma"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 5,372 x 2</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 5,372 x 2</span>
 #&gt;       id keyword                      
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                        
-#&gt; </span><span style='color: #555555;'> 1</span><span>  </span><span style='text-decoration: underline;'>1</span><span>163 10.7202/1063788ar            
-#&gt; </span><span style='color: #555555;'> 2</span><span>   619 18th century                 
-#&gt; </span><span style='color: #555555;'> 3</span><span>  </span><span style='text-decoration: underline;'>1</span><span>154 1password                    
-#&gt; </span><span style='color: #555555;'> 4</span><span>    81 1science                     
-#&gt; </span><span style='color: #555555;'> 5</span><span>   361 second-career librarianship  
-#&gt; </span><span style='color: #555555;'> 6</span><span>   662 second life                  
-#&gt; </span><span style='color: #555555;'> 7</span><span>  </span><span style='text-decoration: underline;'>1</span><span>424 2016 us presidential election
-#&gt; </span><span style='color: #555555;'> 8</span><span>    42 21st-century skills          
-#&gt; </span><span style='color: #555555;'> 9</span><span>  </span><span style='text-decoration: underline;'>1</span><span>114 21st century skills          
-#&gt; </span><span style='color: #555555;'>10</span><span>  </span><span style='text-decoration: underline;'>1</span><span>051 24-hour opening              
-#&gt; </span><span style='color: #555555;'># ... with 5,362 more rows</span><span></div><div class='input'><span class='co'># }</span>
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                        
+#&gt; <span style='color: #BCBCBC;'> 1</span>  <span style='text-decoration: underline;'>1</span>163 10.7202/1063788ar            
+#&gt; <span style='color: #BCBCBC;'> 2</span>   619 18th century                 
+#&gt; <span style='color: #BCBCBC;'> 3</span>  <span style='text-decoration: underline;'>1</span>154 1password                    
+#&gt; <span style='color: #BCBCBC;'> 4</span>    81 1science                     
+#&gt; <span style='color: #BCBCBC;'> 5</span>   361 second-career librarianship  
+#&gt; <span style='color: #BCBCBC;'> 6</span>   662 second life                  
+#&gt; <span style='color: #BCBCBC;'> 7</span>  <span style='text-decoration: underline;'>1</span>424 2016 us presidential election
+#&gt; <span style='color: #BCBCBC;'> 8</span>    42 21st-century skills          
+#&gt; <span style='color: #BCBCBC;'> 9</span>  <span style='text-decoration: underline;'>1</span>114 21st century skills          
+#&gt; <span style='color: #BCBCBC;'>10</span>  <span style='text-decoration: underline;'>1</span>051 24-hour opening              
+#&gt; <span style='color: #949494;'># ... with 5,362 more rows</span></div><div class='input'><span class='co'># }</span>
 
-</div></span></pre>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

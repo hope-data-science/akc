@@ -11,7 +11,8 @@ keyword_clean(
   sep = ";",
   rmParentheses = TRUE,
   rmNumber = TRUE,
-  lemmatize = FALSE
+  lemmatize = FALSE,
+  lemmatize_dict = NULL
 )
 }
 \arguments{
@@ -30,6 +31,13 @@ uses TRUE.}
 
 \item{lemmatize}{Lemmatize the keywords or not. Lemmatization is supported by `lemmatize_strings` function
 in `textstem` package.Default uses FALSE.}
+
+\item{lemmatize_dict}{A dictionary of base terms and lemmas to use for replacement.
+Only used when the \bold{lemmatize} parameter is \code{TRUE}.
+The first column should be the full word form in lower case
+while the second column is the corresponding replacement lemma.
+Default uses \code{NULL}, this would apply the default dictionary used in
+\code{\link[textstem]{lemmatize_strings}} function.}
 }
 \value{
 A tbl with two columns, namely document ID and cleaned keywords.
