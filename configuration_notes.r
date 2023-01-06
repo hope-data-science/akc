@@ -1,6 +1,6 @@
 
 library(pacman)
-p_load(devtools,usethis,roxygen2,pkgdown,testthat)
+p_load(devtools,usethis,roxygen2,pkgdown,testthat,installr)
 
 p_load(tidygraph,ggraph,igraph,dplyr,tidytext,ggwordcloud,stringr,ggforce)
 
@@ -15,10 +15,11 @@ test_package("akc")
 
 
 options(pkgdown.internet = FALSE)
+options(rmarkdown.html_vignette.check_title = FALSE)
 build_site()
 
 
-options(rmarkdown.html_vignette.check_title = FALSE)
+
 
 
 submit_cran()

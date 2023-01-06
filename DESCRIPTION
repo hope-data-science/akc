@@ -1,17 +1,17 @@
 Package: akc
 Title: Automatic Knowledge Classification
-Version: 0.9.6
+Version: 0.9.9
 Authors@R: 
     person(given = "Tian-Yuan",
            family = "Huang",
            role = c("aut", "cre"),
            email = "huang.tian-yuan@qq.com",
-           comment = c(ORCID = "0000-0002-3591-4203"))
+           comment = c(ORCID = "0000-0002-4151-3764"))
 Description: A tidy framework for automatic knowledge classification and visualization. Currently, the core functionality of the framework is mainly supported by modularity-based clustering (community detection) in keyword co-occurrence network, and focuses on co-word analysis of bibliometric research. However, the designed functions in 'akc' are general, and could be extended to solve other tasks in text mining as well.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Depends: R (>= 3.0.0)
+Depends: R (>= 4.0.0)
 Imports: 
     igraph,
     dplyr,
@@ -29,7 +29,7 @@ Imports:
     ggwordcloud (>= 0.5.0),
     tidyfst
 URL: https://github.com/hope-data-science/akc
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.1
 Suggests: 
     testthat (>= 3.0.0),
     knitr,

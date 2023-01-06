@@ -29,7 +29,7 @@ keyword_table = function(tibble_graph,top = 10){
       arrange(desc(value)) %>%
       top_n(top,value) %>%
       summarise(keyword = str_c(keyword_value,collapse = "; ")) %>%
-      rename(Group = group,!!str_c("Keywords(TOP ",top,")") := keyword)
+      rename(Group = group,!!str_c("Keywords (TOP ",top,")") := keyword)
   }else{
    stop("keyword_table only receives class 'tbl_graph'.")
   }

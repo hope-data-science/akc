@@ -20,8 +20,8 @@
 #'  \code{\link[textstem]{lemmatize_strings}} function.
 #' @details The entire cleaning processes include:
 #' 1.Split the text with separators;
-#' 2.Reomve the contents in the parentheses (including the parentheses);
-#' 3.Remove whitespaces from start and end of string and reduces repeated whitespaces inside a string;
+#' 2.Remove the contents in the parentheses (including the parentheses);
+#' 3.Remove white spaces from start and end of string and reduces repeated white spaces inside a string;
 #' 4.Remove all the null character string and pure number sequences;
 #' 5.Convert all letters to lower case;
 #' 6.Lemmatization.

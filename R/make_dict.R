@@ -17,5 +17,5 @@
 #' @export
 #'
 make_dict = function(dict_vacabulary_vector){
-  data.table(keyword = unique(dict_vacabulary_vector),key = "keyword")
+  data.table(keyword = tolower(unique(dict_vacabulary_vector)),key = "keyword")
 }

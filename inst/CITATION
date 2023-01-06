@@ -1,0 +1,18 @@
+citHeader("To cite akc in publications use:")
+
+citEntry(
+  entry    = "Article",
+  title    = "akc: A Tidy Framework for Automatic Knowledge Classification in R",
+  author   = "Huang, Tian-Yuan and Li, Li and Yang, Liying",
+  journal  = "The R Journal",
+  year     = 2022,
+  volume   = 14,
+  number   = 2,
+  pages    = "67-76",
+  url      = "https://doi.org/10.32614/RJ-2022-025",
+  textVersion = paste(
+"Huang et al., (2022). akc: A Tidy Framework for Automatic Knowledge Classification in R. The R Journal, 14(2), 67-76,https://doi.org/10.32614/RJ-2022-025"
+  )
+)
+
+

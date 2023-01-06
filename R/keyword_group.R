@@ -30,7 +30,7 @@
 #' @export
 #' @examples
 #' library(akc)
-#'
+#' \donttest{
 #' bibli_data_table %>%
 #'   keyword_clean(id = "id",keyword = "keyword") %>%
 #'   keyword_group(id = "id",keyword = "keyword")
@@ -43,7 +43,7 @@
 #'   com_detect_fun = group_louvain)
 #'
 #' # get more alternatives by searching '?tidygraph::group_graph'
-#'
+#' }
 
 keyword_group = function(dt,id = "id",keyword = "keyword",
                         top = 200,min_freq = 1,

@@ -1,4 +1,28 @@
 
+## 0.9.9
+Update the citation in The R Journal.
+
+## 0.9.8.1
+The data.table has an update that affects the package, fix to make it work again.
+Details:
+akc
+=====
+Error: package or namespace load failed for ‘akc’:
+ object ‘update.dev.pkg’ is not exported by 'namespace:data.table'
+
+Yes we have changed the name to update_dev_pkg(). This function upgrades the user's installation to the very latest commit of data.table in development. As such I'm surprised your package depends on it. It is supposed to be called by users, yes. But it is not supposed to be called by packages.
+
+
+## 0.9.8
+1.Using the latest version of roxygen2 to process the package submission, so as to deal with the CRAN notification.
+2.Remove outdated URL in the document.
+
+## 0.9.7
+1. Update the ORCID.
+2. Better styling for the display (e.g. white space between brackets and texts).
+3. In `make_dict` function, ensure the words in lower case.
+4. Add a vignette to show benchmark for different algorithms and network sizes.
+
 ## 0.9.6
 1. We have added the parameter `lemmatize_dict` in the `keyword_clean` function, users can now use a customized dictionary in this function.
 2. Added `lemmatize_dict` and `stem_lang` parameter for `keyword_merge` function, so as to utilize other language and dictionary options when using 'textstem' package.

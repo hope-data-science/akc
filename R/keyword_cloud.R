@@ -21,15 +21,17 @@
 #' library(dplyr)
 #' library(akc)
 #'
-#' bibli_data_table %>%
-#'   keyword_clean(id = "id",keyword = "keyword") %>%
-#'   keyword_group(id = "id",keyword = "keyword") -> grouped_keyword
+#' \donttest{
+#'   bibli_data_table %>%
+#'     keyword_clean(id = "id",keyword = "keyword") %>%
+#'     keyword_group(id = "id",keyword = "keyword") -> grouped_keyword
 #'
-#' grouped_keyword %>%
-#'   keyword_cloud()
+#'   grouped_keyword %>%
+#'     keyword_cloud()
 #'
-#' grouped_keyword %>%
-#'   keyword_cloud(group_no = 1)
+#'   grouped_keyword %>%
+#'     keyword_cloud(group_no = 1)
+#' }
 
 keyword_cloud = function(tibble_graph,group_no = NULL,top = 50,max_size = 20){
   if(is.null(group_no))

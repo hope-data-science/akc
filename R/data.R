@@ -3,7 +3,7 @@
 #' @description
 #' A selected sample of bibliometric data about topics on "Library science".
 #' @description Period: 2019
-#' @description  Database:\href{http://www.webofknowledge.com/}{Clarivate Analytics Web of Science}
+#' @description  Database: Web of Science Core Collection
 #'
 #' @format A data frame with 1448 rows and 4 variables:
 #' \describe{
@@ -13,7 +13,6 @@
 #'  \item{abstract}{Abstract of the article}
 #' }
 #'
-#' @source \url{http://www.webofknowledge.com/}
 
 "bibli_data_table"
 
