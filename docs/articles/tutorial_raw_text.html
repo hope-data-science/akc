@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,23 +40,17 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">akc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.9</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -64,6 +60,9 @@
       <a href="../articles/akc_vignette.html">Automatic knowledge classification based on keyword co-occurrrence network</a>
     </li>
     <li>
+      <a href="../articles/Benchmarking.html">Benchmarking</a>
+    </li>
+    <li>
       <a href="../articles/tutorial_raw_text.html">Tutorial for knowledge classification from raw text</a>
     </li>
   </ul>
@@ -71,7 +70,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/hope-data-science/akc/">
+  <a href="https://github.com/hope-data-science/akc/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -86,149 +85,177 @@
 
       
 
-      </header><script src="tutorial_raw_text_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Tutorial for knowledge classification from raw text</h1>
-                        <h4 class="author">Huang Tian-Yuan (Hope)</h4>
+      <h1 data-toc-skip>Tutorial for knowledge classification from raw
+text</h1>
+                        <h4 data-toc-skip class="author">Huang Tian-Yuan
+(Hope)</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/hope-data-science/akc/blob/master/vignettes/tutorial_raw_text.Rmd"><code>vignettes/tutorial_raw_text.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/hope-data-science/akc/blob/HEAD/vignettes/tutorial_raw_text.Rmd" class="external-link"><code>vignettes/tutorial_raw_text.Rmd</code></a></small>
       <div class="hidden name"><code>tutorial_raw_text.Rmd</code></div>
 
     </div>
 
     
     
-<p>This tutorial gives an example of how to use <code>akc</code> package to carry out automatic knowledge classification based on raw text. First, load the packages we need.</p>
+<p>This tutorial gives an example of how to use <code>akc</code> package
+to carry out automatic knowledge classification based on raw text.
+First, load the packages we need.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hope-data-science/akc">akc</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'dplyr'</span>
-<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     filter, lag</span>
-<span class="co">#&gt; The following objects are masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     intersect, setdiff, setequal, union</span></code></pre></div>
-<div id="inspect-the-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#inspect-the-data" class="anchor"></a>Inspect the data</h2>
-<p>In the dataset, we have the ID, title, keyword and abstract of documents. We are going to use the keyword as the dictionary to extract keywords from the abstract.</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hope-data-science/akc" class="external-link">akc</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     filter, lag</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span></code></pre></div>
+<div class="section level2">
+<h2 id="inspect-the-data">Inspect the data<a class="anchor" aria-label="anchor" href="#inspect-the-data"></a>
+</h2>
+<p>In the dataset, we have the ID, title, keyword and abstract of
+documents. We are going to use the keyword as the dictionary to extract
+keywords from the abstract.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bibli_data_table</span>
-<span class="co">#&gt; # A tibble: 1,448 x 4</span>
-<span class="co">#&gt;       id title                  keyword                 abstract                </span>
-<span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;                  &lt;chr&gt;                   &lt;chr&gt;                   </span>
-<span class="co">#&gt;  1     1 Keeping the doors ope~ Austerity; community c~ "English public librari~</span>
-<span class="co">#&gt;  2     2 Comparison of Sloveni~ Comparative librarians~ "This paper aims to pro~</span>
-<span class="co">#&gt;  3     3 Analysis of the facto~ Continuation will of v~ "This study aims to dev~</span>
-<span class="co">#&gt;  4     4 Redefining Library an~ Curriculum; education ~ "The purpose of this st~</span>
-<span class="co">#&gt;  5     5 Can in-house use data~ Check-out use; circula~ "Libraries worldwide ar~</span>
-<span class="co">#&gt;  6     6 Practices of communit~ Community councillors;~ "The purpose of the res~</span>
-<span class="co">#&gt;  7     7 Exploring Becoming, D~ Library and Informatio~ "Professional identity ~</span>
-<span class="co">#&gt;  8     8 Predictors of burnout~ Emotional exhaustion; ~ "Work stress and profes~</span>
-<span class="co">#&gt;  9     9 The Roma and document~ Academic libraries; co~ "This paper explores th~</span>
-<span class="co">#&gt; 10    10 Mediation effect of k~ Job performance; knowl~ "This paper proposes a ~</span>
-<span class="co">#&gt; # ... with 1,438 more rows</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">bibli_data_table</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,448 × 4</span></span></span>
+<span><span class="co">#&gt;       id title                                                   keyword abstr…¹</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     1 Keeping the doors open in an age of austerity? Qualita… Auster… <span style="color: #949494;">"</span>Engli…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     2 Comparison of Slovenian and Korean library laws         Compar… <span style="color: #949494;">"</span>This …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     3 Analysis of the factors affecting volunteering, satisf… Contin… <span style="color: #949494;">"</span>This …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     4 Redefining Library and Information Science education a… Curric… <span style="color: #949494;">"</span>The p…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>     5 Can in-house use data of print collections shed new li… Check-… <span style="color: #949494;">"</span>Libra…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>     6 Practices of community representatives in exploiting i… Commun… <span style="color: #949494;">"</span>The p…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     7 Exploring Becoming, Doing, and Relating within the inf… Librar… <span style="color: #949494;">"</span>Profe…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     8 Predictors of burnout in public library employees       Emotio… <span style="color: #949494;">"</span>Work …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     9 The Roma and documentary film: Considerations for coll… Academ… <span style="color: #949494;">"</span>This …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    10 Mediation effect of knowledge management on the relati… Job pe… <span style="color: #949494;">"</span>This …</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 1,438 more rows, and abbreviated variable name ¹​abstract</span></span></span></code></pre></div>
 </div>
-<div id="get-the-dictionary-from-keyword-field" class="section level2">
-<h2 class="hasAnchor">
-<a href="#get-the-dictionary-from-keyword-field" class="anchor"></a>Get the dictionary from keyword field</h2>
-<p><code>keyword_clean</code> is designed to split the keywords and removed pure numbers and contents in the parentheses. All letters would be converted to lower case. Details see the help of <code>keyword_clean</code>, use “?keyword_clean”. After cleaning, we’ll use these keywords to establish a dictionary.</p>
+<div class="section level2">
+<h2 id="get-the-dictionary-from-keyword-field">Get the dictionary from keyword field<a class="anchor" aria-label="anchor" href="#get-the-dictionary-from-keyword-field"></a>
+</h2>
+<p><code>keyword_clean</code> is designed to split the keywords and
+removed pure numbers and contents in the parentheses. All letters would
+be converted to lower case. Details see the help of
+<code>keyword_clean</code>, use “?keyword_clean”. After cleaning, we’ll
+use these keywords to establish a dictionary.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bibli_data_table</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/keyword_clean.html">keyword_clean</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">keyword</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/make_dict.html">make_dict</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">my_dict</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">bibli_data_table</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/keyword_clean.html">keyword_clean</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">keyword</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/make_dict.html">make_dict</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">my_dict</span></span></code></pre></div>
 </div>
-<div id="extract-keywords-from-abstract" class="section level2">
-<h2 class="hasAnchor">
-<a href="#extract-keywords-from-abstract" class="anchor"></a>Extract keywords from abstract</h2>
-<p>Using <code>keyword_extract</code> to extract keywords from the abstract. Here, we also exclude the stop words using the “stopword” parameter.</p>
+<div class="section level2">
+<h2 id="extract-keywords-from-abstract">Extract keywords from abstract<a class="anchor" aria-label="anchor" href="#extract-keywords-from-abstract"></a>
+</h2>
+<p>Using <code>keyword_extract</code> to extract keywords from the
+abstract. Here, we also exclude the stop words using the “stopword”
+parameter.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># get stop words from `tidytext` package</span>
-<span class="fu">tidytext</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/tidytext/man/stop_words.html">stop_words</a></span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">word</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">my_stopword</span>
-  
-<span class="va">bibli_data_table</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="../reference/keyword_extract.html">keyword_extract</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"id"</span>,text <span class="op">=</span> <span class="st">"abstract"</span>,
-    dict <span class="op">=</span> <span class="va">my_dict</span>,stopword <span class="op">=</span> <span class="va">my_stopword</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">extracted_keywords</span>
-<span class="co">#&gt; Joining, by = "keyword"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># get stop words from `tidytext` package</span></span>
+<span><span class="fu">tidytext</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/tidytext/man/stop_words.html" class="external-link">stop_words</a></span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">word</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">my_stopword</span></span>
+<span>  </span>
+<span><span class="va">bibli_data_table</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="../reference/keyword_extract.html">keyword_extract</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"id"</span>,text <span class="op">=</span> <span class="st">"abstract"</span>,</span>
+<span>    dict <span class="op">=</span> <span class="va">my_dict</span>,stopword <span class="op">=</span> <span class="va">my_stopword</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">extracted_keywords</span></span>
+<span><span class="co">#&gt; Joining, by = "keyword"</span></span></code></pre></div>
 </div>
-<div id="merge-keywords-with-same-meanings" class="section level2">
-<h2 class="hasAnchor">
-<a href="#merge-keywords-with-same-meanings" class="anchor"></a>Merge keywords with same meanings</h2>
-<p>While this process has consider lots of factors, such as stemming, lemmatizing, etc. Here I’ll provide a easy implementation. For advanced usage, use “?keyword_merge” to find out.</p>
+<div class="section level2">
+<h2 id="merge-keywords-with-same-meanings">Merge keywords with same meanings<a class="anchor" aria-label="anchor" href="#merge-keywords-with-same-meanings"></a>
+</h2>
+<p>While this process has consider lots of factors, such as stemming,
+lemmatizing, etc. Here I’ll provide a easy implementation. For advanced
+usage, use “?keyword_merge” to find out.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">extracted_keywords</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/keyword_merge.html">keyword_merge</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">merged_keywords</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">extracted_keywords</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="../reference/keyword_merge.html">keyword_merge</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">merged_keywords</span></span></code></pre></div>
 </div>
-<div id="divide-keywords-into-groups-automatic-classification" class="section level2">
-<h2 class="hasAnchor">
-<a href="#divide-keywords-into-groups-automatic-classification" class="anchor"></a>Divide keywords into groups (automatic classification)</h2>
-<p>This process will construct a keyword co-occurrence network and use community detection to group the keywords automatically. You can use “top” or “min_freq” to control how many keywords should be included in the network. “top” means how many keywords with largest frequency should be included. “min_freq” means the included keywords should emerge at least how many times. Default uses <code>top = 200</code> and <code>min_freq = 1</code>.</p>
+<div class="section level2">
+<h2 id="divide-keywords-into-groups-automatic-classification">Divide keywords into groups (automatic classification)<a class="anchor" aria-label="anchor" href="#divide-keywords-into-groups-automatic-classification"></a>
+</h2>
+<p>This process will construct a keyword co-occurrence network and use
+community detection to group the keywords automatically. You can use
+“top” or “min_freq” to control how many keywords should be included in
+the network. “top” means how many keywords with largest frequency should
+be included. “min_freq” means the included keywords should emerge at
+least how many times. Default uses <code>top = 200</code> and
+<code>min_freq = 1</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">merged_keywords</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/keyword_group.html">keyword_group</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">grouped_keywords</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">merged_keywords</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="../reference/keyword_group.html">keyword_group</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">grouped_keywords</span></span></code></pre></div>
 </div>
-<div id="get-the-grouped-table" class="section level2">
-<h2 class="hasAnchor">
-<a href="#get-the-grouped-table" class="anchor"></a>Get the grouped table</h2>
+<div class="section level2">
+<h2 id="get-the-grouped-table">Get the grouped table<a class="anchor" aria-label="anchor" href="#get-the-grouped-table"></a>
+</h2>
 <p>Getting the result as a table could be easy by:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">grouped_keywords</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 203 x 3</span>
-<span class="co">#&gt;    name         freq group</span>
-<span class="co">#&gt;    &lt;chr&gt;       &lt;int&gt; &lt;int&gt;</span>
-<span class="co">#&gt;  1 library      1583     1</span>
-<span class="co">#&gt;  2 information   583     1</span>
-<span class="co">#&gt;  3 data          437     1</span>
-<span class="co">#&gt;  4 librarians    398     1</span>
-<span class="co">#&gt;  5 academic      351     2</span>
-<span class="co">#&gt;  6 design        338     1</span>
-<span class="co">#&gt;  7 analysis      301     1</span>
-<span class="co">#&gt;  8 development   254     2</span>
-<span class="co">#&gt;  9 collection    283     2</span>
-<span class="co">#&gt; 10 research      589     1</span>
-<span class="co">#&gt; # ... with 193 more rows</span></code></pre></div>
-<p>If you only wants the top keywords to be displayed, <code>keyword_table</code> provides another relatively formal table:</p>
+<code class="sourceCode R"><span><span class="va">grouped_keywords</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 203 × 3</span></span></span>
+<span><span class="co">#&gt;    name         freq group</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> library      <span style="text-decoration: underline;">1</span>583     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> information   583     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> data          437     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> librarians    398     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> academic      351     2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> design        338     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> analysis      301     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> development   254     2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> collection    283     2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> research      589     1</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 193 more rows</span></span></span></code></pre></div>
+<p>If you only wants the top keywords to be displayed,
+<code>keyword_table</code> provides another relatively formal table:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">grouped_keywords</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/keyword_table.html">keyword_table</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 2 x 2</span>
-<span class="co">#&gt;   Group `Keywords(TOP 10)`                                                      </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;                                                                   </span>
-<span class="co">#&gt; 1     1 library (1583); research (589); information (583); data (437); universi~</span>
-<span class="co">#&gt; 2     2 academic (351); collection (283); development (254); academic libraries~</span></code></pre></div>
-<p>In such implementation, only two groups are found. You can specify the number of top keywords using “top” parameter.</p>
+<code class="sourceCode R"><span><span class="va">grouped_keywords</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="../reference/keyword_table.html">keyword_table</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">#&gt;   Group `Keywords (TOP 10)`                                                     </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                                   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 library (1583); research (589); information (583); data (437); universi…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 academic (351); collection (283); development (254); academic libraries…</span></span></code></pre></div>
+<p>In such implementation, only two groups are found. You can specify
+the number of top keywords using “top” parameter.</p>
 </div>
-<div id="visualization-of-the-network" class="section level2">
-<h2 class="hasAnchor">
-<a href="#visualization-of-the-network" class="anchor"></a>Visualization of the network</h2>
-<p>Currently, <code>keyword_vis</code>,<code>keyword_network</code> and <code>keyword_cloud</code> could all be used to draw plots for the network, but in differnt forms. Let’s try to draw a word cloud first:</p>
+<div class="section level2">
+<h2 id="visualization-of-the-network">Visualization of the network<a class="anchor" aria-label="anchor" href="#visualization-of-the-network"></a>
+</h2>
+<p>Currently, <code>keyword_vis</code>,<code>keyword_network</code> and
+<code>keyword_cloud</code> could all be used to draw plots for the
+network, but in differnt forms. Let’s try to draw a word cloud
+first:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">grouped_keywords</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/keyword_cloud.html">keyword_cloud</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">grouped_keywords</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="../reference/keyword_cloud.html">keyword_cloud</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="tutorial_raw_text_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 <p>To get the word cloud of one group,use:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">grouped_keywords</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/keyword_cloud.html">keyword_cloud</a></span><span class="op">(</span>group_no <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">grouped_keywords</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="../reference/keyword_cloud.html">keyword_cloud</a></span><span class="op">(</span>group_no <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="tutorial_raw_text_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
 <p>If you want to draw a network, use <code>keyword_network</code>:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">grouped_keywords</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/keyword_network.html">keyword_network</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Joining, by = c("name", "freq", "group")</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">grouped_keywords</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="../reference/keyword_network.html">keyword_network</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Joining, by = c("name", "freq", "group")</span></span></code></pre></div>
 <p><img src="tutorial_raw_text_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
-<p>In the plot, “N=106” means altogether there are 106 keywords in the group, though only the top 10 by frequency are showed in the graph. If you only want to visualize the second group and display 20 nodes, try:</p>
+<p>In the plot, “N=106” means altogether there are 106 keywords in the
+group, though only the top 10 by frequency are showed in the graph. If
+you only want to visualize the second group and display 20 nodes,
+try:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">grouped_keywords</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/keyword_network.html">keyword_network</a></span><span class="op">(</span>group_no <span class="op">=</span> <span class="fl">2</span>,max_nodes <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">grouped_keywords</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="../reference/keyword_network.html">keyword_network</a></span><span class="op">(</span>group_no <span class="op">=</span> <span class="fl">2</span>,max_nodes <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre></div>
 <p><img src="tutorial_raw_text_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
 <p>Have fun playing with akc!</p>
 </div>
@@ -245,11 +272,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Tian-Yuan Huang.</p>
+  <p></p>
+<p>Developed by Tian-Yuan Huang.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
@@ -257,6 +286,8 @@
 
   
 
+
+  
 
   </body>
 </html>
