@@ -1,7 +1,6 @@
-citHeader("To cite akc in publications use:")
 
-citEntry(
-  entry    = "Article",
+bibentry(
+  bibtype    = "Article",
   title    = "akc: A Tidy Framework for Automatic Knowledge Classification in R",
   author   = "Huang, Tian-Yuan and Li, Li and Yang, Liying",
   journal  = "The R Journal",
