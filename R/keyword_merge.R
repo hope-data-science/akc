@@ -19,7 +19,7 @@
 #'  Applicable when \bold{reduce_form} takes "stem".
 #' @details  While \code{keyword_clean} has provided a robust way to lemmatize the keywords, the returned token
 #' might not be the most common way to use.This function first gets the stem or lemma of
-#' every keyword using \code{\link{stem_strings}} or \code{\link{lemmatize_strings}} from \pkg{textstem} package,
+#' every keyword using \code{\link[textstem]{stem_strings}} or \code{\link[textstem]{lemmatize_strings}} from \pkg{textstem} package,
 #' then find the most frequent form (if more than 1,randomly select one)
 #' for each stem or lemma. Last, every keyword
 #' would be replaced by the most frequent keyword which share the same stem or lemma with it.
