@@ -6,7 +6,7 @@
 \alias{akc-package}
 \title{akc: Automatic Knowledge Classification}
 \description{
-\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
 A tidy framework for automatic knowledge classification and visualization. Currently, the core functionality of the framework is mainly supported by modularity-based clustering (community detection) in keyword co-occurrence network, and focuses on co-word analysis of bibliometric research. However, the designed functions in 'akc' are general, and could be extended to solve other tasks in text mining as well.
 }
@@ -18,7 +18,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Tian-Yuan Huang \email{huang.tian-yuan@qq.com} (\href{https://orcid.org/0000-0002-3591-4203}{ORCID})
+\strong{Maintainer}: Tian-Yuan Huang \email{huang.tian-yuan@qq.com} (\href{https://orcid.org/0000-0002-4151-3764}{ORCID})
 
 }
 \keyword{internal}

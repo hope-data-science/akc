@@ -1,4 +1,7 @@
 
+## 0.9.9.1 
+Fix errors reported by CRAN ("Error: object ‘key<-’ is not exported by 'namespace:data.table'").
+
 ## 0.9.9
 Update the citation in The R Journal.
 

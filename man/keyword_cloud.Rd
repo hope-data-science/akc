@@ -31,15 +31,17 @@ yielded by \code{\link[akc]{keyword_group}}.
 library(dplyr)
 library(akc)
 
-bibli_data_table \%>\%
-  keyword_clean(id = "id",keyword = "keyword") \%>\%
-  keyword_group(id = "id",keyword = "keyword") -> grouped_keyword
+\donttest{
+  bibli_data_table \%>\%
+    keyword_clean(id = "id",keyword = "keyword") \%>\%
+    keyword_group(id = "id",keyword = "keyword") -> grouped_keyword
 
-grouped_keyword \%>\%
-  keyword_cloud()
+  grouped_keyword \%>\%
+    keyword_cloud()
 
-grouped_keyword \%>\%
-  keyword_cloud(group_no = 1)
+  grouped_keyword \%>\%
+    keyword_cloud(group_no = 1)
+}
 }
 \seealso{
 \code{\link[akc]{keyword_group}},

@@ -45,7 +45,7 @@ For suggestions of community detection algorithm, see the references provided be
 }
 \examples{
 library(akc)
-
+\donttest{
 bibli_data_table \%>\%
   keyword_clean(id = "id",keyword = "keyword") \%>\%
   keyword_group(id = "id",keyword = "keyword")
@@ -58,7 +58,7 @@ bibli_data_table \%>\%
   com_detect_fun = group_louvain)
 
 # get more alternatives by searching '?tidygraph::group_graph'
-
+}
 }
 \references{
 de Sousa, Fabiano Berardo, and Liang Zhao. "Evaluating and comparing the igraph community detection algorithms." 2014 Brazilian Conference on Intelligent Systems. IEEE, 2014.

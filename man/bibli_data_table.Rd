@@ -13,9 +13,6 @@ A data frame with 1448 rows and 4 variables:
  \item{abstract}{Abstract of the article}
 }
 }
-\source{
-\url{http://www.webofknowledge.com/}
-}
 \usage{
 bibli_data_table
 }
@@ -24,6 +21,6 @@ A selected sample of bibliometric data about topics on "Library science".
 
 Period: 2019
 
-Database:\href{http://www.webofknowledge.com/}{Clarivate Analytics Web of Science}
+Database: Web of Science Core Collection
 }
 \keyword{datasets}
