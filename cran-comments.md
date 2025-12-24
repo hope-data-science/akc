@@ -1,4 +1,10 @@
 
+## 0.9.9.2
+Fix bug in `keyword_merge` by setting `dt2 %>% merge(dt3,all.x = TRUE,by = "keyword",allow.cartesian=TRUE) `, otherwise data.table will throw an error.
+
+## 0.9.9.2
+Fix bug in `keyword_merge` by setting `tidyfst::pairwise_count_dt(id,keyword,upper = TRUE)`. 
+
 ## 0.9.9.1 
 Fix errors reported by CRAN ("Error: object ‘key<-’ is not exported by 'namespace:data.table'").
 
