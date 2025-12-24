@@ -94,7 +94,7 @@ keyword_merge = function(dt,id = "id",keyword = "keyword",
         .[str_detect(keyword," ")] %>%
         as_tibble() %>%
         # pairwise_count(keyword,id) %>%
-        tidyfst::pairwise_count_dt(id,keyword) %>%
+        tidyfst::pairwise_count_dt(id,keyword,upper = TRUE) %>%
         mutate(value = str_detect(item1,item2)) %>%
         filter(value == TRUE) %>%
         transmute(keyword = item1,replace = item2) %>%
@@ -102,7 +102,7 @@ keyword_merge = function(dt,id = "id",keyword = "keyword",
         unique()-> dt3
 
       dt2 %>%
-        merge(dt3,all.x = TRUE,by = "keyword") %>%
+        merge(dt3,all.x = TRUE,by = "keyword",allow.cartesian=TRUE) %>%
         .[!is.na(replace),keyword:=replace] %>%
         .[,replace := NULL] %>%
         unique() -> final
